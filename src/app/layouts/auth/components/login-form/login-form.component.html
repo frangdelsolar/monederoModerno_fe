@@ -1,0 +1,30 @@
+<app-card title="Iniciar Sesión">
+  <div class="flex flex-column justify-content-center gap-5">
+    <form [formGroup]="form" id="ngForm">
+      <div class="flex flex-column gap-3">
+        <app-input-text
+          [control]="email"
+          [editOn]="true"
+          [type]="'email'"
+          [label]="'Email'"
+          [iconOn]="true"
+        ></app-input-text>
+
+        <app-input-password
+          [control]="password"
+          [label]="'Contraseña'"
+        ></app-input-password>
+      </div>
+    </form>
+
+    <a [routerLink]="'/auth/reset-password'"
+      ><small class="block p-button-link">¿Olvidaste tus datos?</small></a
+    >
+    <a [routerLink]="'/auth/register'"
+      ><small class="block p-button-link"
+        >¿Todavía no estás registrado?</small
+      ></a
+    >
+    <button pButton pRipple label="Sign In" (click)="onLogin()"></button>
+  </div>
+</app-card>

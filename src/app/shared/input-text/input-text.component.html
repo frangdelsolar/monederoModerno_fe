@@ -1,0 +1,25 @@
+<div *ngIf="!editOn">
+  <h3 id="label" class="py-0 my-0 font-normal text-base">{{ label }}</h3>
+  <p id="value" class="py-0 my-0 font-bold text-lg">
+    {{ control.value || "N/A" }}
+  </p>
+</div>
+<div *ngIf="editOn">
+  <span class="p-float-label mt-4">
+    <input
+      id="in-text"
+      class="w-full"
+      [type]="type"
+      pInputText
+      [formControl]="control"
+      [ngClass]="control.dirty && control.errors ? 'ng-invalid ng-dirty' : ''"
+    />
+
+    <label htmlFor="in-text">{{ label }}</label>
+  </span>
+  <div class="mx-1" *ngFor="let item of control.errors | keyvalue">
+    <small *ngIf="item.key == 'serverError'" id="input-help" class="p-error">{{
+      item.value
+    }}</small>
+  </div>
+</div>

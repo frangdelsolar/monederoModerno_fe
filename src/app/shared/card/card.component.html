@@ -1,0 +1,12 @@
+<p-card header="{{ title }}" subheader="{{ subtitle }}">
+  <ng-template *ngIf="image" pTemplate="header">
+    <app-input-image [item]="image"></app-input-image>
+  </ng-template>
+  <ng-template *ngIf="imageControl" pTemplate="header">
+    <app-input-image
+      [editModeOn]="editModeOn"
+      [control]="imageControl"
+    ></app-input-image>
+  </ng-template>
+  <ng-content></ng-content>
+</p-card>

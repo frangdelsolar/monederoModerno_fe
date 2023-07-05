@@ -1,0 +1,9 @@
+<div class="mt-4">
+  <h4 *ngIf="label">{{ label }}</h4>
+  <ckeditor [editor]="Editor" [formControl]="control"></ckeditor>
+  <div class="mx-1" *ngFor="let item of control.errors | keyvalue">
+    <small *ngIf="item.key == 'serverError'" id="input-help" class="p-error">{{
+      item.value
+    }}</small>
+  </div>
+</div>

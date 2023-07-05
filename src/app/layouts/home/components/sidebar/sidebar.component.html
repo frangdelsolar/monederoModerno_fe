@@ -1,0 +1,49 @@
+<p-sidebar
+  [(visible)]="display"
+  (onShow)="onShow()"
+  (onHide)="onHide()"
+  styleClass="p-sidebar-sm"
+>
+  <div class="flex flex-row gap-2 align-items-start justify-content-start">
+    <p-avatar image="assets/logo/monedero (1).png" size="small"></p-avatar>
+    <h2>MonederoModerno</h2>
+  </div>
+  <p-divider></p-divider>
+
+  <div class="flex flex-row align-items-center justify-content-center">
+    <div class="col-3">
+      <p-avatar
+        image="{{ user?.photoURL }}"
+        size="xlarge"
+        shape="circle"
+      ></p-avatar>
+    </div>
+    <div
+      class="col-5 col-offset-1 flex flex-column align-items-left justify-content-center gap-0"
+    >
+      <p class="mb-0 pb-0">
+        <b>{{ user?.displayName }}</b>
+      </p>
+      <p class="mb-0 pb-0">
+        <small>{{ user?.email }}</small>
+      </p>
+    </div>
+    <div class="col-2 col-offset-1">
+      <button
+        pButton
+        pRipple
+        type="button"
+        icon="pi pi-sign-out"
+        class="p-button-rounded p-button-info p-button-text p-button-sm"
+        (click)="onLogout()"
+      ></button>
+    </div>
+  </div>
+  <p-divider></p-divider>
+
+  <p-menu
+    [model]="items"
+    [style]="{ width: '100%', border: '0px' }"
+    styleClass="m-0 p-0"
+  ></p-menu>
+</p-sidebar>

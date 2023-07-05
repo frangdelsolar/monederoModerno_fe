@@ -1,0 +1,34 @@
+<p-toolbar>
+  <div class="p-toolbar-group-left">
+    <button
+      *ngIf="userIsAuth && showMenuButton"
+      pButton
+      pRipple
+      id="menu-button"
+      type="button"
+      icon="pi pi-bars"
+      class="p-button-rounded p-button-text p-button-plain"
+      (click)="onMenuClick()"
+    ></button>
+  </div>
+  <div class="flex gap-3 align-items-center justify-content-center">
+    <p-avatar image="assets/logo/monedero (1).png" size="small"></p-avatar>
+    <h2 class="p-0 m-0">MonederoModerno</h2>
+  </div>
+  <div class="p-toolbar-group-right">
+    <p-button
+      *ngIf="!userIsAuth && showAuthButtons"
+      id="login-button"
+      icon="pi pi-sign-in"
+      styleClass="p-button-rounded p-button-text"
+      (onClick)="onSignInClick()"
+    ></p-button>
+    <p-button
+      *ngIf="userIsAuth && showAuthButtons"
+      icon="pi pi-sign-out"
+      id="logout-button"
+      styleClass="p-button-rounded p-button-text"
+      (onClick)="onSignOutClick()"
+    ></p-button>
+  </div>
+</p-toolbar>

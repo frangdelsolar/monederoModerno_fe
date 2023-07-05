@@ -1,0 +1,43 @@
+<app-card title="Registro de usuarios">
+  <div class="flex flex-column justify-content-center gap-5">
+    <form [formGroup]="form" id="ngForm">
+      <div class="flex flex-column gap-3">
+        <app-input-text
+          [control]="firstName"
+          [editOn]="true"
+          [type]="'text'"
+          [label]="'Nombre'"
+          [iconOn]="true"
+        ></app-input-text>
+        <app-input-text
+          [control]="lastName"
+          [editOn]="true"
+          [type]="'text'"
+          [label]="'Apellido'"
+          [iconOn]="true"
+        ></app-input-text>
+        <app-input-text
+          [control]="email"
+          [editOn]="true"
+          [type]="'email'"
+          [label]="'Email'"
+          [iconOn]="true"
+        ></app-input-text>
+
+        <app-input-password
+          [control]="password"
+          [label]="'Contraseña'"
+        ></app-input-password>
+        <app-input-password
+          [control]="passwordConfirm"
+          [label]="'Confirmar contraseña'"
+        ></app-input-password>
+      </div>
+    </form>
+
+    <a [routerLink]="'/auth/login'"
+      ><small class="block p-button-link">¿Ya estás registrado?</small></a
+    >
+    <button pButton pRipple label="Enviar" (click)="onRegister()"></button>
+  </div>
+</app-card>

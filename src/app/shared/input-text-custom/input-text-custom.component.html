@@ -1,0 +1,22 @@
+<div *ngIf="!editOn">
+  <ng-content></ng-content>
+</div>
+<div *ngIf="editOn" class="my-3">
+  <span class="p-float-label mb-2">
+    <input
+      id="in-text"
+      class="w-full"
+      [type]="type"
+      pInputText
+      [(ngModel)]="value"
+      (ngModelChange)="onChange($event)"
+      [ngClass]="control.dirty && control.errors ? 'ng-invalid ng-dirty' : ''"
+    />
+    <label htmlFor="in-text">{{ label }}</label>
+  </span>
+  <div class="mx-1" *ngFor="let item of control.errors | keyvalue">
+    <small *ngIf="item.key == 'serverError'" id="input-help" class="p-error">{{
+      item.value
+    }}</small>
+  </div>
+</div>

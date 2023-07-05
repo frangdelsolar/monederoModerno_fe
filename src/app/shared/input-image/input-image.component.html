@@ -1,0 +1,37 @@
+<div
+  class="container"
+  [ngClass]="
+    control.errors && control.dirty
+      ? 'border-solid border-100 border-red-200'
+      : ''
+  "
+>
+  <img
+    class="image"
+    [alt]="control.value.description"
+    [src]="control.value.image_url"
+  />
+  <div *ngIf="editModeOn && processing" class="transparency">
+    <div class="icon">
+      <i class="pi pi-spin pi-spinner" style="font-size: 5rem"></i>
+    </div>
+  </div>
+  <div *ngIf="editModeOn && !processing" class="overlay">
+    <div class="icon">
+      <i class="fa fa-camera"></i>
+      <p-fileUpload
+        mode="basic"
+        chooseLabel="Choose"
+        accept="image/*"
+        [auto]="true"
+        [customUpload]="true"
+        (uploadHandler)="uploadHandler($event)"
+      ></p-fileUpload>
+    </div>
+  </div>
+  <div class="mx-1" *ngFor="let item of control.errors | keyvalue">
+    <small *ngIf="item.key == 'serverError'" id="input-help" class="p-error">{{
+      item.value
+    }}</small>
+  </div>
+</div>

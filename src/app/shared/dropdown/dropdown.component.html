@@ -1,0 +1,17 @@
+<div class="p-fluid">
+  <span class="p-float-label w-full">
+    <p-dropdown
+      [options]="items"
+      [formControl]="control"
+      [placeholder]="label"
+      optionLabel="name"
+      inputId="float-label"
+    ></p-dropdown>
+    <label for="float-label">{{ label }}</label>
+  </span>
+  <div class="mx-1" *ngFor="let item of control.errors | keyvalue">
+    <small *ngIf="item.key == 'serverError'" id="input-help" class="p-error">{{
+      item.value
+    }}</small>
+  </div>
+</div>

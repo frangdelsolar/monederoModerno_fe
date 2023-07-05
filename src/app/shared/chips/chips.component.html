@@ -1,0 +1,15 @@
+<div class="p-fluid">
+  <span class="p-float-label">
+    <p-chips
+      [formControl]="control"
+      separator=","
+      styleClass="w-full mr-0 pr-0"
+    ></p-chips>
+    <label htmlFor="in-text">Tags</label>
+  </span>
+  <div class="mx-1" *ngFor="let item of control.errors | keyvalue">
+    <small *ngIf="item.key == 'serverError'" id="input-help" class="p-error">{{
+      item.value
+    }}</small>
+  </div>
+</div>
