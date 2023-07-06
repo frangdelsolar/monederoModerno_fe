@@ -1,5 +1,5 @@
 <app-card title="Iniciar Sesión">
-  <div class="flex flex-column justify-content-center gap-5">
+  <div class="flex flex-column justify-content-center gap-3">
     <form [formGroup]="form" id="ngForm">
       <div class="flex flex-column gap-3">
         <app-input-text
@@ -25,6 +25,22 @@
         >¿Todavía no estás registrado?</small
       ></a
     >
-    <button pButton pRipple label="Sign In" (click)="onLogin()"></button>
+
+    <button pButton pRipple label="Enviar" (click)="onLogin()"></button>
+    <button
+      pButton
+      pRipple
+      id="btn_googleLogin"
+      label="Ingresar con Google"
+      class="p-button-outlined"
+      (click)="onGoogleLogin()"
+    >
+      <img
+        src="/assets/icon-google.png"
+        alt="Ingreso con google"
+        style="width: 15px"
+        class="mr-2"
+      />
+    </button>
   </div>
 </app-card>

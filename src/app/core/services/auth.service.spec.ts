@@ -53,7 +53,7 @@ describe('AuthService', () => {
     };
     localStorage.setItem('user', JSON.stringify(storedUser));
 
-    authService.isAuth();
+    authService.verifyAuthentication();
 
     expect(authService['user']).toEqual(storedUser);
     expect(authService['isAuthenticated'].value).toBeTrue();
@@ -71,7 +71,7 @@ describe('AuthService', () => {
   it('should store the user data in local storage', () => {
     const userData = { email: 'test@example.com', name: 'John Doe' };
 
-    authService.storeUser(userData);
+    authService.storeAuthDetails(userData);
 
     expect(localStorage.getItem('user')).toEqual(JSON.stringify(userData));
   });

@@ -37,12 +37,7 @@ export class LoginFormComponent implements OnInit {
     if (this.form.valid) {
       this.authSvc.auth(this.form.value).then((res: any) => {
         if (res == true) {
-          this.toastSvc.add({
-            severity: 'success',
-            summary: 'Inicio de sesión exitoso',
-            detail: 'Redirigiendo...',
-          });
-          this.router.navigate(['']);
+          window.location.href = '/';
         } else {
           this.toastSvc.add({
             severity: 'error',
@@ -52,5 +47,19 @@ export class LoginFormComponent implements OnInit {
         }
       });
     }
+  }
+
+  onGoogleLogin() {
+    this.authSvc.googleLogin().then((res: any) => {
+      if (res) {
+        window.location.href = '/';
+      } else {
+        this.toastSvc.add({
+          severity: 'error',
+          summary: 'Inicio de sesión fallido',
+          detail: res,
+        });
+      }
+    });
   }
 }

@@ -5,7 +5,14 @@ import { initializeApp } from 'firebase/app';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from '../models/user.interface';
 import { UserService } from '../controllers/user.controller';
-
+import firebase from 'firebase/compat/app';
+import {
+  getAuth,
+  getRedirectResult,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  updateProfile,
+} from 'firebase/auth';
 @Injectable({
   providedIn: 'root',
 })
@@ -72,7 +79,13 @@ export class AuthService {
         user.email,
         user.password
       );
-      this.storeAuthDetails(googleAuth.user);
+      if (googleAuth && googleAuth.user) {
+        googleAuth.user.updateProfile({
+          displayName: `${user.first_name} ${user.last_name}`,
+        });
+        this.storeAuthDetails(googleAuth.user);
+      }
+
       return this.registerUserInBackend(user);
     } catch (err: any) {
       response.message = err.message;
@@ -80,13 +93,26 @@ export class AuthService {
     }
   }
 
-  registerUserInBackend(user: any) {
-    const body = {
-      first_name: user.first_name,
-      last_name: user.last_name,
-      email: user.email,
-    };
+  async googleLogin() {
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      const userCred = await this.afAuth.signInWithPopup(provider);
+      this.storeAuthDetails(userCred.user);
 
+      if (userCred.additionalUserInfo?.isNewUser) {
+        this.registerUserInBackend({
+          first_name: userCred.user?.displayName?.split(' ')[0],
+          last_name: userCred.user?.displayName?.split(' ')[1],
+          email: userCred.user?.email,
+        });
+      }
+      return true;
+    } catch (err: any) {
+      return err;
+    }
+  }
+
+  registerUserInBackend(user: any) {
     return this.userSvc.create(user);
   }
 

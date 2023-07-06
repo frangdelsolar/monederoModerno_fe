@@ -53,10 +53,8 @@ export class RegisterFormComponent implements OnInit {
   async onRegister() {
     if (this.form.valid) {
       this.authSvc.registerUser(this.form.value).then((res: any) => {
-        console.log(res);
         res.subscribe(
           (res: any) => {
-            console.log(res);
             if (res.success == 'ok') {
               this.toastSvc.add({
                 severity: 'success',
