@@ -1,0 +1,45 @@
+<app-card title="Añadir transacción">
+  <div class="flex flex-column gap-3">
+    <app-transaction-form></app-transaction-form>
+
+    <!-- <app-frequency-form
+      [editOn]="editModeOn"
+      [label]="'¿Cuántas veces?'"
+      [control]="frequencyControl"
+    ></app-frequency-form> -->
+
+    <!-- <app-form-section [label]="'¿Cuándo empieza?'">
+      <app-datepicker
+        [editOn]="editModeOn"
+        [label]="'Fecha de inicio'"
+        [control]="startDateControl"
+      ></app-datepicker>
+    </app-form-section> -->
+
+    <!-- <app-goal-form
+      [editOn]="editModeOn"
+      [label]="'¿Hasta cuándo?'"
+      [control]="frequencyControl"
+    ></app-goal-form> -->
+
+    <!-- <app-input-currency
+      [editOn]="editModeOn"
+      [label]="'¿Cuánto vale la cuota?'"
+      [control]="amountControl"
+    ></app-input-currency> -->
+
+    <!-- <app-input-text-area
+      [editOn]="editModeOn"
+      [label]="'Comentario'"
+      [control]="commentControl"
+    ></app-input-text-area> -->
+
+    <button
+      pButton
+      pRipple
+      class="p-button-primary"
+      label="Guardar"
+      (click)="onSaveClick()"
+    ></button>
+  </div>
+</app-card>

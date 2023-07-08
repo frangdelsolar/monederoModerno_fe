@@ -10,8 +10,9 @@ export class InputTextComponent implements OnInit {
   @Input() editOn: boolean = false;
   @Input() label: string = 'Text';
   @Input() type: string = 'text';
-  @Input() control: FormControl = new FormControl('', []);
+  @Input() control: FormControl = new FormControl(null, []);
   @Input() iconOn: boolean = false;
+  @Input() helpText: string = '';
 
   constructor() {}
 

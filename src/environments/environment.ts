@@ -11,8 +11,9 @@ export const environment = {
   },
 
   apiUrl: '',
+  apiExchangeRate: '',
   apiImage: '',
   apiRegisterUser: '',
-  apiUrlLogin: '',
-  apiPasswordReset: '',
+  apiService: '',
+  apiServiceProvider: '',
 };

@@ -26,6 +26,10 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
+  onLogoClick() {
+    this.router.navigate(['']);
+  }
+
   onMenuClick() {
     this.sidebarSvc.$display.next(true);
   }

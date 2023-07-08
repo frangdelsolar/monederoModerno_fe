@@ -9,14 +9,8 @@ import { FormControl } from '@angular/forms';
 export class DatepickerComponent implements OnInit {
   @Input() editOn: boolean = false;
   @Input() label: string = 'Label';
-  @Input() control: FormControl = new FormControl('', []);
+  @Input() control: FormControl = new FormControl<Date | null>(null, []);
   constructor() {}
 
-  ngOnInit(): void {
-    let date = new Date();
-    if (this.control.value) {
-      date = new Date(this.control.value);
-    }
-    this.control.setValue(date);
-  }
+  ngOnInit(): void {}
 }

@@ -1,0 +1,31 @@
+<h4 class="mt-0 mb-1 ml-3">{{ label }}</h4>
+<div
+  class="border-solid border-200 border-round-lg px-3 pt-5 pb-3 surface-200 w-auto"
+>
+  <div
+    class="flex flex-row flex-wrap gap-4 justify-content-left align-items-start"
+  >
+    <app-dropdown
+      [label]="'Moneda'"
+      [control]="currencyControl"
+      [items]="currencyItems"
+    ></app-dropdown>
+    <app-input-text
+      [editOn]="true"
+      [label]="'Valor'"
+      [type]="'number'"
+      [control]="control"
+    ></app-input-text>
+    <span *ngIf="showRate">
+      <app-input-text
+        [editOn]="true"
+        [label]="'Tasa de conversión'"
+        [type]="'number'"
+        [control]="rateControl"
+      ></app-input-text>
+      <small class="ml-3 font-semibold"
+        >AR$ {{ conversion.toLocaleString() }}</small
+      >
+    </span>
+  </div>
+</div>

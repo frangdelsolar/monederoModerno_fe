@@ -1,0 +1,31 @@
+<h4 class="mt-0 mb-1 ml-3">{{ label }}</h4>
+<div
+  class="border-solid border-200 border-round-lg px-3 pt-5 pb-3 surface-ground w-auto"
+>
+  <div *ngFor="let item of goalType" class="field-checkbox">
+    <p-radioButton
+      [inputId]="item.key"
+      [value]="item"
+      [formControl]="goalTypeControl"
+    ></p-radioButton>
+    <label [for]="item.key" class="ml-2">{{ item.name }}</label>
+  </div>
+  <div class="pt-2">
+    <app-input-currency
+      *ngIf="showAmountControl"
+      [label]="'Monto total'"
+      [editOn]="true"
+    ></app-input-currency>
+    <app-input-text
+      *ngIf="showRepetitionsControl"
+      [label]="'Repeticiones'"
+      [editOn]="true"
+      [type]="'number'"
+    ></app-input-text>
+    <app-datepicker
+      *ngIf="showDateControl"
+      [label]="'Fecha de finalización'"
+      [editOn]="true"
+    ></app-datepicker>
+  </div>
+</div>

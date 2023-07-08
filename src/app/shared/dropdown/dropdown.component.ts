@@ -10,7 +10,7 @@ export class DropdownComponent implements OnInit {
   @Input() items: any[];
   @Input() label: string = 'Label';
   @Input() control: FormControl = new FormControl('', []);
-
+  @Input() disabled: boolean = false;
   constructor() {}
 
   ngOnInit(): void {}

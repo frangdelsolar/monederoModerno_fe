@@ -1,0 +1,36 @@
+<app-form-section [label]="label">
+  <div *ngFor="let item of eventType" class="field-checkbox">
+    <p-radioButton
+      [inputId]="item.key"
+      [value]="item"
+      [formControl]="eventTypeControl"
+    ></p-radioButton>
+    <label [for]="item.key" class="ml-2">{{ item.name }}</label>
+  </div>
+
+  <div *ngIf="showFrequencyControl">
+    <div
+      class="flex flex-row flex-wrap gap-4 pt-4 justify-content-left align-items-start"
+    >
+      <app-dropdown
+        [label]="'Cadencia'"
+        [control]="frequencyControl"
+        [items]="frequencyItems"
+      ></app-dropdown>
+
+      <app-dropdown
+        *ngIf="showMonthControl"
+        [label]="'Mes'"
+        [control]="monthControl"
+        [items]="monthItems"
+      ></app-dropdown>
+
+      <app-dropdown
+        *ngIf="showDayControl"
+        [label]="'Dia'"
+        [control]="dayControl"
+        [items]="dayItems"
+      ></app-dropdown>
+    </div>
+  </div>
+</app-form-section>

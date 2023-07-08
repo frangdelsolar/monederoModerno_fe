@@ -1,0 +1,22 @@
+<app-form-section [label]="label">
+  <div class="flex flex-column row-gap-3">
+    <app-deduction-type-dropdown
+      [editOn]="editOn"
+      [label]="labelForTransactionTypeControl"
+      [control]="transactionTypeControl"
+    ></app-deduction-type-dropdown>
+    <app-service-dropdown
+      [editOn]="editOn"
+      *ngIf="showServiceControl"
+      [label]="labelForServiceControl"
+      [serviceType]="transactionTypeControl"
+      [serviceControl]="serviceControl"
+    ></app-service-dropdown>
+    <app-service-provider-dropdown
+      [editOn]="editOn"
+      *ngIf="showServiceProviderControl"
+      [label]="labelForServiceProviderControl"
+      [serviceProviderControl]="serviceProviderControl"
+    ></app-service-provider-dropdown>
+  </div>
+</app-form-section>
