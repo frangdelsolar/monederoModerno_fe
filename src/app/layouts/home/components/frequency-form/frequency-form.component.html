@@ -7,6 +7,11 @@
     ></p-radioButton>
     <label [for]="item.key" class="ml-2">{{ item.name }}</label>
   </div>
+  <div class="mx-1" *ngFor="let item of eventTypeControl.errors | keyvalue">
+    <small *ngIf="item.key == 'serverError'" id="input-help" class="p-error">{{
+      item.value
+    }}</small>
+  </div>
 
   <div *ngIf="showFrequencyControl">
     <div

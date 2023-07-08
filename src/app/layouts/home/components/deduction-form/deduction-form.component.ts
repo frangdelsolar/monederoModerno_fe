@@ -6,7 +6,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { DeductionFormService } from '@app/core/services/deduction-form.service';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-deduction-form',
