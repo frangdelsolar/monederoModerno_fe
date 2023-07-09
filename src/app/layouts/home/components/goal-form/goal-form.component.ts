@@ -127,7 +127,7 @@ export class GoalFormComponent implements OnInit {
       }
     } else if (this.goalTypeControl.value.key == 'calendar') {
       if (this.dateControl.value == null) {
-        let errorMsg = 'Debes seleccionar una fecha';
+        let errorMsg = 'Debes seleccionar una fecha de finalización';
         this.dateControl.markAsDirty();
         this.dateControl.markAsTouched();
         this.dateControl.setErrors({
@@ -142,13 +142,35 @@ export class GoalFormComponent implements OnInit {
       this.validateCurrencySignal.next(true);
     }
 
+    let goal_type = '';
+    if (this.goalTypeControl.value != null) {
+      goal_type = this.goalTypeControl.value.key;
+    }
+    let repetitions = this.repetitionsControl.value;
+    let date = this.dateControl.value;
+    let currency = '';
+    if (this.currencyControl.value != null) {
+      currency = this.currencyControl.value.value;
+    }
+    let amount = this.amountControl.value;
+    let rate = this.rateControl.value;
+
+    if (this.deductionFormService.frequency.value == 'one-off') {
+      goal_type = '';
+      repetitions = null;
+      date = null;
+      currency = '';
+      amount = null;
+      rate = null;
+    }
+
     this.deductionFormService.goalOk(
-      this.goalTypeControl.value.key,
-      this.repetitionsControl.value,
-      this.dateControl.value,
-      this.currencyControl.value.value,
-      this.amountControl.value,
-      this.rateControl.value
+      goal_type,
+      repetitions,
+      date,
+      currency,
+      amount,
+      rate
     );
   }
 }

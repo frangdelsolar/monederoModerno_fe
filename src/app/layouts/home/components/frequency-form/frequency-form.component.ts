@@ -122,10 +122,10 @@ export class FrequencyFormComponent implements OnInit {
     });
 
     this.frequencyControl.valueChanges.subscribe((value) => {
-      if (value.value === 'monthly') {
+      if (value && value.value === 'monthly') {
         this.showMonthControl = false;
         this.showDayControl = true;
-      } else if (value.value === 'yearly') {
+      } else if (value && value.value === 'yearly') {
         this.showMonthControl = true;
         this.showDayControl = true;
       } else {
@@ -152,6 +152,11 @@ export class FrequencyFormComponent implements OnInit {
     this.eventTypeControl.valueChanges.subscribe((value) => {
       if (value.key === 'one-off') {
         this.showFrequencyControl = false;
+        this.showDayControl = false;
+        this.showMonthControl = false;
+        this.frequencyControl.setValue(null);
+        this.dayControl.setValue(null);
+        this.monthControl.setValue(null);
       } else {
         this.showFrequencyControl = true;
       }
@@ -161,7 +166,7 @@ export class FrequencyFormComponent implements OnInit {
 
   validateAndSave() {
     if (this.eventTypeControl.value === null) {
-      let errorMsg = 'Seleccione un tipo de evento';
+      let errorMsg = 'Debes seleccionar un frecuencia de transacción';
       this.deductionFormSvc.pushError({
         step: 'frequency',
         error: errorMsg,
@@ -175,7 +180,7 @@ export class FrequencyFormComponent implements OnInit {
     let day_value = '';
     if (this.eventTypeControl.value.key == 'recurring') {
       if (this.frequencyControl.value === null) {
-        let errorMsg = 'Seleccione una frecuencia';
+        let errorMsg = 'Debes seleccionar una frecuencia';
         this.deductionFormSvc.pushError({
           step: 'frequency',
           error: errorMsg,
@@ -190,7 +195,7 @@ export class FrequencyFormComponent implements OnInit {
 
       if (this.frequencyControl.value.value === 'yearly') {
         if (this.monthControl.value === null) {
-          let errorMsg = 'Seleccione un mes';
+          let errorMsg = 'Debes seleccionar un mes';
           this.deductionFormSvc.pushError({
             step: 'frequency',
             error: errorMsg,
@@ -205,7 +210,7 @@ export class FrequencyFormComponent implements OnInit {
 
       if (['yearly', 'monthly'].includes(this.frequencyControl.value.value)) {
         if (this.dayControl.value === null) {
-          let errorMsg = 'Seleccione un día';
+          let errorMsg = 'Debes seleccionar un día';
           this.deductionFormSvc.pushError({
             step: 'frequency',
             error: errorMsg,

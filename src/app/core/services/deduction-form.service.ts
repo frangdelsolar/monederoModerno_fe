@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import {
   FormBuilder,
@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { TransactionService } from '../controllers/transaction.controller';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,7 @@ export class DeductionFormService {
   public SaveGoalSignal = new BehaviorSubject(false);
 
   errors: any[] = [];
+  errorsEmmiter: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
   form: FormGroup;
   transaction_type: FormControl = new FormControl(null, [Validators.required]);
@@ -39,7 +41,10 @@ export class DeductionFormService {
   amount: FormControl = new FormControl(null, []);
   rate: FormControl = new FormControl(null, []);
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private transactionSvc: TransactionService
+  ) {
     this.form = this.fb.group({
       transaction_type: this.transaction_type,
       service: this.service,
@@ -62,6 +67,7 @@ export class DeductionFormService {
   }
 
   public save() {
+    this.errors = [];
     this.SaveServiceSignal.next(true);
     this.SaveServiceProviderSignal.next(true);
     this.SaveTransactionSignal.next(true);
@@ -70,10 +76,10 @@ export class DeductionFormService {
     this.SaveGoalSignal.next(true);
 
     setTimeout(() => {
-      if (!this.checkErrors()) {
-        this.sendRequestToServer();
-      }
-    }, 2000);
+      // if (!this.checkErrors()) {
+      this.sendRequestToServer();
+      // }
+    }, 1000);
   }
 
   private checkErrors(): boolean {
@@ -85,11 +91,20 @@ export class DeductionFormService {
   }
 
   private sendRequestToServer() {
-    console.log('Request sent to server');
+    console.log('Request sent to server', this.form.value);
+    this.transactionSvc.create(this.form.value).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   pushError(error: any) {
     this.errors.push(error);
+    this.errorsEmmiter.next(this.errors);
   }
 
   serviceOk(value: string) {

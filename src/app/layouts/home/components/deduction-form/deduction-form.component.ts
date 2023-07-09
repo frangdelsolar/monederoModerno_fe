@@ -16,6 +16,8 @@ import { BehaviorSubject } from 'rxjs';
 export class DeductionFormComponent implements OnInit {
   @Input() editModeOn: boolean = true;
 
+  errors: any[] = [];
+
   startDateControl: FormControl = new FormControl(null, [Validators.required]);
   amountControl: FormControl = new FormControl(null, [Validators.required]);
   currencyControl: FormControl = new FormControl(null, [Validators.required]);
@@ -45,15 +47,21 @@ export class DeductionFormComponent implements OnInit {
         this.validateAndSave();
       }
     });
+
+    this.deductionFormSvc.errorsEmmiter.subscribe((errors: any) => {
+      this.errors = errors;
+    });
   }
 
   onCurrencyErrors(errors: any) {
-    errors.forEach((error: any) => {
-      this.deductionFormSvc.pushError({
-        step: error.step,
-        error: error.error,
+    if (errors && errors.length > 0) {
+      errors.forEach((error: any) => {
+        this.deductionFormSvc.pushError({
+          step: error.step,
+          error: error.error,
+        });
       });
-    });
+    }
   }
 
   validateAndSave() {
@@ -73,9 +81,9 @@ export class DeductionFormComponent implements OnInit {
     this.deductionFormSvc.startDateOk(this.startDateControl.value);
     this.deductionFormSvc.commentOk(this.commentControl.value);
     this.deductionFormSvc.amountOk(
-      this.rateControl.value,
       this.currencyControl.value.value,
-      this.amountControl.value
+      this.amountControl.value,
+      this.rateControl.value
     );
   }
 

@@ -60,7 +60,7 @@ export class TransactionFormComponent implements OnInit {
       this.transactionTypeControl.setErrors({ serverError: errorMsg });
       this.deductionFormSvc.pushError({
         step: 'transaction',
-        message: errorMsg,
+        error: errorMsg,
       });
       return;
     }

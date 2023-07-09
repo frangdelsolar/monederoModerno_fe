@@ -16,4 +16,5 @@ export const environment = {
   apiRegisterUser: '',
   apiService: '',
   apiServiceProvider: '',
+  apiTransaction: '',
 };
