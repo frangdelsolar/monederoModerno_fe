@@ -7,7 +7,12 @@
 <div *ngIf="editOn">
   <div class="p-fluid pt-2">
     <span class="p-float-label w-full">
-      <p-calendar [formControl]="control" [showIcon]="true"></p-calendar>
+      <p-calendar
+        [formControl]="control"
+        [showIcon]="true"
+        [dateFormat]="dateFormat"
+        [view]="view"
+      ></p-calendar>
       <label for="float-label">{{ label }}</label>
     </span>
     <div class="mx-1" *ngFor="let item of control.errors | keyvalue">

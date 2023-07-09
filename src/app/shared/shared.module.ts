@@ -48,6 +48,7 @@ import { InputPasswordComponent } from './input-password/input-password.componen
 import { InputTextAreaComponent } from './input-text-area/input-text-area.component';
 import { InputTextComponent } from './input-text/input-text.component';
 import { InputTextCustomComponent } from './input-text-custom/input-text-custom.component';
+import { MonthPickerComponent } from './month-picker/month-picker.component';
 import { TabMenuComponent } from './tab-menu/tab-menu.component';
 import { TagComponent } from './tag/tag.component';
 import { ToastComponent } from './toast/toast.component';
@@ -105,6 +106,7 @@ const uiComponents = [
   InputTextComponent,
   InputPasswordComponent,
   InputTextCustomComponent,
+  MonthPickerComponent,
   TabMenuComponent,
   TagComponent,
   TagDisplayComponent,

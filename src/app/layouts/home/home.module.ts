@@ -10,6 +10,9 @@ import { FrequencyFormComponent } from './components/frequency-form/frequency-fo
 import { GoalFormComponent } from './components/goal-form/goal-form.component';
 import { TransactionFormComponent } from './components/transaction-form/transaction-form.component';
 import { ServiceProviderDropdownComponent } from './components/service-provider-dropdown/service-provider-dropdown.component';
+import { TransactionsListComponent } from './components/transactions-list/transactions-list.component';
+import { TransactionItemComponent } from './components/transaction-item/transaction-item.component';
+import { TransactionDetailComponent } from './components/transaction-detail/transaction-detail.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { ServiceProviderDropdownComponent } from './components/service-provider-
     GoalFormComponent,
     TransactionFormComponent,
     ServiceProviderDropdownComponent,
+    TransactionsListComponent,
+    TransactionItemComponent,
+    TransactionDetailComponent,
   ],
   imports: [CommonModule, SharedModule],
   exports: [SharedModule],

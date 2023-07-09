@@ -1,0 +1,13 @@
+<app-card [title]="'Detalle Mensual'">
+  <app-month-picker
+    [label]="'Selecciona un mes'"
+    [control]="dateControl"
+  ></app-month-picker>
+
+  <div class="flex flex-column justify-content-center mt-3">
+    <app-transaction-item
+      *ngFor="let item of transactions"
+      [transaction]="item"
+    ></app-transaction-item>
+  </div>
+</app-card>
