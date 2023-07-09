@@ -11,6 +11,13 @@ export class TransactionService {
 
   constructor(private privateSvc: PrivateApiService) {}
 
+  public getById(id: string) {
+    return this.privateSvc.get<Transaction>(
+      this._apiUrl + id + '/',
+      null,
+      true
+    );
+  }
   public getAll() {
     return this.privateSvc.get(this._apiUrl, null, true);
   }

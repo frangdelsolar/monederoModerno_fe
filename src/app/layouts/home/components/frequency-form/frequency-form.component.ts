@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import frequencyEnum from '@app/core/enums/frequency.enum';
+import monthEnum from '@app/core/enums/months.enum';
 import { DeductionFormService } from '@app/core/services/deduction-form.service';
 
 @Component({
@@ -26,81 +28,11 @@ export class FrequencyFormComponent implements OnInit {
   showFrequencyControl: boolean = false;
 
   frequencyControl: FormControl = new FormControl(null, []);
-  frequencyItems = [
-    {
-      value: 'daily',
-      name: 'Diario',
-    },
-    {
-      value: 'weekly',
-      name: 'Semanal',
-    },
-    {
-      value: 'biweekly',
-      name: 'Quincenal',
-    },
-    {
-      value: 'monthly',
-      name: 'Mensual',
-    },
-    {
-      value: 'yearly',
-      name: 'Anual',
-    },
-  ];
+  frequencyItems = frequencyEnum.filter((item) => item.value !== 'one-off');
 
   showMonthControl: boolean = false;
   monthControl: FormControl = new FormControl(null, []);
-  monthItems = [
-    {
-      value: '1',
-      name: 'Enero',
-    },
-    {
-      value: '2',
-      name: 'Febrero',
-    },
-    {
-      value: '3',
-      name: 'Marzo',
-    },
-    {
-      value: '4',
-      name: 'Abril',
-    },
-    {
-      value: '5',
-      name: 'Mayo',
-    },
-    {
-      value: '6',
-      name: 'Junio',
-    },
-    {
-      value: '7',
-      name: 'Julio',
-    },
-    {
-      value: '8',
-      name: 'Agosto',
-    },
-    {
-      value: '9',
-      name: 'Septiembre',
-    },
-    {
-      value: '10',
-      name: 'Octubre',
-    },
-    {
-      value: '11',
-      name: 'Noviembre',
-    },
-    {
-      value: '12',
-      name: 'Diciembre',
-    },
-  ];
+  monthItems = monthEnum;
 
   showDayControl: boolean = false;
   dayControl: FormControl = new FormControl(null, []);
@@ -223,7 +155,6 @@ export class FrequencyFormComponent implements OnInit {
         }
       }
     }
-
     this.deductionFormSvc.frequencyOk(frequency_value, day_value, month_value);
   }
 }
