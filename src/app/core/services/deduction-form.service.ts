@@ -15,6 +15,8 @@ export class DeductionFormService {
   public SaveServiceProviderSignal = new BehaviorSubject(false);
   public SaveTransactionSignal = new BehaviorSubject(false);
   public SaveFrequencySignal = new BehaviorSubject(false);
+  public SaveStartDateSignal = new BehaviorSubject(false);
+  public SaveGoalSignal = new BehaviorSubject(false);
 
   errors: any[] = [];
 
@@ -25,6 +27,17 @@ export class DeductionFormService {
   frequency: FormControl = new FormControl(null, [Validators.required]);
   frequency_day: FormControl = new FormControl(null, []);
   frequency_month: FormControl = new FormControl(null, []);
+  start_date: FormControl = new FormControl(null, []);
+  goal_type: FormControl = new FormControl(null, []);
+  repetitions: FormControl = new FormControl(null, []);
+  end_date: FormControl = new FormControl(null, []);
+  goal_currency: FormControl = new FormControl(null, []);
+  goal_amount: FormControl = new FormControl(null, []);
+  goal_rate: FormControl = new FormControl(null, []);
+  comment: FormControl = new FormControl(null, []);
+  currency: FormControl = new FormControl(null, []);
+  amount: FormControl = new FormControl(null, []);
+  rate: FormControl = new FormControl(null, []);
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
@@ -34,15 +47,45 @@ export class DeductionFormService {
       frequency: this.frequency,
       frequency_day: this.frequency_day,
       frequency_month: this.frequency_month,
+      start_date: this.start_date,
+      goal_type: this.goal_type,
+      repetitions: this.repetitions,
+      end_date: this.end_date,
+      goal_currency: this.goal_currency,
+      goal_amount: this.goal_amount,
+      goal_rate: this.goal_rate,
+      comment: this.comment,
+      currency: this.currency,
+      amount: this.amount,
+      rate: this.rate,
     });
   }
 
   public save() {
-    console.log('saving deduction');
     this.SaveServiceSignal.next(true);
     this.SaveServiceProviderSignal.next(true);
     this.SaveTransactionSignal.next(true);
     this.SaveFrequencySignal.next(true);
+    this.SaveStartDateSignal.next(true);
+    this.SaveGoalSignal.next(true);
+
+    setTimeout(() => {
+      if (!this.checkErrors()) {
+        this.sendRequestToServer();
+      }
+    }, 2000);
+  }
+
+  private checkErrors(): boolean {
+    if (this.errors.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  private sendRequestToServer() {
+    console.log('Request sent to server');
   }
 
   pushError(error: any) {
@@ -61,10 +104,43 @@ export class DeductionFormService {
     this.transaction_type.setValue(value);
   }
 
+  startDateOk(value: Date) {
+    this.start_date.setValue(value);
+  }
+
+  setFrequency(value: string) {
+    this.frequency.setValue(value);
+  }
+
   frequencyOk(frequency: string, day: string, month: string) {
     this.frequency.setValue(frequency);
     this.frequency_day.setValue(day);
     this.frequency_month.setValue(month);
-    console.log(this.form.value);
+  }
+
+  goalOk(
+    goal_type: string,
+    repetitions: number | null,
+    end_date: Date | null,
+    goal_currency: string | null,
+    goal_amount: number | null,
+    goal_rate: number | null
+  ) {
+    this.goal_type.setValue(goal_type);
+    this.repetitions.setValue(repetitions);
+    this.end_date.setValue(end_date);
+    this.goal_currency.setValue(goal_currency);
+    this.goal_amount.setValue(goal_amount);
+    this.goal_rate.setValue(goal_rate);
+  }
+
+  commentOk(value: string) {
+    this.comment.setValue(value);
+  }
+
+  amountOk(currency: string, amount: number, rate: number) {
+    this.currency.setValue(currency);
+    this.amount.setValue(amount);
+    this.rate.setValue(rate);
   }
 }

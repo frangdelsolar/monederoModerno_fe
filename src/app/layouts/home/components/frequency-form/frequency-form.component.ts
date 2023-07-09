@@ -155,6 +155,7 @@ export class FrequencyFormComponent implements OnInit {
       } else {
         this.showFrequencyControl = true;
       }
+      this.deductionFormSvc.setFrequency(value.key);
     });
   }
 
@@ -168,24 +169,23 @@ export class FrequencyFormComponent implements OnInit {
       this.eventTypeControl.markAsDirty();
       this.eventTypeControl.markAsTouched();
       this.eventTypeControl.setErrors({ serverError: errorMsg });
-      return;
     }
     let frequency_value = 'one-off';
     let month_value = '';
     let day_value = '';
     if (this.eventTypeControl.value.key == 'recurring') {
-      frequency_value = this.frequencyControl.value.value;
       if (this.frequencyControl.value === null) {
-        let errorMsg = 'Seleccione un tipo de evento';
+        let errorMsg = 'Seleccione una frecuencia';
         this.deductionFormSvc.pushError({
           step: 'frequency',
           error: errorMsg,
         });
         this.frequencyControl.markAsDirty();
         this.frequencyControl.markAsTouched();
-
         this.frequencyControl.setErrors({ serverError: errorMsg });
-        return;
+        frequency_value = '';
+      } else {
+        frequency_value = this.frequencyControl.value.value;
       }
 
       if (this.frequencyControl.value.value === 'yearly') {
@@ -198,7 +198,6 @@ export class FrequencyFormComponent implements OnInit {
           this.monthControl.markAsDirty();
           this.monthControl.markAsTouched();
           this.monthControl.setErrors({ serverError: errorMsg });
-          return;
         } else {
           month_value = this.monthControl.value.value;
         }
@@ -214,7 +213,6 @@ export class FrequencyFormComponent implements OnInit {
           this.dayControl.markAsDirty();
           this.dayControl.markAsTouched();
           this.dayControl.setErrors({ serverError: errorMsg });
-          return;
         } else {
           day_value = this.dayControl.value.value;
         }

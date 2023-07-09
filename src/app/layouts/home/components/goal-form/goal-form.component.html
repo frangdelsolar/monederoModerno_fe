@@ -10,22 +10,37 @@
     ></p-radioButton>
     <label [for]="item.key" class="ml-2">{{ item.name }}</label>
   </div>
-  <div class="pt-2">
+  <div class="mx-1" *ngFor="let item of goalTypeControl.errors | keyvalue">
+    <small *ngIf="item.key == 'serverError'" id="input-help" class="p-error">{{
+      item.value
+    }}</small>
+  </div>
+  <div
+    *ngIf="showAmountControl || showRepetitionsControl || showDateControl"
+    class="pt-3"
+  >
     <app-input-currency
       *ngIf="showAmountControl"
       [label]="'Monto total'"
       [editOn]="true"
+      [currencyControl]="currencyControl"
+      [amountControl]="amountControl"
+      [rateControl]="rateControl"
+      [validateSignal]="validateCurrencySignal"
+      (errorsEmitter)="onCurrencyErrors($event)"
     ></app-input-currency>
     <app-input-text
       *ngIf="showRepetitionsControl"
       [label]="'Repeticiones'"
       [editOn]="true"
       [type]="'number'"
+      [control]="repetitionsControl"
     ></app-input-text>
     <app-datepicker
       *ngIf="showDateControl"
       [label]="'Fecha de finalización'"
       [editOn]="true"
+      [control]="dateControl"
     ></app-datepicker>
   </div>
 </div>

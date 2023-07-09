@@ -7,31 +7,35 @@
       [label]="'¿Cuántas veces?'"
     ></app-frequency-form>
 
-    <!-- <app-form-section [label]="'¿Cuándo empieza?'">
+    <app-form-section [label]="'¿Cuándo empieza?'">
       <app-datepicker
         [editOn]="editModeOn"
         [label]="'Fecha de inicio'"
         [control]="startDateControl"
       ></app-datepicker>
-    </app-form-section> -->
+    </app-form-section>
 
-    <!-- <app-goal-form
+    <app-goal-form
+      *ngIf="showGoalForm"
       [editOn]="editModeOn"
       [label]="'¿Hasta cuándo?'"
-      [control]="frequencyControl"
-    ></app-goal-form> -->
+    ></app-goal-form>
 
-    <!-- <app-input-currency
-      [editOn]="editModeOn"
+    <app-input-currency
       [label]="'¿Cuánto vale la cuota?'"
-      [control]="amountControl"
-    ></app-input-currency> -->
+      [editOn]="editModeOn"
+      [currencyControl]="currencyControl"
+      [amountControl]="amountControl"
+      [rateControl]="rateControl"
+      [validateSignal]="validateCurrencySignal"
+      (errorsEmitter)="onCurrencyErrors($event)"
+    ></app-input-currency>
 
-    <!-- <app-input-text-area
+    <app-input-text-area
       [editOn]="editModeOn"
       [label]="'Comentario'"
       [control]="commentControl"
-    ></app-input-text-area> -->
+    ></app-input-text-area>
 
     <button
       pButton
