@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import frequencyEnum from '@app/core/enums/frequency.enum';
+import FREQUENCIES from '@app/core/enums/frequency.enum';
 import monthEnum from '@app/core/enums/months.enum';
 import { DeductionFormService } from '@app/core/services/deduction-form.service';
 
@@ -28,8 +28,16 @@ export class FrequencyFormComponent implements OnInit {
   showFrequencyControl: boolean = false;
 
   frequencyControl: FormControl = new FormControl(null, []);
-  frequencyItems = frequencyEnum.filter((item) => item.value !== 'one-off');
-
+  frequencyItems = [
+    {
+      value: 'MONTHLY',
+      name: FREQUENCIES.MONTHLY,
+    },
+    {
+      value: 'YEARLY',
+      name: FREQUENCIES.YEARLY.valueOf(),
+    },
+  ];
   showMonthControl: boolean = false;
   monthControl: FormControl = new FormControl(null, []);
   monthItems = monthEnum;
@@ -54,10 +62,10 @@ export class FrequencyFormComponent implements OnInit {
     });
 
     this.frequencyControl.valueChanges.subscribe((value) => {
-      if (value && value.value === 'monthly') {
+      if (value && value.name === FREQUENCIES.MONTHLY) {
         this.showMonthControl = false;
         this.showDayControl = true;
-      } else if (value && value.value === 'yearly') {
+      } else if (value && value.name === FREQUENCIES.YEARLY) {
         this.showMonthControl = true;
         this.showDayControl = true;
       } else {
@@ -107,7 +115,7 @@ export class FrequencyFormComponent implements OnInit {
       this.eventTypeControl.markAsTouched();
       this.eventTypeControl.setErrors({ serverError: errorMsg });
     }
-    let frequency_value = 'one-off';
+    let frequency_value = FREQUENCIES.ONEOFF.valueOf();
     let month_value = '';
     let day_value = '';
     if (this.eventTypeControl.value.key == 'recurring') {
@@ -125,7 +133,7 @@ export class FrequencyFormComponent implements OnInit {
         frequency_value = this.frequencyControl.value.value;
       }
 
-      if (this.frequencyControl.value.value === 'yearly') {
+      if (this.frequencyControl.value.name === FREQUENCIES.YEARLY) {
         if (this.monthControl.value === null) {
           let errorMsg = 'Debes seleccionar un mes';
           this.deductionFormSvc.pushError({
@@ -140,7 +148,10 @@ export class FrequencyFormComponent implements OnInit {
         }
       }
 
-      if (['yearly', 'monthly'].includes(this.frequencyControl.value.value)) {
+      if (
+        this.frequencyControl.value.name == FREQUENCIES.MONTHLY ||
+        this.frequencyControl.value.name == FREQUENCIES.YEARLY
+      ) {
         if (this.dayControl.value === null) {
           let errorMsg = 'Debes seleccionar un día';
           this.deductionFormSvc.pushError({

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import FREQUENCIES from '@app/core/enums/frequency.enum';
+import { GOAL_TYPES } from '@app/core/enums/goal_type.enum';
 import { DeductionFormService } from '@app/core/services/deduction-form.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -15,20 +17,20 @@ export class GoalFormComponent implements OnInit {
   goalTypeControl: FormControl = new FormControl(null, []);
   goalType = [
     {
-      key: 'repetitions',
-      name: 'Termina cuando se alcanza un número de repeticiones',
+      value: 'NOGOAL',
+      name: GOAL_TYPES.NOGOAL,
     },
     {
-      key: 'calendar',
-      name: 'Termina cuando se alcanza una fecha',
+      value: 'REPETITIONS',
+      name: GOAL_TYPES.REPETITIONS,
     },
     {
-      key: 'amount',
-      name: 'Termina cuando se alcanza un monto',
+      value: 'AMOUNT',
+      name: GOAL_TYPES.AMOUNT,
     },
     {
-      key: 'no-goal',
-      name: 'No se termina',
+      value: 'CALENDAR',
+      name: GOAL_TYPES.CALENDAR,
     },
   ];
 
@@ -54,7 +56,7 @@ export class GoalFormComponent implements OnInit {
     });
 
     this.goalTypeControl.valueChanges.subscribe((value) => {
-      if (value.key == 'repetitions') {
+      if (value.name == GOAL_TYPES.REPETITIONS) {
         this.showRepetitionsControl = true;
         this.showDateControl = false;
         this.showAmountControl = false;
@@ -62,7 +64,7 @@ export class GoalFormComponent implements OnInit {
         this.amountControl.setValue(null);
         this.currencyControl.setValue(null);
         this.rateControl.setValue(null);
-      } else if (value.key == 'calendar') {
+      } else if (value.name == GOAL_TYPES.CALENDAR) {
         this.showRepetitionsControl = false;
         this.showDateControl = true;
         this.showAmountControl = false;
@@ -70,7 +72,7 @@ export class GoalFormComponent implements OnInit {
         this.amountControl.setValue(null);
         this.currencyControl.setValue(null);
         this.rateControl.setValue(null);
-      } else if (value.key == 'amount') {
+      } else if (value.name == GOAL_TYPES.AMOUNT) {
         this.showRepetitionsControl = false;
         this.showDateControl = false;
         this.showAmountControl = true;
@@ -111,7 +113,7 @@ export class GoalFormComponent implements OnInit {
         error: errorMsg,
       });
     }
-    if (this.goalTypeControl.value.key == 'repetitions') {
+    if (this.goalTypeControl.value.name == GOAL_TYPES.REPETITIONS) {
       if (this.repetitionsControl.value == null) {
         let errorMsg = 'Debes seleccionar un número de repeticiones';
         this.repetitionsControl.markAsDirty();
@@ -125,7 +127,7 @@ export class GoalFormComponent implements OnInit {
           error: errorMsg,
         });
       }
-    } else if (this.goalTypeControl.value.key == 'calendar') {
+    } else if (this.goalTypeControl.value.name == GOAL_TYPES.CALENDAR) {
       if (this.dateControl.value == null) {
         let errorMsg = 'Debes seleccionar una fecha de finalización';
         this.dateControl.markAsDirty();
@@ -138,13 +140,13 @@ export class GoalFormComponent implements OnInit {
           error: errorMsg,
         });
       }
-    } else if (this.goalTypeControl.value.key == 'amount') {
+    } else if (this.goalTypeControl.value.name == GOAL_TYPES.AMOUNT) {
       this.validateCurrencySignal.next(true);
     }
 
     let goal_type = '';
     if (this.goalTypeControl.value != null) {
-      goal_type = this.goalTypeControl.value.key;
+      goal_type = this.goalTypeControl.value.value;
     }
     let repetitions = this.repetitionsControl.value;
     let date = this.dateControl.value;
@@ -155,7 +157,7 @@ export class GoalFormComponent implements OnInit {
     let amount = this.amountControl.value;
     let rate = this.rateControl.value;
 
-    if (this.deductionFormService.frequency.value == 'one-off') {
+    if (this.deductionFormService.frequency.value.value == FREQUENCIES.ONEOFF) {
       goal_type = '';
       repetitions = null;
       date = null;

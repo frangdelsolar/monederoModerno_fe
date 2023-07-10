@@ -1,28 +1,7 @@
-const frequencyEnum = [
-  {
-    value: 'one-off',
-    name: 'Una vez',
-  },
-  {
-    value: 'daily',
-    name: 'Diario',
-  },
-  {
-    value: 'weekly',
-    name: 'Semanal',
-  },
-  {
-    value: 'biweekly',
-    name: 'Quincenal',
-  },
-  {
-    value: 'monthly',
-    name: 'Mensual',
-  },
-  {
-    value: 'yearly',
-    name: 'Anual',
-  },
-];
+enum FREQUENCIES {
+  ONEOFF = 'Una vez',
+  MONTHLY = 'Mensual',
+  YEARLY = 'Anual',
+}
 
-export default frequencyEnum;
+export default FREQUENCIES;

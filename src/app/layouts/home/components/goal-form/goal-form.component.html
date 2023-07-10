@@ -4,11 +4,11 @@
 >
   <div *ngFor="let item of goalType" class="field-checkbox">
     <p-radioButton
-      [inputId]="item.key"
+      [inputId]="item.value"
       [value]="item"
       [formControl]="goalTypeControl"
     ></p-radioButton>
-    <label [for]="item.key" class="ml-2">{{ item.name }}</label>
+    <label [for]="item.value" class="ml-2">{{ item.name }}</label>
   </div>
   <div class="mx-1" *ngFor="let item of goalTypeControl.errors | keyvalue">
     <small *ngIf="item.key == 'serverError'" id="input-help" class="p-error">{{
