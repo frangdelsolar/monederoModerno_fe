@@ -71,12 +71,12 @@
   </app-form-section>
 
   <app-form-section [label]="amountLabel">
-    <div class="flex justify-content-between mt-0 pt-0">
-      <app-input-text
+    <div class="flex justify-content-between mt-3 pt-0">
+      <app-input-currency
         [editOn]="false"
         [label]="'Total'"
-        [control]="amountControl"
-      ></app-input-text>
+        [amountControl]="amountControl"
+      ></app-input-currency>
     </div>
   </app-form-section>
 

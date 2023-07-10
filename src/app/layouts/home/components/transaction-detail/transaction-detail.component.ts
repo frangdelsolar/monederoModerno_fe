@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TransactionService } from '@app/core/controllers/transaction.controller';
+import FREQUENCIES from '@app/core/enums/frequency.enum';
+import { GOAL_TYPES } from '@app/core/enums/goal_type.enum';
+import { TRANSACTION_TYPES } from '@app/core/enums/transaction_type.enum';
 import { Transaction } from '@app/core/models/transaction.interface';
 import { AppDialogService } from '@app/core/services/app-dialog.service';
 
@@ -47,6 +50,8 @@ export class TransactionDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('Income', TRANSACTION_TYPES['INCOME']);
+
     this.dialogSvc.DialogDataObservable.subscribe((data) => {
       if (data) {
         this.transactionId = data.data.transactionId;
@@ -54,11 +59,21 @@ export class TransactionDetailComponent implements OnInit {
           .getById(this.transactionId.toString())
           .subscribe((transaction: Transaction) => {
             this.transaction = transaction;
+            let in_transaction_type =
+              TRANSACTION_TYPES[
+                transaction.transaction_type as keyof typeof TRANSACTION_TYPES
+              ];
 
-            if (this.transaction.transaction_type == 'income') {
+            let in_frequency =
+              FREQUENCIES[transaction.frequency as keyof typeof FREQUENCIES];
+
+            let in_goal_type =
+              GOAL_TYPES[transaction.goal_type as keyof typeof GOAL_TYPES];
+
+            if (in_transaction_type == TRANSACTION_TYPES.INCOME) {
               this.deductionLabel = 'Estás recibiendo';
               this.frequencyLabel = 'Este ingreso se produce';
-            } else if (this.transaction.transaction_type == 'expense') {
+            } else if (in_transaction_type == TRANSACTION_TYPES.EXPENSE) {
               this.deductionLabel = 'Estás pagando';
               this.frequencyLabel = 'Este gasto se produce';
             }
@@ -66,14 +81,14 @@ export class TransactionDetailComponent implements OnInit {
             this.serviceProviderControl.setValue(
               this.transaction.service_provider.name
             );
-            this.frequencyControl.setValue(this.transaction.frequency);
+            this.frequencyControl.setValue(in_frequency);
             if (
-              this.frequencyControl.value == 'Mensual' ||
-              this.frequencyControl.value == 'Anual'
+              in_frequency == FREQUENCIES.MONTHLY ||
+              in_frequency == FREQUENCIES.YEARLY
             ) {
               this.showFrequencyDay = true;
             }
-            if (this.frequencyControl.value == 'Anual') {
+            if (in_frequency == FREQUENCIES.YEARLY) {
               this.showFrequencyMonth = true;
             }
             this.frequencyDayControl.setValue(this.transaction.frequency_day);
@@ -82,22 +97,23 @@ export class TransactionDetailComponent implements OnInit {
             );
 
             this.startDateControl.setValue(this.transaction.start_date);
-            this.goalTypeControl.setValue(this.transaction.goal_type);
+            this.goalTypeControl.setValue(in_goal_type);
             this.endDateControl.setValue(this.transaction.end_date);
-            if (this.goalTypeControl.value == 'calendar') {
+            if (in_goal_type == GOAL_TYPES.CALENDAR) {
               this.showEndDate = true;
-            } else if (this.goalTypeControl.value == 'repetitions') {
+            } else if (in_goal_type == GOAL_TYPES.REPETITIONS) {
               this.showRepetitions = true;
-            } else if (this.goalTypeControl.value == 'amount') {
+            } else if (in_goal_type == GOAL_TYPES.AMOUNT) {
               this.showGoalAmount = true;
-            } else if (this.goalTypeControl.value == 'no-goal') {
+            } else if (in_goal_type == GOAL_TYPES.NOGOAL) {
               this.showIndefinite = true;
               this.indefiniteControl.setValue('Indefinidas');
             }
             this.repetitionsControl.setValue(this.transaction.repetitions);
-            let goal_amount = `${
-              this.transaction.goal_currency.currency
-            } $${this.transaction.goal_currency.amount.toLocaleString()}`;
+            let goal_amount = '';
+            if (this.transaction.goal_currency != null) {
+              goal_amount = `${this.transaction.goal_currency.currency} $${this.transaction.goal_currency.amount}`;
+            }
             this.goalAmountControl.setValue(goal_amount);
 
             let amount = `${

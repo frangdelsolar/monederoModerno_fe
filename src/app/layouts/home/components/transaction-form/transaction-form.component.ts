@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ServiceService } from '@app/core/controllers/service.controller';
+import { TRANSACTION_TYPES } from '@app/core/enums/transaction_type.enum';
 import { DeductionFormService } from '@app/core/services/deduction-form.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -28,12 +29,12 @@ export class TransactionFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.transactionTypeControl.valueChanges.subscribe((value) => {
-      if (value.value == 'income') {
+      if (value.name == TRANSACTION_TYPES.INCOME) {
         this.showServiceControl = true;
         this.labelForServiceControl = '¿Qué vas a recibir?';
         this.showServiceProviderControl = true;
         this.labelForServiceProviderControl = '¿Quién te paga?';
-      } else if (value.value == 'expense') {
+      } else if (value.name == TRANSACTION_TYPES.EXPENSE) {
         this.showServiceControl = true;
         this.labelForServiceControl = '¿Qué vas a pagar?';
         this.showServiceProviderControl = true;
