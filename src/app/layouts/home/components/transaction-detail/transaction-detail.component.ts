@@ -175,7 +175,6 @@ export class TransactionDetailComponent implements OnInit, OnDestroy {
       rate: this.newAmountForm.value.newRate,
       due_date: this.transaction.due_date,
     };
-    console.log(data);
     this.transactionSvc.payTransaction(data).subscribe((res) => {});
   }
 }

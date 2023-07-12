@@ -31,11 +31,22 @@ export class AuthService {
     return this.isAuthenticated.asObservable();
   }
 
+  checkFirebaseAuthStatus() {
+    this.afAuth.authState.subscribe((user) => {
+      if (user) {
+        this.storeAuthDetails(user);
+      } else {
+        this.logout();
+      }
+    });
+  }
+
   verifyAuthentication() {
     let userDataString = localStorage.getItem('user');
     if (userDataString) {
       this.user = JSON.parse(userDataString);
       this.isAuthenticated.next(true);
+      this.checkFirebaseAuthStatus();
     } else {
       this.isAuthenticated.next(false);
     }
