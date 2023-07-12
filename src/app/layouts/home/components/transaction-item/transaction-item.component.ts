@@ -10,6 +10,8 @@ import { TransactionDetailComponent } from '../transaction-detail/transaction-de
 })
 export class TransactionItemComponent implements OnInit {
   @Input() transaction: Transaction;
+  @Input() month: string;
+  @Input() year: string;
 
   constructor(private dialogSvc: AppDialogService) {}
 
@@ -18,7 +20,11 @@ export class TransactionItemComponent implements OnInit {
   showDetail() {
     this.dialogSvc.show({
       component: TransactionDetailComponent,
-      data: { transactionId: this.transaction.id },
+      data: {
+        transactionId: this.transaction.id,
+        month: this.month,
+        year: this.year,
+      },
       params: {
         header: 'Detalle de transacción',
         width: '70%',

@@ -70,16 +70,6 @@
     </div>
   </app-form-section>
 
-  <app-form-section [label]="amountLabel">
-    <div class="flex justify-content-between mt-3 pt-0">
-      <app-input-currency
-        [editOn]="false"
-        [label]="'Total'"
-        [amountControl]="amountControl"
-      ></app-input-currency>
-    </div>
-  </app-form-section>
-
   <app-form-section *ngIf="showCommentSection" [label]="commentLabel">
     <div class="flex justify-content-between mt-0 pt-0">
       <app-input-text
@@ -89,4 +79,46 @@
       ></app-input-text>
     </div>
   </app-form-section>
+
+  <p-divider></p-divider>
+
+  <app-form-section [label]="dueDateLabel">
+    <div class="flex justify-content-between mt-0 pt-0">
+      <app-datepicker
+        [editOn]="false"
+        [label]="'Fecha de vencimiento'"
+        [control]="dueDateControl"
+      ></app-datepicker>
+    </div>
+  </app-form-section>
+
+  <app-form-section [label]="amountLabel">
+    <div class="flex justify-content-between mt-0 pt-0">
+      <app-input-text
+        [editOn]="false"
+        [label]="'Total'"
+        [control]="amountControl"
+      ></app-input-text>
+    </div>
+  </app-form-section>
+
+  <app-input-switch
+    [label]="'Editar monto'"
+    [control]="editAmountSectionControl"
+  ></app-input-switch>
+  <app-input-currency
+    *ngIf="editAmountSectionControl.value"
+    [editOn]="true"
+    [label]="'Ingresar valor'"
+    [amountControl]="newAmountControl"
+    [currencyControl]="newCurrencyControl"
+    [rateControl]="newRateControl"
+  ></app-input-currency>
+
+  <button
+    pButton
+    type="button"
+    label="Pagar Vencimiento"
+    (click)="payTransaction()"
+  ></button>
 </div>

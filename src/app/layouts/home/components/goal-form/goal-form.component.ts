@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import FREQUENCIES from '@app/core/enums/frequency.enum';
-import { GOAL_TYPES } from '@app/core/enums/goal_type.enum';
+import GOAL_TYPES, { GOAL_TYPE_ITEMS } from '@app/core/enums/goal_type.enum';
 import { DeductionFormService } from '@app/core/services/deduction-form.service';
+import processFormControlErrors from '@app/core/utils/processFormControlErrors';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -15,24 +16,13 @@ export class GoalFormComponent implements OnInit {
   @Input() label: string = 'Label';
 
   goalTypeControl: FormControl = new FormControl(null, []);
-  goalType = [
-    {
-      value: 'NOGOAL',
-      name: GOAL_TYPES.NOGOAL,
-    },
-    {
-      value: 'REPETITIONS',
-      name: GOAL_TYPES.REPETITIONS,
-    },
-    {
-      value: 'AMOUNT',
-      name: GOAL_TYPES.AMOUNT,
-    },
-    {
-      value: 'CALENDAR',
-      name: GOAL_TYPES.CALENDAR,
-    },
-  ];
+  goalType = GOAL_TYPE_ITEMS.map((item) => {
+    return {
+      value: item.value,
+      name: item.name,
+      key: item.value,
+    };
+  });
 
   showRepetitionsControl: boolean = false;
   repetitionsControl: FormControl = new FormControl(null, []);
@@ -46,6 +36,8 @@ export class GoalFormComponent implements OnInit {
   validateCurrencySignal: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
 
+  processError = processFormControlErrors;
+
   constructor(private deductionFormService: DeductionFormService) {}
 
   ngOnInit(): void {
@@ -56,7 +48,7 @@ export class GoalFormComponent implements OnInit {
     });
 
     this.goalTypeControl.valueChanges.subscribe((value) => {
-      if (value.name == GOAL_TYPES.REPETITIONS) {
+      if (value.value == GOAL_TYPES.REPETITIONS) {
         this.showRepetitionsControl = true;
         this.showDateControl = false;
         this.showAmountControl = false;
@@ -64,7 +56,7 @@ export class GoalFormComponent implements OnInit {
         this.amountControl.setValue(null);
         this.currencyControl.setValue(null);
         this.rateControl.setValue(null);
-      } else if (value.name == GOAL_TYPES.CALENDAR) {
+      } else if (value.value == GOAL_TYPES.CALENDAR) {
         this.showRepetitionsControl = false;
         this.showDateControl = true;
         this.showAmountControl = false;
@@ -72,7 +64,7 @@ export class GoalFormComponent implements OnInit {
         this.amountControl.setValue(null);
         this.currencyControl.setValue(null);
         this.rateControl.setValue(null);
-      } else if (value.name == GOAL_TYPES.AMOUNT) {
+      } else if (value.value == GOAL_TYPES.AMOUNT) {
         this.showRepetitionsControl = false;
         this.showDateControl = false;
         this.showAmountControl = true;
@@ -102,45 +94,32 @@ export class GoalFormComponent implements OnInit {
 
   validateAndSave() {
     if (this.goalTypeControl.value == null) {
-      let errorMsg = 'Debes seleccionar un tipo de meta';
-      this.goalTypeControl.markAsDirty();
-      this.goalTypeControl.markAsTouched();
-      this.goalTypeControl.setErrors({
-        serverError: errorMsg,
-      });
-      this.deductionFormService.pushError({
-        step: 'goal',
-        error: errorMsg,
-      });
+      this.processError(
+        'goal',
+        this.goalTypeControl,
+        'Debes seleccionar un frecuencia de transacción',
+        this.deductionFormService
+      );
     }
-    if (this.goalTypeControl.value.name == GOAL_TYPES.REPETITIONS) {
+    if (this.goalTypeControl.value.value == GOAL_TYPES.REPETITIONS) {
       if (this.repetitionsControl.value == null) {
-        let errorMsg = 'Debes seleccionar un número de repeticiones';
-        this.repetitionsControl.markAsDirty();
-        this.repetitionsControl.markAsTouched();
-        this.repetitionsControl.setErrors({
-          serverError: errorMsg,
-        });
-
-        this.deductionFormService.pushError({
-          step: 'goal',
-          error: errorMsg,
-        });
+        this.processError(
+          'goal',
+          this.repetitionsControl,
+          'Debes seleccionar un número de repeticiones',
+          this.deductionFormService
+        );
       }
-    } else if (this.goalTypeControl.value.name == GOAL_TYPES.CALENDAR) {
+    } else if (this.goalTypeControl.value.value == GOAL_TYPES.CALENDAR) {
       if (this.dateControl.value == null) {
-        let errorMsg = 'Debes seleccionar una fecha de finalización';
-        this.dateControl.markAsDirty();
-        this.dateControl.markAsTouched();
-        this.dateControl.setErrors({
-          serverError: errorMsg,
-        });
-        this.deductionFormService.pushError({
-          step: 'goal',
-          error: errorMsg,
-        });
+        this.processError(
+          'goal',
+          this.dateControl,
+          'Debes seleccionar una fecha de finalización',
+          this.deductionFormService
+        );
       }
-    } else if (this.goalTypeControl.value.name == GOAL_TYPES.AMOUNT) {
+    } else if (this.goalTypeControl.value.value == GOAL_TYPES.AMOUNT) {
       this.validateCurrencySignal.next(true);
     }
 

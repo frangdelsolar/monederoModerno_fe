@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./dropdown.component.scss'],
 })
 export class DropdownComponent implements OnInit {
+  @Input() editOn: boolean = true;
   @Input() items: any[];
   @Input() label: string = 'Label';
   @Input() control: FormControl = new FormControl('', []);

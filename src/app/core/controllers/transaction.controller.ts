@@ -11,9 +11,9 @@ export class TransactionService {
 
   constructor(private privateSvc: PrivateApiService) {}
 
-  public getById(id: string) {
+  public getById(id: string, month: string, year: string) {
     return this.privateSvc.get<Transaction>(
-      this._apiUrl + id + '/',
+      this._apiUrl + id + '?month=' + month + '&year=' + year,
       null,
       true
     );
@@ -29,5 +29,13 @@ export class TransactionService {
 
   public create(data: Transaction) {
     return this.privateSvc.post<Transaction>(this._apiUrl, data, true);
+  }
+
+  public payTransaction(data: any) {
+    return this.privateSvc.post<any>(
+      environment.apiUrl + 'api/pay/',
+      data,
+      true
+    );
   }
 }

@@ -8,6 +8,8 @@
     <app-transaction-item
       *ngFor="let item of transactions"
       [transaction]="item"
+      [month]="month"
+      [year]="year"
     ></app-transaction-item>
   </div>
 </app-card>

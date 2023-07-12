@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import FREQUENCIES from '@app/core/enums/frequency.enum';
+import FREQUENCIES, { FREQUENCY_ITEMS } from '@app/core/enums/frequency.enum';
 import monthEnum from '@app/core/enums/months.enum';
 import { DeductionFormService } from '@app/core/services/deduction-form.service';
+import processFormControlErrors from '@app/core/utils/processFormControlErrors';
 
 @Component({
   selector: 'app-frequency-form',
@@ -16,7 +17,7 @@ export class FrequencyFormComponent implements OnInit {
   eventTypeControl: FormControl = new FormControl(null, []);
   eventType = [
     {
-      key: 'one-off',
+      key: 'ONEOFF',
       name: 'Transacción única',
     },
     {
@@ -28,16 +29,10 @@ export class FrequencyFormComponent implements OnInit {
   showFrequencyControl: boolean = false;
 
   frequencyControl: FormControl = new FormControl(null, []);
-  frequencyItems = [
-    {
-      value: 'MONTHLY',
-      name: FREQUENCIES.MONTHLY,
-    },
-    {
-      value: 'YEARLY',
-      name: FREQUENCIES.YEARLY.valueOf(),
-    },
-  ];
+  frequencyItems = FREQUENCY_ITEMS.filter(
+    (item) => item.value != FREQUENCIES.ONEOFF
+  );
+
   showMonthControl: boolean = false;
   monthControl: FormControl = new FormControl(null, []);
   monthItems = monthEnum;
@@ -45,8 +40,11 @@ export class FrequencyFormComponent implements OnInit {
   showDayControl: boolean = false;
   dayControl: FormControl = new FormControl(null, []);
   dayItems: any[] = [];
+
+  processError = processFormControlErrors;
+
   constructor(private deductionFormSvc: DeductionFormService) {
-    for (let i = 1; i <= 31; i++) {
+    for (let i = 1; i <= 28; i++) {
       this.dayItems.push({
         value: i.toString(),
         name: i.toString(),
@@ -62,10 +60,10 @@ export class FrequencyFormComponent implements OnInit {
     });
 
     this.frequencyControl.valueChanges.subscribe((value) => {
-      if (value && value.name === FREQUENCIES.MONTHLY) {
+      if (value && value.value === FREQUENCIES.MONTHLY) {
         this.showMonthControl = false;
         this.showDayControl = true;
-      } else if (value && value.name === FREQUENCIES.YEARLY) {
+      } else if (value && value.value === FREQUENCIES.YEARLY) {
         this.showMonthControl = true;
         this.showDayControl = true;
       } else {
@@ -90,7 +88,7 @@ export class FrequencyFormComponent implements OnInit {
     });
 
     this.eventTypeControl.valueChanges.subscribe((value) => {
-      if (value.key === 'one-off') {
+      if (value.key === FREQUENCIES.ONEOFF) {
         this.showFrequencyControl = false;
         this.showDayControl = false;
         this.showMonthControl = false;
@@ -100,67 +98,59 @@ export class FrequencyFormComponent implements OnInit {
       } else {
         this.showFrequencyControl = true;
       }
-      this.deductionFormSvc.setFrequency(value.key);
+      this.deductionFormSvc.setFrequency(FREQUENCIES.ONEOFF);
     });
   }
 
   validateAndSave() {
     if (this.eventTypeControl.value === null) {
-      let errorMsg = 'Debes seleccionar un frecuencia de transacción';
-      this.deductionFormSvc.pushError({
-        step: 'frequency',
-        error: errorMsg,
-      });
-      this.eventTypeControl.markAsDirty();
-      this.eventTypeControl.markAsTouched();
-      this.eventTypeControl.setErrors({ serverError: errorMsg });
+      this.processError(
+        'frequency',
+        this.eventTypeControl,
+        'Debes seleccionar un frecuencia de transacción',
+        this.deductionFormSvc
+      );
     }
-    let frequency_value = FREQUENCIES.ONEOFF.valueOf();
+    let frequency_value: string = FREQUENCIES.ONEOFF;
     let month_value = '';
     let day_value = '';
     if (this.eventTypeControl.value.key == 'recurring') {
       if (this.frequencyControl.value === null) {
-        let errorMsg = 'Debes seleccionar una frecuencia';
-        this.deductionFormSvc.pushError({
-          step: 'frequency',
-          error: errorMsg,
-        });
-        this.frequencyControl.markAsDirty();
-        this.frequencyControl.markAsTouched();
-        this.frequencyControl.setErrors({ serverError: errorMsg });
+        this.processError(
+          'frequency',
+          this.frequencyControl,
+          'Debes seleccionar un frecuencia',
+          this.deductionFormSvc
+        );
         frequency_value = '';
       } else {
         frequency_value = this.frequencyControl.value.value;
       }
 
-      if (this.frequencyControl.value.name === FREQUENCIES.YEARLY) {
+      if (this.frequencyControl.value.value === FREQUENCIES.YEARLY) {
         if (this.monthControl.value === null) {
-          let errorMsg = 'Debes seleccionar un mes';
-          this.deductionFormSvc.pushError({
-            step: 'frequency',
-            error: errorMsg,
-          });
-          this.monthControl.markAsDirty();
-          this.monthControl.markAsTouched();
-          this.monthControl.setErrors({ serverError: errorMsg });
+          this.processError(
+            'frequency',
+            this.monthControl,
+            'Debes seleccionar un mes',
+            this.deductionFormSvc
+          );
         } else {
           month_value = this.monthControl.value.value;
         }
       }
 
       if (
-        this.frequencyControl.value.name == FREQUENCIES.MONTHLY ||
-        this.frequencyControl.value.name == FREQUENCIES.YEARLY
+        this.frequencyControl.value.value == FREQUENCIES.MONTHLY ||
+        this.frequencyControl.value.value == FREQUENCIES.YEARLY
       ) {
         if (this.dayControl.value === null) {
-          let errorMsg = 'Debes seleccionar un día';
-          this.deductionFormSvc.pushError({
-            step: 'frequency',
-            error: errorMsg,
-          });
-          this.dayControl.markAsDirty();
-          this.dayControl.markAsTouched();
-          this.dayControl.setErrors({ serverError: errorMsg });
+          this.processError(
+            'frequency',
+            this.dayControl,
+            'Debes seleccionar un día',
+            this.deductionFormSvc
+          );
         } else {
           day_value = this.dayControl.value.value;
         }

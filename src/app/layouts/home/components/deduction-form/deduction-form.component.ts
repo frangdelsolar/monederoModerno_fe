@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import FREQUENCIES from '@app/core/enums/frequency.enum';
 import { DeductionFormService } from '@app/core/services/deduction-form.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -33,15 +34,13 @@ export class DeductionFormComponent implements OnInit {
   constructor(private deductionFormSvc: DeductionFormService) {}
 
   ngOnInit(): void {
-    this.deductionFormSvc.frequency.valueChanges.subscribe(
-      (frequency: string) => {
-        if (frequency == 'one-off') {
-          this.showGoalForm = false;
-        } else {
-          this.showGoalForm = true;
-        }
+    this.deductionFormSvc.frequency.valueChanges.subscribe((frequency) => {
+      if (frequency.value == FREQUENCIES.ONEOFF) {
+        this.showGoalForm = false;
+      } else {
+        this.showGoalForm = true;
       }
-    );
+    });
     this.deductionFormSvc.SaveStartDateSignal.subscribe((save: boolean) => {
       if (save) {
         this.validateAndSave();

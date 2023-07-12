@@ -10,6 +10,8 @@ import { TransactionService } from '@app/core/controllers/transaction.controller
 export class TransactionsListComponent implements OnInit {
   dateControl: FormControl = new FormControl<Date>(new Date(), []);
   transactions: any[] = [];
+  month: string;
+  year: string;
 
   constructor(private transactionSvc: TransactionService) {}
 
@@ -28,6 +30,8 @@ export class TransactionsListComponent implements OnInit {
   }
 
   loadData(month: number, year: number) {
+    this.month = month.toString();
+    this.year = year.toString();
     this.transactionSvc
       .getActiveByDate(month.toString(), year.toString())
       .subscribe(

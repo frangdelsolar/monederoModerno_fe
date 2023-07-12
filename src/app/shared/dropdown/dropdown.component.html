@@ -1,5 +1,5 @@
 <div class="p-fluid">
-  <span class="p-float-label w-full">
+  <span *ngIf="editOn" class="p-float-label w-full">
     <p-dropdown
       [options]="items"
       [formControl]="control"

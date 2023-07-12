@@ -17,4 +17,5 @@ export interface Transaction {
   goal_currency: Currency;
   comment?: string;
   currency: Currency;
+  due_date?: Date;
 }

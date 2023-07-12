@@ -18,6 +18,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputSwitchModule } from 'primeng/inputswitch';
 import { KnobModule } from 'primeng/knob';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuModule } from 'primeng/menu';
@@ -45,6 +46,7 @@ import { InputCurrencyComponent } from './input-currency/input-currency.componen
 import { InputEditorComponent } from './input-editor/input-editor.component';
 import { InputImageComponent } from './input-image/input-image.component';
 import { InputPasswordComponent } from './input-password/input-password.component';
+import { InputSwitchComponent } from './input-switch/input-switch.component';
 import { InputTextAreaComponent } from './input-text-area/input-text-area.component';
 import { InputTextComponent } from './input-text/input-text.component';
 import { InputTextCustomComponent } from './input-text-custom/input-text-custom.component';
@@ -71,6 +73,7 @@ const pngModules = [
   FileUploadModule,
   FormsModule,
   ImageModule,
+  InputSwitchModule,
   InputTextareaModule,
   InputTextModule,
   KnobModule,
@@ -105,6 +108,7 @@ const uiComponents = [
   InputTextAreaComponent,
   InputTextComponent,
   InputPasswordComponent,
+  InputSwitchComponent,
   InputTextCustomComponent,
   MonthPickerComponent,
   TabMenuComponent,
