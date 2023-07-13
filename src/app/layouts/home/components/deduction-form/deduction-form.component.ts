@@ -35,7 +35,7 @@ export class DeductionFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.deductionFormSvc.frequency.valueChanges.subscribe((frequency) => {
-      if (frequency.value == FREQUENCIES.ONEOFF) {
+      if (frequency == FREQUENCIES.ONEOFF) {
         this.showGoalForm = false;
       } else {
         this.showGoalForm = true;

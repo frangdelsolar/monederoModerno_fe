@@ -91,10 +91,9 @@ export class DeductionFormService {
   }
 
   private sendRequestToServer() {
-    console.log('Request sent to server', this.form.value);
     this.transactionSvc.create(this.form.value).subscribe(
       (res) => {
-        console.log(res);
+        window.location.reload();
       },
       (err) => {
         console.log(err);

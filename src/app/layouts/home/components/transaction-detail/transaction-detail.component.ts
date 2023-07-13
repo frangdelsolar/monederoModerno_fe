@@ -21,7 +21,7 @@ export class TransactionDetailComponent implements OnInit, OnDestroy {
 
   dialogDataSubscription: Subscription;
 
-  pendingPayment: boolean = true;
+  pendingPayment: boolean = false;
 
   constructor(
     private dialogSvc: AppDialogService,
@@ -42,6 +42,8 @@ export class TransactionDetailComponent implements OnInit, OnDestroy {
               this.$transaction.next(transaction);
               if (this.transaction.payment != null) {
                 this.pendingPayment = false;
+              } else {
+                this.pendingPayment = true;
               }
             });
         }

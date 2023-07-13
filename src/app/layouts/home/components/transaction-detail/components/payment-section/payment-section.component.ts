@@ -21,7 +21,7 @@ export class PaymentSectionComponent implements OnInit {
   newCurrencyControl: FormControl = new FormControl(null, []);
   newRateControl: FormControl = new FormControl(null, []);
 
-  pendingPayment: boolean = true;
+  pendingPayment: boolean = false;
 
   constructor(
     private transactionSvc: TransactionService,
@@ -40,6 +40,8 @@ export class PaymentSectionComponent implements OnInit {
       this.transaction = transaction;
       if (this.transaction.payment != null) {
         this.pendingPayment = false;
+      } else {
+        this.pendingPayment = true;
       }
     });
 
@@ -62,6 +64,8 @@ export class PaymentSectionComponent implements OnInit {
       data.currency = this.newCurrencyControl.value.value;
       data.rate = this.newRateControl.value;
     }
-    this.transactionSvc.payTransaction(data).subscribe((res) => {});
+    this.transactionSvc.payTransaction(data).subscribe((res) => {
+      window.location.reload();
+    });
   }
 }
