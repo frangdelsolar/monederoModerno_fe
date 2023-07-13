@@ -98,7 +98,7 @@ export class FrequencyFormComponent implements OnInit {
       } else {
         this.showFrequencyControl = true;
       }
-      this.deductionFormSvc.setFrequency(FREQUENCIES.ONEOFF);
+      this.deductionFormSvc.setFrequency(value.key);
     });
   }
 
