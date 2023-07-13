@@ -11,5 +11,7 @@ export interface DialogData {
     maximizable?: boolean;
     accept?: Function;
     reject?: Function;
+    responsive?: boolean;
+    breakpoints?: any;
   };
 }

@@ -27,8 +27,13 @@ export class TransactionItemComponent implements OnInit {
       },
       params: {
         header: 'Detalle de transacción',
-        width: '70%',
         closable: true,
+        maximizable: true,
+        responsive: true,
+        breakpoints: {
+          '960px': '80vw',
+          '640px': '100vw',
+        },
       },
     });
   }

@@ -14,5 +14,22 @@
     <p class="my-0 py-0 font-bold">{{ transaction.currency.currency }}</p>
     <p class="my-0 py-0 text-sm">${{ transaction.currency.amount }}</p>
   </div>
+  <div
+    *ngIf="transaction.payment"
+    class="col-4 flex flex-column align-items-end justify-content-left"
+  >
+    <p class="my-0 py-0 font-bold">
+      {{ transaction.payment.currency.currency }}
+    </p>
+    <p class="my-0 py-0 text-sm">${{ transaction.payment.currency.amount }}</p>
+  </div>
+  <div
+    *ngIf="!transaction.payment"
+    class="col-4 flex flex-column align-items-end justify-content-left"
+  >
+    <p class="my-0 py-0 text-sm font-base">Estado</p>
+
+    <p class="my-0 py-0 font-bold">Pendiente</p>
+  </div>
 </div>
 <p-divider></p-divider>

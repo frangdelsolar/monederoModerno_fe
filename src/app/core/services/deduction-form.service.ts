@@ -76,9 +76,9 @@ export class DeductionFormService {
     this.SaveGoalSignal.next(true);
 
     setTimeout(() => {
-      // if (!this.checkErrors()) {
-      this.sendRequestToServer();
-      // }
+      if (!this.checkErrors()) {
+        this.sendRequestToServer();
+      }
     }, 1000);
   }
 

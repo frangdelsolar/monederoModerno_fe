@@ -8,7 +8,7 @@
   <app-input-currency
     *ngIf="editAmountSectionControl.value"
     [editOn]="true"
-    [label]="'Ingresar monto a abonar'"
+    [label]="'Ingresar monto abonado'"
     [amountControl]="newAmountControl"
     [currencyControl]="newCurrencyControl"
     [rateControl]="newRateControl"
@@ -17,7 +17,7 @@
   <button
     pButton
     type="button"
-    label="Pagar Vencimiento"
+    label="Ejecutar Vencimiento"
     (click)="payTransaction()"
   ></button>
 </section>
