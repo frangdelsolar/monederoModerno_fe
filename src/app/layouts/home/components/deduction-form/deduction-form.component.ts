@@ -28,6 +28,9 @@ export class DeductionFormComponent implements OnInit {
 
   showGoalForm: boolean = false;
 
+  showMarkAsPaidSwitch: boolean = false;
+  markAsPaidControl: FormControl = new FormControl('', [Validators.required]);
+
   validateCurrencySignal: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
 
@@ -37,8 +40,10 @@ export class DeductionFormComponent implements OnInit {
     this.deductionFormSvc.frequency.valueChanges.subscribe((frequency) => {
       if (frequency == FREQUENCIES.ONEOFF) {
         this.showGoalForm = false;
+        this.showMarkAsPaidSwitch = true;
       } else {
         this.showGoalForm = true;
+        this.showMarkAsPaidSwitch = false;
       }
     });
     this.deductionFormSvc.SaveStartDateSignal.subscribe((save: boolean) => {
@@ -82,7 +87,8 @@ export class DeductionFormComponent implements OnInit {
     this.deductionFormSvc.amountOk(
       this.currencyControl.value.value,
       this.amountControl.value,
-      this.rateControl.value
+      this.rateControl.value,
+      this.markAsPaidControl.value
     );
   }
 

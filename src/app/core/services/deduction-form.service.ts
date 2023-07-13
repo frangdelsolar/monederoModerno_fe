@@ -40,6 +40,7 @@ export class DeductionFormService {
   currency: FormControl = new FormControl(null, []);
   amount: FormControl = new FormControl(null, []);
   rate: FormControl = new FormControl(null, []);
+  paid: FormControl = new FormControl(null, []);
 
   constructor(
     private fb: FormBuilder,
@@ -63,6 +64,7 @@ export class DeductionFormService {
       currency: this.currency,
       amount: this.amount,
       rate: this.rate,
+      paid: this.paid,
     });
   }
 
@@ -152,9 +154,10 @@ export class DeductionFormService {
     this.comment.setValue(value);
   }
 
-  amountOk(currency: string, amount: number, rate: number) {
+  amountOk(currency: string, amount: number, rate: number, paid: boolean) {
     this.currency.setValue(currency);
     this.amount.setValue(amount);
     this.rate.setValue(rate);
+    this.paid.setValue(paid);
   }
 }

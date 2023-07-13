@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppDialogService } from '@app/core/services/app-dialog.service';
+import { DeductionFormComponent } from './components/deduction-form/deduction-form.component';
 
 @Component({
   selector: 'app-home',
@@ -11,5 +12,20 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onAddClick() {}
+  onAddTransaction() {
+    this.dialogSvc.show({
+      component: DeductionFormComponent,
+      data: {},
+      params: {
+        header: 'Añadir transacción',
+        closable: true,
+        maximizable: true,
+        responsive: true,
+        breakpoints: {
+          '960px': '80vw',
+          '640px': '100vw',
+        },
+      },
+    });
+  }
 }

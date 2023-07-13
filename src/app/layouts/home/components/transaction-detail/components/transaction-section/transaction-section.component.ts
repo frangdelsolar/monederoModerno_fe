@@ -56,10 +56,10 @@ export class TransactionSectionComponent implements OnInit {
 
       if (in_transaction_type == TRANSACTION_TYPES.INCOME) {
         this.deductionLabel = 'Estás recibiendo';
-        this.frequencyLabel = 'Este ingreso se produce';
+        this.frequencyLabel = 'Ocurrencia';
       } else if (in_transaction_type == TRANSACTION_TYPES.EXPENSE) {
         this.deductionLabel = 'Estás pagando';
-        this.frequencyLabel = 'Este gasto se produce';
+        this.frequencyLabel = 'Ocurrencia';
       }
 
       this.serviceControl.setValue(this.transaction.service.name);

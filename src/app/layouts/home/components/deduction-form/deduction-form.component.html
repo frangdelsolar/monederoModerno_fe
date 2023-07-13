@@ -1,5 +1,4 @@
-<app-card title="Añadir transacción">
-  <!-- <div
+<!-- <div
     class="border-solid border-200 border-round-lg px-3 pt-5 pb-3 bg-red-50 w-auto flex flex-column justify-content-center mb-3"
     *ngIf="errors.length > 0"
   >
@@ -11,50 +10,55 @@
     </ul>
   </div> -->
 
-  <div class="flex flex-column gap-3">
-    <app-transaction-form></app-transaction-form>
+<div class="flex flex-column gap-3">
+  <app-transaction-form></app-transaction-form>
 
-    <app-frequency-form
+  <app-frequency-form
+    [editOn]="editModeOn"
+    [label]="'¿Cuántas veces?'"
+  ></app-frequency-form>
+
+  <app-form-section [label]="'¿Cuándo empieza?'">
+    <app-datepicker
       [editOn]="editModeOn"
-      [label]="'¿Cuántas veces?'"
-    ></app-frequency-form>
+      [label]="'Fecha de inicio'"
+      [control]="startDateControl"
+    ></app-datepicker>
+  </app-form-section>
 
-    <app-form-section [label]="'¿Cuándo empieza?'">
-      <app-datepicker
-        [editOn]="editModeOn"
-        [label]="'Fecha de inicio'"
-        [control]="startDateControl"
-      ></app-datepicker>
-    </app-form-section>
+  <app-goal-form
+    *ngIf="showGoalForm"
+    [editOn]="editModeOn"
+    [label]="'¿Hasta cuándo?'"
+  ></app-goal-form>
 
-    <app-goal-form
-      *ngIf="showGoalForm"
-      [editOn]="editModeOn"
-      [label]="'¿Hasta cuándo?'"
-    ></app-goal-form>
+  <app-input-currency
+    [label]="'¿Cuánto vale la cuota?'"
+    [editOn]="editModeOn"
+    [currencyControl]="currencyControl"
+    [amountControl]="amountControl"
+    [rateControl]="rateControl"
+    [validateSignal]="validateCurrencySignal"
+    (errorsEmitter)="onCurrencyErrors($event)"
+  ></app-input-currency>
 
-    <app-input-currency
-      [label]="'¿Cuánto vale la cuota?'"
-      [editOn]="editModeOn"
-      [currencyControl]="currencyControl"
-      [amountControl]="amountControl"
-      [rateControl]="rateControl"
-      [validateSignal]="validateCurrencySignal"
-      (errorsEmitter)="onCurrencyErrors($event)"
-    ></app-input-currency>
+  <app-input-switch
+    *ngIf="showMarkAsPaidSwitch"
+    [label]="'Marcar como pagado'"
+    [control]="markAsPaidControl"
+  ></app-input-switch>
 
-    <app-input-text-area
-      [editOn]="editModeOn"
-      [label]="'Comentario'"
-      [control]="commentControl"
-    ></app-input-text-area>
+  <app-input-text-area
+    [editOn]="editModeOn"
+    [label]="'Notas'"
+    [control]="commentControl"
+  ></app-input-text-area>
 
-    <button
-      pButton
-      pRipple
-      class="p-button-primary"
-      label="Guardar"
-      (click)="onSaveClick()"
-    ></button>
-  </div>
-</app-card>
+  <button
+    pButton
+    pRipple
+    class="p-button-primary"
+    label="Guardar"
+    (click)="onSaveClick()"
+  ></button>
+</div>

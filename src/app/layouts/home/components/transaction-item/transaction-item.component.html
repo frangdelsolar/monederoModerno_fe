@@ -1,8 +1,8 @@
 <div
   class="flex flex-row justify-content-between align-items-center"
   [ngClass]="{
-    'hover-green': transaction.transaction_type === 'income',
-    'hover-red': transaction.transaction_type === 'expense'
+    'hover-green': transaction.transaction_type === 'INCOME',
+    'hover-red': transaction.transaction_type === 'EXPENSE'
   }"
   (click)="showDetail()"
 >
@@ -10,25 +10,26 @@
     <p class="my-0 py-0 font-bold">{{ transaction.service.name }}</p>
     <p class="my-0 py-0 text-sm">{{ transaction.service_provider.name }}</p>
   </div>
-  <div class="col-4 flex flex-column align-items-end justify-content-left">
+  <div class="col-3 flex flex-column align-items-end justify-content-left">
     <p class="my-0 py-0 font-bold">{{ transaction.currency.currency }}</p>
     <p class="my-0 py-0 text-sm">${{ transaction.currency.amount }}</p>
   </div>
   <div
     *ngIf="transaction.payment"
-    class="col-4 flex flex-column align-items-end justify-content-left"
+    class="col-5 flex flex-column align-items-end justify-content-left"
   >
-    <p class="my-0 py-0 font-bold">
-      {{ transaction.payment.currency.currency }}
+    <p class="my-0 py-0 font-bold">Pagado</p>
+    <p class="my-0 py-0 text-sm">
+      {{ transaction.payment.currency.currency }} ${{
+        transaction.payment.currency.amount
+      }}
     </p>
-    <p class="my-0 py-0 text-sm">${{ transaction.payment.currency.amount }}</p>
   </div>
   <div
     *ngIf="!transaction.payment"
     class="col-4 flex flex-column align-items-end justify-content-left"
   >
     <p class="my-0 py-0 text-sm font-base">Estado</p>
-
     <p class="my-0 py-0 font-bold">Pendiente</p>
   </div>
 </div>
