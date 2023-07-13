@@ -7,6 +7,13 @@
         [control]="dueDateControl"
       ></app-datepicker>
       <app-input-text
+        *ngIf="installmentControl.value"
+        [editOn]="false"
+        [label]="'Cuota Nº'"
+        [control]="installmentControl"
+      >
+      </app-input-text>
+      <app-input-text
         *ngIf="pendingPayment"
         [editOn]="false"
         [label]="'Estado'"

@@ -20,6 +20,7 @@ export class InstallmentSectionComponent implements OnInit {
   statusControl: FormControl = new FormControl(null, []);
   paymentControl: FormControl = new FormControl(null, []);
   paymentDateControl: FormControl = new FormControl(null, []);
+  installmentControl: FormControl = new FormControl(null, []);
 
   pendingPayment: boolean = true;
 
@@ -50,6 +51,8 @@ export class InstallmentSectionComponent implements OnInit {
           this.transaction.payment.currency.amount;
         this.paymentControl.setValue(payment_value);
       }
+
+      this.installmentControl.setValue(this.transaction.installment_number);
     });
   }
 }

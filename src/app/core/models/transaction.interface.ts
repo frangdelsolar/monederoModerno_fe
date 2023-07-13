@@ -19,4 +19,5 @@ export interface Transaction {
   currency: Currency;
   due_date?: Date;
   payment?: any;
+  installment_number?: number;
 }
