@@ -18,4 +18,5 @@ export interface Transaction {
   comment?: string;
   currency: Currency;
   due_date?: Date;
+  payment?: any;
 }

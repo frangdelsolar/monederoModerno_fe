@@ -1,0 +1,41 @@
+<section id="installment-details" class="flex flex-column gap-3">
+  <app-form-section [label]="dueDateLabel">
+    <div class="flex justify-content-between mt-0 pt-0">
+      <app-datepicker
+        [editOn]="false"
+        [label]="'Fecha de vencimiento'"
+        [control]="dueDateControl"
+      ></app-datepicker>
+      <app-input-text
+        *ngIf="pendingPayment"
+        [editOn]="false"
+        [label]="'Estado'"
+        [control]="statusControl"
+      >
+      </app-input-text>
+      <app-datepicker
+        *ngIf="!pendingPayment"
+        [editOn]="false"
+        [label]="'Fecha de pago'"
+        [control]="paymentDateControl"
+      ></app-datepicker>
+    </div>
+  </app-form-section>
+
+  <app-form-section [label]="amountLabel">
+    <div class="flex justify-content-between mt-0 pt-0">
+      <app-input-text
+        [editOn]="false"
+        [label]="'Total Cuota'"
+        [control]="amountControl"
+      ></app-input-text>
+
+      <app-input-text
+        *ngIf="!pendingPayment"
+        [editOn]="false"
+        [label]="'Total Abonado'"
+        [control]="paymentControl"
+      ></app-input-text>
+    </div>
+  </app-form-section>
+</section>

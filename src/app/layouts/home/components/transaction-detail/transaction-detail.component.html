@@ -1,124 +1,13 @@
 <div class="flex flex-column gap-3">
-  <app-form-section [label]="deductionLabel">
-    <div class="flex justify-content-between mt-0 pt-0">
-      <app-input-text
-        [label]="'Concepto'"
-        [editOn]="false"
-        [control]="serviceControl"
-      ></app-input-text>
-      <app-input-text
-        [label]="'Proveedor'"
-        [editOn]="false"
-        [control]="serviceProviderControl"
-      ></app-input-text>
-    </div>
-  </app-form-section>
+  <app-transaction-section
+    [transactionObservable]="$transaction"
+  ></app-transaction-section>
+  <app-installment-section
+    [transactionObservable]="$transaction"
+  ></app-installment-section>
 
-  <app-form-section [label]="frequencyLabel">
-    <div class="flex justify-content-between mt-0 pt-0">
-      <app-input-text
-        [label]="'Frecuencia'"
-        [editOn]="false"
-        [control]="frequencyControl"
-      ></app-input-text>
-      <app-input-text
-        *ngIf="showFrequencyDay"
-        [label]="'El día'"
-        [editOn]="false"
-        [control]="frequencyDayControl"
-      ></app-input-text>
-      <app-input-text
-        *ngIf="showFrequencyMonth"
-        [label]="'El mes'"
-        [editOn]="false"
-        [control]="frequencyMonthControl"
-      ></app-input-text>
-    </div>
-  </app-form-section>
-
-  <app-form-section [label]="startDateLabel">
-    <div class="flex justify-content-between mt-0 pt-0">
-      <app-datepicker
-        [editOn]="false"
-        [label]="'Desde'"
-        [control]="startDateControl"
-      ></app-datepicker>
-      <app-datepicker
-        *ngIf="showEndDate"
-        [editOn]="false"
-        [label]="'Hasta'"
-        [control]="endDateControl"
-      ></app-datepicker>
-      <app-input-text
-        *ngIf="showRepetitions"
-        [editOn]="false"
-        [label]="'Repeticiones'"
-        [control]="repetitionsControl"
-      ></app-input-text>
-      <app-input-text
-        *ngIf="showGoalAmount"
-        [editOn]="false"
-        [label]="'Monto Total'"
-        [control]="goalAmountControl"
-      ></app-input-text>
-      <app-input-text
-        *ngIf="showIndefinite"
-        [editOn]="false"
-        [label]="'Repeticiones'"
-        [control]="indefiniteControl"
-      ></app-input-text>
-    </div>
-  </app-form-section>
-
-  <app-form-section *ngIf="showCommentSection" [label]="commentLabel">
-    <div class="flex justify-content-between mt-0 pt-0">
-      <app-input-text
-        [editOn]="false"
-        [label]="'Comentario'"
-        [control]="commentControl"
-      ></app-input-text>
-    </div>
-  </app-form-section>
-
-  <p-divider></p-divider>
-
-  <app-form-section [label]="dueDateLabel">
-    <div class="flex justify-content-between mt-0 pt-0">
-      <app-datepicker
-        [editOn]="false"
-        [label]="'Fecha de vencimiento'"
-        [control]="dueDateControl"
-      ></app-datepicker>
-    </div>
-  </app-form-section>
-
-  <app-form-section [label]="amountLabel">
-    <div class="flex justify-content-between mt-0 pt-0">
-      <app-input-text
-        [editOn]="false"
-        [label]="'Total'"
-        [control]="amountControl"
-      ></app-input-text>
-    </div>
-  </app-form-section>
-
-  <app-input-switch
-    [label]="'Editar monto'"
-    [control]="editAmountSectionControl"
-  ></app-input-switch>
-  <app-input-currency
-    *ngIf="editAmountSectionControl.value"
-    [editOn]="true"
-    [label]="'Ingresar valor'"
-    [amountControl]="newAmountControl"
-    [currencyControl]="newCurrencyControl"
-    [rateControl]="newRateControl"
-  ></app-input-currency>
-
-  <button
-    pButton
-    type="button"
-    label="Pagar Vencimiento"
-    (click)="payTransaction()"
-  ></button>
+  <app-payment-section
+    *ngIf="pendingPayment"
+    [transactionObservable]="$transaction"
+  ></app-payment-section>
 </div>

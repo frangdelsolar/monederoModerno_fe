@@ -1,0 +1,23 @@
+<section id="pending-payment" class="flex flex-column gap-3">
+  <p-divider></p-divider>
+
+  <app-input-switch
+    [label]="'Editar monto'"
+    [control]="editAmountSectionControl"
+  ></app-input-switch>
+  <app-input-currency
+    *ngIf="editAmountSectionControl.value"
+    [editOn]="true"
+    [label]="'Ingresar monto a abonar'"
+    [amountControl]="newAmountControl"
+    [currencyControl]="newCurrencyControl"
+    [rateControl]="newRateControl"
+  ></app-input-currency>
+
+  <button
+    pButton
+    type="button"
+    label="Pagar Vencimiento"
+    (click)="payTransaction()"
+  ></button>
+</section>

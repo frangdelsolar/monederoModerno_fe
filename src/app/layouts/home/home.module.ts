@@ -12,7 +12,7 @@ import { TransactionFormComponent } from './components/transaction-form/transact
 import { ServiceProviderDropdownComponent } from './components/service-provider-dropdown/service-provider-dropdown.component';
 import { TransactionsListComponent } from './components/transactions-list/transactions-list.component';
 import { TransactionItemComponent } from './components/transaction-item/transaction-item.component';
-import { TransactionDetailComponent } from './components/transaction-detail/transaction-detail.component';
+import { TransactionDetailModule } from './components/transaction-detail/transaction-detail.module';
 
 @NgModule({
   declarations: [
@@ -27,9 +27,8 @@ import { TransactionDetailComponent } from './components/transaction-detail/tran
     ServiceProviderDropdownComponent,
     TransactionsListComponent,
     TransactionItemComponent,
-    TransactionDetailComponent,
   ],
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, TransactionDetailModule],
   exports: [SharedModule],
 })
 export class HomeModule {}
