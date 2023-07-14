@@ -1,4 +1,13 @@
 <h4>Historial de pagos</h4>
+<app-input-switch
+  [label]="'Mostrar cambio'"
+  [control]="showExchangeColumn"
+></app-input-switch>
+
+<app-input-switch
+  [label]="'Mostrar total'"
+  [control]="showTotal"
+></app-input-switch>
 <p-table
   [value]="payments"
   [paginator]="true"
@@ -12,6 +21,7 @@
       <th>Vencimiento</th>
       <th>Fecha de pago</th>
       <th>Total abonado</th>
+      <th *ngIf="showExchangeColumn.value">Cambio</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-payment>
@@ -20,6 +30,16 @@
       <td>{{ payment.due_date }}</td>
       <td>{{ payment.transaction_date }}</td>
       <td>{{ payment.currency.currency }} ${{ payment.currency.amount }}</td>
+      <td *ngIf="showExchangeColumn.value">
+        {{ payment.currency.exchange_rate }}
+      </td>
     </tr>
   </ng-template>
 </p-table>
+
+<p *ngIf="showTotal.value" class="font-bold text-lg">
+  Total USD ${{ total.toLocaleString() }}
+</p>
+<p *ngIf="showTotal.value" class="font-bold text-lg">
+  Porcentaje del total %{{ percentage.toFixed(2) }}
+</p>

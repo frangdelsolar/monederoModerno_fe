@@ -1,6 +1,6 @@
 export interface Currency {
   id?: number;
   currency: string;
-  amount: number;
+  amount: any;
   rate: number;
 }
