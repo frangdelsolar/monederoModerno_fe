@@ -21,6 +21,7 @@ export class PaymentSectionComponent implements OnInit {
   newCurrencyControl: FormControl = new FormControl(null, []);
   newRateControl: FormControl = new FormControl(null, []);
   updateAmountControl: FormControl = new FormControl(false, []);
+  dueDateControl: FormControl = new FormControl(new Date(), []);
 
   pendingPayment: boolean = false;
 
@@ -45,10 +46,9 @@ export class PaymentSectionComponent implements OnInit {
       } else {
         this.pendingPayment = true;
       }
-    });
-
-    this.currencySvc.get().subscribe((rate: any) => {
-      this.newRateControl.setValue(rate['venta']);
+      if (this.transaction.due_date) {
+        this.dueDateControl.setValue(new Date(this.transaction.due_date));
+      }
     });
 
     this.editAmountSectionControl.valueChanges.subscribe((value) => {

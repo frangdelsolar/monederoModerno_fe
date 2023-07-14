@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CurrencyService } from '@app/core/controllers/currency.controller';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-input-currency',
@@ -11,9 +11,21 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class InputCurrencyComponent implements OnInit {
   @Input() editOn: boolean = false;
   @Input() label: string = 'Label';
-  @Input() amountControl: FormControl = new FormControl(null, []);
-
   @Input() currencyControl: FormControl = new FormControl(null, []);
+  @Input() amountControl: FormControl = new FormControl(null, []);
+  @Input() rateControl: FormControl = new FormControl(null, []);
+  @Input() rateDateControl: FormControl = new FormControl(new Date(), []);
+  @Input() validateSignal: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
+
+  @Output() errorsEmitter: BehaviorSubject<any> = new BehaviorSubject<any>(
+    null
+  );
+
+  loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  conversion: number = 0;
+  showRate: boolean = false;
+  rateDate: Date = new Date();
   currencyItems = [
     {
       value: 'USD',
@@ -25,16 +37,6 @@ export class InputCurrencyComponent implements OnInit {
     },
   ];
 
-  showRate: boolean = false;
-  @Input() rateControl: FormControl = new FormControl(null, []);
-
-  conversion: number = 0;
-
-  @Input() validateSignal: BehaviorSubject<boolean> =
-    new BehaviorSubject<boolean>(false);
-  @Output() errorsEmitter: BehaviorSubject<any> = new BehaviorSubject<any>(
-    null
-  );
   constructor(private currencySvc: CurrencyService) {}
 
   ngOnInit(): void {
@@ -44,8 +46,11 @@ export class InputCurrencyComponent implements OnInit {
       }
     });
 
-    this.currencySvc.get().subscribe((rate: any) => {
-      this.rateControl.setValue(rate['venta']);
+    this.getExchangeRate();
+
+    this.rateDateControl.valueChanges.subscribe((value) => {
+      this.rateDate = value;
+      this.getExchangeRate();
     });
 
     this.currencyControl.valueChanges.subscribe((value) => {
@@ -68,6 +73,18 @@ export class InputCurrencyComponent implements OnInit {
         this.getConversion();
       }
     });
+  }
+
+  getExchangeRate() {
+    this.loading.next(true);
+
+    this.currencySvc
+      .get(this.rateDate.toISOString().split('T')[0])
+      .subscribe((rate: any) => {
+        this.rateControl.setValue(rate['blue']['venta']);
+        this.getConversion();
+        this.loading.next(false);
+      });
   }
 
   getConversion() {

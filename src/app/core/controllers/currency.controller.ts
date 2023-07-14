@@ -10,7 +10,8 @@ export class CurrencyService {
 
   constructor(private privateSvc: PrivateApiService) {}
 
-  public get() {
-    return this.privateSvc.get(this._apiUrl, null, true);
+  public get(date: string) {
+    const url = this._apiUrl + '?date=' + date;
+    return this.privateSvc.get(url, null, true);
   }
 }

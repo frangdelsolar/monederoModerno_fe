@@ -41,7 +41,14 @@ export class TransactionDetailComponent implements OnInit, OnDestroy {
             .subscribe((transaction: Transaction) => {
               this.transaction = transaction;
               this.$transaction.next(transaction);
-              if (this.transaction.payment != null) {
+
+              let current_installment = this.transaction.payments.filter(
+                (payment: any) => {
+                  return payment.due_date == transaction.due_date;
+                }
+              );
+              if (current_installment.length > 0) {
+                current_installment = current_installment[0];
                 this.pendingPayment = false;
               } else {
                 this.pendingPayment = true;

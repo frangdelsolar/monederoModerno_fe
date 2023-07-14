@@ -8,7 +8,7 @@ import { ConfirmationService, PrimeNGConfig } from 'primeng/api';
   providers: [ConfirmationService],
 })
 export class AppComponent {
-  title = 'monederoModerno_fe';
+  title = 'Monedero Moderno';
   constructor(private primengConfig: PrimeNGConfig) {}
 
   ngOnInit() {

@@ -3,7 +3,7 @@
   class="border-solid border-200 border-round-lg px-3 pt-5 pb-3 surface-200 w-auto"
 >
   <div
-    class="flex flex-row flex-wrap gap-4 justify-content-left align-items-start"
+    class="flex flex-row flex-wrap gap-4 justify-content-left align-items-center"
   >
     <app-dropdown
       [editOn]="editOn"
@@ -17,6 +17,7 @@
       [type]="'number'"
       [control]="amountControl"
     ></app-input-text>
+
     <span *ngIf="showRate">
       <app-input-text
         [editOn]="editOn"
@@ -28,5 +29,11 @@
         >AR$ {{ conversion.toLocaleString() }}</small
       >
     </span>
+
+    <i
+      *ngIf="loading.value"
+      class="pi pi-spin pi-sync"
+      style="font-size: 1.5rem"
+    ></i>
   </div>
 </div>
