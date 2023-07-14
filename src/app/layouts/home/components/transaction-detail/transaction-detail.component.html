@@ -1,12 +1,23 @@
-<div class="flex flex-column gap-3">
+<div class="flex flex-column gap-0">
   <app-transaction-section
     [transactionObservable]="$transaction"
   ></app-transaction-section>
+
+  <app-input-switch
+    [label]="'Mostrar historial de pagos'"
+    [control]="showHistoricalPaymentsControl"
+  ></app-input-switch>
+  <app-previous-payments
+    *ngIf="showHistoricalPaymentsControl.value"
+    [transactionObservable]="$transaction"
+  >
+  </app-previous-payments>
 
   <p-divider></p-divider>
   <app-installment-section
     [transactionObservable]="$transaction"
   ></app-installment-section>
+
   <app-payment-section
     *ngIf="pendingPayment"
     [transactionObservable]="$transaction"

@@ -1,0 +1,25 @@
+<h4>Historial de pagos</h4>
+<p-table
+  [value]="payments"
+  [paginator]="true"
+  [rows]="5"
+  [rowsPerPageOptions]="[5, 10, 25, 50]"
+  [styleClass]="'p-datatable-sm p-datatable-striped'"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Cuota</th>
+      <th>Vencimiento</th>
+      <th>Fecha de pago</th>
+      <th>Total abonado</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-payment>
+    <tr>
+      <td>{{ payment.installment_number }}</td>
+      <td>{{ payment.due_date }}</td>
+      <td>{{ payment.transaction_date }}</td>
+      <td>{{ payment.currency.currency }} ${{ payment.currency.amount }}</td>
+    </tr>
+  </ng-template>
+</p-table>

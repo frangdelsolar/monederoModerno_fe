@@ -20,6 +20,7 @@ export class PaymentSectionComponent implements OnInit {
   newAmountControl: FormControl = new FormControl(null, []);
   newCurrencyControl: FormControl = new FormControl(null, []);
   newRateControl: FormControl = new FormControl(null, []);
+  updateAmountControl: FormControl = new FormControl(false, []);
 
   pendingPayment: boolean = false;
 
@@ -34,6 +35,7 @@ export class PaymentSectionComponent implements OnInit {
       newAmount: this.newAmountControl,
       newCurrency: this.newCurrencyControl,
       newRate: this.newRateControl,
+      updateAmount: this.updateAmountControl,
     });
 
     this.transactionObservable.subscribe((transaction) => {
@@ -48,6 +50,15 @@ export class PaymentSectionComponent implements OnInit {
     this.currencySvc.get().subscribe((rate: any) => {
       this.newRateControl.setValue(rate['venta']);
     });
+
+    this.editAmountSectionControl.valueChanges.subscribe((value) => {
+      if (!value) {
+        this.updateAmountControl.setValue(false);
+        this.newAmountControl.setValue(null);
+        this.newCurrencyControl.setValue(null);
+        this.newRateControl.setValue(null);
+      }
+    });
   }
 
   payTransaction() {
@@ -57,12 +68,14 @@ export class PaymentSectionComponent implements OnInit {
       currency: this.transaction.currency.currency,
       rate: this.newRateControl.value,
       due_date: this.transaction.due_date,
+      update_amount: false,
     };
 
     if (this.editAmountSectionControl.value) {
       data.amount = this.newAmountControl.value;
       data.currency = this.newCurrencyControl.value.value;
       data.rate = this.newRateControl.value;
+      data.update_amount = this.updateAmountControl.value;
     }
     this.transactionSvc.payTransaction(data).subscribe((res) => {
       window.location.reload();

@@ -1,9 +1,14 @@
-<section id="pending-payment" class="flex flex-column gap-3">
+<section id="payment" class="flex flex-column gap-2">
   <p-divider></p-divider>
 
   <app-input-switch
     [label]="'Editar monto'"
     [control]="editAmountSectionControl"
+  ></app-input-switch>
+  <app-input-switch
+    *ngIf="editAmountSectionControl.value"
+    [label]="'Actualizar proximos vencimientos'"
+    [control]="updateAmountControl"
   ></app-input-switch>
   <app-input-currency
     *ngIf="editAmountSectionControl.value"

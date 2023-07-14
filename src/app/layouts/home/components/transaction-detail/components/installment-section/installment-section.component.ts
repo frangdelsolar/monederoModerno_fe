@@ -35,21 +35,28 @@ export class InstallmentSectionComponent implements OnInit {
         ' $' +
         this.transaction.currency.amount;
       this.amountControl.setValue(amount_value);
-
       this.dueDateControl.setValue(this.transaction.due_date);
-
       this.statusControl.setValue('Pendiente');
-      if (this.transaction.payment != null) {
-        this.pendingPayment = false;
-        this.statusControl.setValue('Ejecutado');
-        this.paymentDateControl.setValue(
-          this.transaction.payment.transaction_date
+
+      if (this.transaction.payments) {
+        let current_installment = this.transaction.payments.filter(
+          (payment: any) => {
+            return payment.due_date == transaction.due_date;
+          }
         );
-        let payment_value =
-          this.transaction.payment.currency.currency +
-          ' $' +
-          this.transaction.payment.currency.amount;
-        this.paymentControl.setValue(payment_value);
+        if (current_installment.length > 0) {
+          current_installment = current_installment[0];
+          this.pendingPayment = false;
+          this.statusControl.setValue('Ejecutado');
+          this.paymentDateControl.setValue(
+            current_installment.transaction_date
+          );
+          let payment_value =
+            current_installment.currency.currency +
+            ' $' +
+            current_installment.currency.amount;
+          this.paymentControl.setValue(payment_value);
+        }
       }
 
       this.installmentControl.setValue(this.transaction.installment_number);

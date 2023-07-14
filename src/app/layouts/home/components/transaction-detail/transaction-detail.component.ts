@@ -22,6 +22,7 @@ export class TransactionDetailComponent implements OnInit, OnDestroy {
   dialogDataSubscription: Subscription;
 
   pendingPayment: boolean = false;
+  showHistoricalPaymentsControl: FormControl = new FormControl(false, []);
 
   constructor(
     private dialogSvc: AppDialogService,
