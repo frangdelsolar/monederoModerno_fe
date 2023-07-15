@@ -21,4 +21,5 @@ export interface Transaction {
   payment?: any;
   payments?: any;
   installment_number?: number;
+  total_paid?: Currency;
 }

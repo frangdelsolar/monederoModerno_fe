@@ -5,11 +5,13 @@
     [label]="'Editar monto'"
     [control]="editAmountSectionControl"
   ></app-input-switch>
+
   <app-input-switch
     *ngIf="editAmountSectionControl.value"
     [label]="'Actualizar proximos vencimientos'"
     [control]="updateAmountControl"
   ></app-input-switch>
+
   <app-input-currency
     *ngIf="editAmountSectionControl.value"
     [editOn]="true"
@@ -25,5 +27,6 @@
     type="button"
     label="Ejecutar Vencimiento"
     (click)="payTransaction()"
+    [loading]="loading"
   ></button>
 </section>

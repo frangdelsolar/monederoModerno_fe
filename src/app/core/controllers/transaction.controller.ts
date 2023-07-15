@@ -19,7 +19,7 @@ export class TransactionService {
     );
   }
   public getAll() {
-    return this.privateSvc.get(this._apiUrl, null, true);
+    return this.privateSvc.get<Transaction[]>(this._apiUrl, null, true);
   }
 
   public getActiveByDate(month: string, year: string) {

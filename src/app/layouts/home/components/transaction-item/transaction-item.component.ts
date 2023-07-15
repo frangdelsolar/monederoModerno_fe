@@ -30,10 +30,8 @@ export class TransactionItemComponent implements OnInit {
         closable: true,
         maximizable: true,
         responsive: true,
-        breakpoints: {
-          '960px': '80vw',
-          '640px': '100vw',
-        },
+        position: 'center',
+        dismissableMask: true,
       },
     });
   }

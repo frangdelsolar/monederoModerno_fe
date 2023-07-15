@@ -19,7 +19,9 @@ export class DeductionFormComponent implements OnInit {
 
   errors: any[] = [];
 
-  startDateControl: FormControl = new FormControl(null, [Validators.required]);
+  startDateControl: FormControl = new FormControl(new Date(), [
+    Validators.required,
+  ]);
   amountControl: FormControl = new FormControl(null, [Validators.required]);
   currencyControl: FormControl = new FormControl(null, [Validators.required]);
   rateControl: FormControl = new FormControl(null, [Validators.required]);

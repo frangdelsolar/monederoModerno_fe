@@ -13,5 +13,7 @@ export interface DialogData {
     reject?: Function;
     responsive?: boolean;
     breakpoints?: any;
+    position?: any;
+    dismissableMask?: boolean;
   };
 }

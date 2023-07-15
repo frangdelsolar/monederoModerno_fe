@@ -22,9 +22,10 @@ export class InputCurrencyComponent implements OnInit {
     null
   );
 
-  loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   conversion: number = 0;
-  showRate: boolean = false;
+  conversionCurrency: string = 'USD';
+  showRate: boolean = true;
   rateDate: Date = new Date();
   currencyItems = [
     {
@@ -47,18 +48,12 @@ export class InputCurrencyComponent implements OnInit {
     });
 
     this.getExchangeRate();
-
     this.rateDateControl.valueChanges.subscribe((value) => {
       this.rateDate = value;
       this.getExchangeRate();
     });
 
     this.currencyControl.valueChanges.subscribe((value) => {
-      if (value.value == 'USD') {
-        this.showRate = true;
-      } else {
-        this.showRate = false;
-      }
       this.getConversion();
     });
 
@@ -77,9 +72,8 @@ export class InputCurrencyComponent implements OnInit {
 
   getExchangeRate() {
     this.loading.next(true);
-
     this.currencySvc
-      .get(this.rateDate.toISOString().split('T')[0])
+      .get(this.rateDateControl.value.toISOString().split('T')[0])
       .subscribe((rate: any) => {
         this.rateControl.setValue(rate['blue']['venta']);
         this.getConversion();
@@ -88,7 +82,18 @@ export class InputCurrencyComponent implements OnInit {
   }
 
   getConversion() {
-    this.conversion = this.rateControl.value * this.amountControl.value;
+    if (!(this.amountControl.value && this.rateControl.value)) {
+      return;
+    }
+    if (this.currencyControl.value.value == 'USD') {
+      this.conversion =
+        this.rateControl.value * parseFloat(this.amountControl.value);
+      this.conversionCurrency = 'ARS';
+    } else {
+      this.conversion =
+        parseFloat(this.amountControl.value) / this.rateControl.value;
+      this.conversionCurrency = 'USD';
+    }
   }
 
   validate() {

@@ -7,6 +7,11 @@
   [label]="'Mostrar total'"
   [control]="showTotal"
 ></app-input-switch>
+
+<p *ngIf="showTotal.value" class="font-bold text-lg">
+  Total abonado {{ total }}
+</p>
+
 <p-table
   [value]="payments"
   [paginator]="true"
@@ -33,31 +38,11 @@
       <td *ngIf="showExchangeColumn.value">
         {{ payment.currency.exchange_rate }}
       </td>
-      <td
-        *ngIf="showExchangeColumn.value && payment.currency.currency == 'ARS'"
-      >
-        USD ${{
-          (
-            payment.currency.amount / payment.currency.exchange_rate
-          ).toLocaleString()
-        }}
-      </td>
-      <td
-        *ngIf="showExchangeColumn.value && payment.currency.currency == 'USD'"
-      >
-        ARS ${{
-          (
-            payment.currency.exchange_rate * payment.currency.amount
-          ).toLocaleString()
+      <td *ngIf="showExchangeColumn.value">
+        {{ payment.currency.converted_currency }} ${{
+          payment.currency.converted_amount.toLocaleString()
         }}
       </td>
     </tr>
   </ng-template>
 </p-table>
-
-<p *ngIf="showTotal.value" class="font-bold text-lg">
-  Total USD ${{ total.toLocaleString() }}
-</p>
-<!-- <p *ngIf="showTotal.value && percentage != undefined" class="font-bold text-lg">
-  Porcentaje del total %{{ percentage.toFixed(2) }}
-</p> -->
