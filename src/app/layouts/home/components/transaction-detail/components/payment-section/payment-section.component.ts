@@ -51,9 +51,6 @@ export class PaymentSectionComponent implements OnInit {
 
     this.transactionObservable.subscribe((transaction: Transaction) => {
       this.transaction = transaction;
-
-      console.log(transaction.currency.amount);
-
       if (this.transaction.payment != null) {
         this.pendingPayment = false;
       } else {
