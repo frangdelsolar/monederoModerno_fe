@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TransactionService } from '@app/core/controllers/transaction.controller';
+import { Currency } from '@app/core/models/currency.interface';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-transactions-list',
@@ -12,6 +14,9 @@ export class TransactionsListComponent implements OnInit {
   transactions: any[] = [];
   month: string;
   year: string;
+  total_expenses: Currency;
+  total_income: Currency;
+  loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private transactionSvc: TransactionService) {}
 
@@ -30,13 +35,17 @@ export class TransactionsListComponent implements OnInit {
   }
 
   loadData(month: number, year: number) {
+    this.loading.next(true);
     this.month = month.toString();
     this.year = year.toString();
     this.transactionSvc
       .getActiveByDate(month.toString(), year.toString())
       .subscribe(
         (res: any) => {
-          this.transactions = res;
+          this.transactions = res.transactions;
+          this.total_expenses = res.total_expenses;
+          this.total_income = res.total_income;
+          this.loading.next(false);
         },
         (err) => {
           console.log(err);

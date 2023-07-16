@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Monedero Moderno</string>
+    <string name="title_activity_main">Monedero Moderno</string>
+    <string name="package_name">com.monederomoderno.app</string>
+    <string name="custom_url_scheme">com.monederomoderno.app</string>
+</resources>

@@ -7,7 +7,7 @@ import { TransactionsListComponent } from './components/transactions-list/transa
 import { TransactionItemComponent } from './components/transaction-item/transaction-item.component';
 import { TransactionDetailModule } from './components/transaction-detail/transaction-detail.module';
 import { DeductionFormModule } from './components/deduction-form/deduction-form.module';
-import { UIModule } from '@app/shared/UI/ui.module';
+import { TotalsDetailsComponent } from './components/transactions-list/components/totals-details/totals-details.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +15,7 @@ import { UIModule } from '@app/shared/UI/ui.module';
     SidebarComponent,
     TransactionsListComponent,
     TransactionItemComponent,
+    TotalsDetailsComponent,
   ],
   imports: [
     CommonModule,

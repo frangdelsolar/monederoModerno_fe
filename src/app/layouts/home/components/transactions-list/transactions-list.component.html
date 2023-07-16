@@ -1,15 +1,32 @@
-<app-card [title]="'Detalle Mensual'">
-  <app-month-picker
-    [label]="'Selecciona un mes'"
-    [control]="dateControl"
-  ></app-month-picker>
+<div class="flex flex-column gap-3">
+  <app-card>
+    <div class="flex flex-row justify-content-center align-items-center gap-3">
+      <app-month-picker
+        [label]="'Selecciona un mes'"
+        [control]="dateControl"
+      ></app-month-picker>
+      <i
+        *ngIf="loading.value"
+        class="pi pi-spin pi-sync"
+        style="font-size: 2rem"
+      ></i>
+    </div>
+  </app-card>
+  <!-- 
+  <div class="flex flex-row align-items-center gap-3">
+    <app-totals-details></app-totals-details>
+    <app-card [title]="'Gastos'"> </app-card>
+    <app-card [title]="'Ingresos'"></app-card>
+  </div> -->
 
-  <div class="flex flex-column justify-content-center mt-3">
-    <app-transaction-item
-      *ngFor="let item of transactions"
-      [transaction]="item"
-      [month]="month"
-      [year]="year"
-    ></app-transaction-item>
-  </div>
-</app-card>
+  <app-card [title]="'Recurrencias'">
+    <div class="flex flex-column justify-content-center mt-3">
+      <app-transaction-item
+        *ngFor="let item of transactions"
+        [transaction]="item"
+        [month]="month"
+        [year]="year"
+      ></app-transaction-item>
+    </div>
+  </app-card>
+</div>

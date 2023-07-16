@@ -19,7 +19,7 @@
   ></app-installment-section>
 
   <app-payment-section
-    *ngIf="pendingPayment"
+    *ngIf="pendingPayment && transaction.status != 'CLOSED'"
     [transactionObservable]="$transaction"
   ></app-payment-section>
 </div>
