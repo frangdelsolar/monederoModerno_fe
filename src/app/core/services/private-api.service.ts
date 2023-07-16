@@ -29,11 +29,9 @@ export class PrivateApiService {
       detail: error.message,
     };
     this.toastSvc.add(toastData);
-    setTimeout(() => {
-      if (error.status === 403) {
-        window.location.href = 'auth/login';
-      }
-    }, 2000);
+    if (error.status === 403) {
+      window.location.href = 'auth/login';
+    }
 
     return throwError(error);
   };

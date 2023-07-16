@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-totals-details',
   templateUrl: './totals-details.component.html',
-  styleUrls: ['./totals-details.component.scss']
+  styleUrls: ['./totals-details.component.scss'],
 })
 export class TotalsDetailsComponent implements OnInit {
+  @Input() expenseData: any;
+  @Input() incomeData: any;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

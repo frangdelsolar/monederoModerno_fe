@@ -4,6 +4,7 @@ export interface DialogData {
   params: {
     header?: string;
     width?: string;
+    height?: string;
     contentStyle?: any;
     closable?: boolean;
     showHeader?: boolean;

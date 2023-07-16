@@ -1,1 +1,5 @@
-<p>totals-details works!</p>
+<app-card>
+  <p>Ejecutado ARS ${{ expenseData?.executed.ars.toLocaleString() }}</p>
+  <p>Proyectado ARS ${{ expenseData?.projected.ars.toLocaleString() }}</p>
+  <p>{{ expenseData?.percentage.toFixed(0) }}%</p>
+</app-card>

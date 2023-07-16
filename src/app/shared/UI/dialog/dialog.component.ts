@@ -41,8 +41,5 @@ export class DialogComponent implements OnInit {
       this.dialogData.component,
       this.dialogData.params
     );
-    // this.ref.onClose.subscribe((data) => {
-    //   this.appDialogSvc.emitClose();
-    // }
   }
 }

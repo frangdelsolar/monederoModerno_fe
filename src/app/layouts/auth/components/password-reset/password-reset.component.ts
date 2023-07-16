@@ -17,7 +17,6 @@ import { AuthService } from '@core/services/auth.service';
 export class PasswordResetComponent implements OnInit {
   form!: FormGroup;
   email = new FormControl('', []);
-  username = new FormControl('', []);
 
   constructor(
     private fb: FormBuilder,
@@ -27,51 +26,28 @@ export class PasswordResetComponent implements OnInit {
   ) {
     this.form = fb.group({
       email: this.email,
-      username: this.username,
     });
   }
 
   ngOnInit(): void {}
 
-  validateForm() {
-    let valid = this.email.value != '' || this.username.value != '';
-
-    if (!valid) {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Algo anda mal',
-        detail: 'Parece que falta completar algo.',
-      });
-      valid = false;
-    }
-
-    return valid;
-  }
-
   onSubmitClick() {
-    if (this.validateForm()) {
-      this.messageService.add({
-        severity: 'info',
-        summary: 'Operación en curso',
-        detail: 'Hemos recibido tu petición',
-      });
-      this.authSvc.passwordReset(this.form.value).then(
-        (success) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Operación exitosa',
-            detail:
-              'Por favor revisa tu casilla de correo. REVISA LA CARPETA DE CORREO NO DESEADO!!',
-          });
-        },
-        (error) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Algo anda mal',
-            detail: error.message,
-          });
-        }
-      );
-    }
+    this.authSvc.passwordReset(this.form.value).then(
+      (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Revisa tu correo',
+          detail:
+            'Te enviamos un correo para que puedas cambiar tu contraseña.',
+        });
+      },
+      (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Algo anda mal',
+          detail: 'Parece que falta completar algo.',
+        });
+      }
+    );
   }
 }

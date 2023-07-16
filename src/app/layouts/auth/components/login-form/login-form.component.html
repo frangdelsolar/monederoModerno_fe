@@ -28,6 +28,7 @@
 
     <button pButton pRipple label="Enviar" (click)="onLogin()"></button>
     <button
+      *ngIf="showGoogleLoginButton"
       pButton
       pRipple
       id="btn_googleLogin"
