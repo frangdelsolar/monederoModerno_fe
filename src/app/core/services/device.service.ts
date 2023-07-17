@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Device } from '@capacitor/device';
 
-
 @Injectable({
-    providedIn: "root",
-  })
+  providedIn: 'root',
+})
 export class DeviceService {
+  constructor() {}
 
-    constructor(){}
+  async getDeviceInfo() {
+    return await Device.getInfo();
+  }
 
-    async getDeviceInfo(){
-        return await Device.getInfo();
-    }
-
-
-    async getBatteryInfo (){
-        return await Device.getBatteryInfo();
-    };
+  async getBatteryInfo() {
+    return await Device.getBatteryInfo();
+  }
 }
