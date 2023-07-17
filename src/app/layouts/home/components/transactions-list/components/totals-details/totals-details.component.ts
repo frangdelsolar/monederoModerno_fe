@@ -9,7 +9,14 @@ export class TotalsDetailsComponent implements OnInit {
   @Input() expenseData: any;
   @Input() incomeData: any;
 
+  percentage: any;
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.expenseData.subscribe((res: any) => {
+      this.percentage = res.percentage;
+      console.log(res);
+    });
+  }
 }

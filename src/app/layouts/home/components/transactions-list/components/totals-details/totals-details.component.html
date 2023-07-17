@@ -1,5 +1,19 @@
-<app-card>
-  <p>Ejecutado ARS ${{ expenseData?.executed.ars.toLocaleString() }}</p>
-  <p>Proyectado ARS ${{ expenseData?.projected.ars.toLocaleString() }}</p>
-  <p>{{ expenseData?.percentage.toFixed(0) }}%</p>
-</app-card>
+<div class="flex flex-row row-gap-3 justify-content-around">
+  <app-card>
+    <div class="grid mx-3">
+      <div class="col-4">{{ percentage }}%</div>
+      <div class="col-8">
+        <h4>Ingresos</h4>
+      </div>
+    </div>
+  </app-card>
+
+  <app-card>
+    <div class="grid mx-3">
+      <div class="col-4"></div>
+      <div class="col-8">
+        <h4>Gastos</h4>
+      </div>
+    </div>
+  </app-card>
+</div>

@@ -7,11 +7,11 @@
     [label]="'Mostrar historial de pagos'"
     [control]="showHistoricalPaymentsControl"
   ></app-input-switch>
+
   <app-previous-payments
     *ngIf="showHistoricalPaymentsControl.value"
     [transactionObservable]="$transaction"
-  >
-  </app-previous-payments>
+  ></app-previous-payments>
 
   <p-divider></p-divider>
   <app-installment-section
