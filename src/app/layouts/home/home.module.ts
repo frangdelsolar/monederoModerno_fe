@@ -8,6 +8,7 @@ import { TransactionItemComponent } from './components/transaction-item/transact
 import { TransactionDetailModule } from './components/transaction-detail/transaction-detail.module';
 import { DeductionFormModule } from './components/deduction-form/deduction-form.module';
 import { TotalsDetailsComponent } from './components/transactions-list/components/totals-details/totals-details.component';
+import { TransactionWrapperComponent } from './components/transaction-wrapper/transaction-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TotalsDetailsComponent } from './components/transactions-list/component
     TransactionsListComponent,
     TransactionItemComponent,
     TotalsDetailsComponent,
+    TransactionWrapperComponent,
   ],
   imports: [
     CommonModule,

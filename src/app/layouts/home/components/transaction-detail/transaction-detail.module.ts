@@ -16,6 +16,6 @@ import { PreviousPaymentsComponent } from './components/previous-payments/previo
     PreviousPaymentsComponent,
   ],
   imports: [CommonModule, SharedModule],
-  exports: [SharedModule],
+  exports: [SharedModule, TransactionDetailComponent],
 })
 export class TransactionDetailModule {}
