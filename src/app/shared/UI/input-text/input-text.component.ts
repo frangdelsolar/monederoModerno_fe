@@ -13,6 +13,7 @@ export class InputTextComponent implements OnInit {
   @Input() control: FormControl = new FormControl(null, []);
   @Input() iconOn: boolean = false;
   @Input() helpText: string = '';
+  @Input() id: string = 'in-text';
 
   constructor() {}
 

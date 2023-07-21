@@ -12,12 +12,10 @@ const routes: Routes = [
     children: [
       {
         path: 'transaccion/:id',
-        pathMatch: 'full',
         component: TransactionWrapperComponent,
       },
       {
         path: '',
-        pathMatch: 'full',
         component: TransactionsListComponent,
       },
     ],

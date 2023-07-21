@@ -24,6 +24,7 @@ export class TransactionSectionComponent implements OnInit {
 
   serviceControl: FormControl = new FormControl(null, []);
   serviceProviderControl: FormControl = new FormControl(null, []);
+  productControl: FormControl = new FormControl(null, []);
   frequencyControl: FormControl = new FormControl(null, []);
   frequencyDayControl: FormControl = new FormControl(null, []);
   frequencyMonthControl: FormControl = new FormControl(null, []);
@@ -44,6 +45,7 @@ export class TransactionSectionComponent implements OnInit {
   showIndefinite = false;
   showStartDateSection = true;
   showCommentSection = false;
+  showProductControl = false;
 
   constructor() {}
 
@@ -63,6 +65,9 @@ export class TransactionSectionComponent implements OnInit {
       }
 
       this.serviceControl.setValue(this.transaction.service.name);
+      this.showProductControl = this.serviceControl.value != null;
+
+      this.productControl.setValue(this.transaction.product);
       this.serviceProviderControl.setValue(
         this.transaction.service_provider.name
       );

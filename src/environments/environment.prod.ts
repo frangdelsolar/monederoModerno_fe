@@ -13,6 +13,7 @@ export const environment = {
   apiUrl: 'https://monederomoderno.us.aldryn.io/',
   apiExchangeRate: 'api/currency/exchange/',
   apiImage: 'api/images/',
+  apiProduct: 'api/service-products/',
   apiRegisterUser: 'api/user/register/',
   apiServiceProvider: 'api/service-providers/',
   apiService: 'api/services/',

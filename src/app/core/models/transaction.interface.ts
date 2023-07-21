@@ -6,6 +6,7 @@ export interface Transaction {
   id?: number;
   transaction_type: string;
   service: Service;
+  product?: string;
   service_provider: ServiceProvider;
   frequency: string;
   frequency_day?: string;

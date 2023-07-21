@@ -1,10 +1,11 @@
 <app-form-section [label]="label">
-  <div class="flex flex-column row-gap-3">
+  <div class="flex flex-column gap-3">
     <app-deduction-type-dropdown
       [editOn]="editOn"
       [label]="labelForTransactionTypeControl"
       [control]="transactionTypeControl"
     ></app-deduction-type-dropdown>
+
     <app-service-dropdown
       [editOn]="editOn"
       *ngIf="showServiceControl"
@@ -12,6 +13,15 @@
       [serviceType]="transactionTypeControl"
       [serviceControl]="serviceControl"
     ></app-service-dropdown>
+
+    <app-input-text
+      [editOn]="editOn"
+      *ngIf="showServiceControl"
+      [label]="labelForProductControl"
+      [control]="productControl"
+      [id]="'product-input'"
+    ></app-input-text>
+
     <app-service-provider-dropdown
       [editOn]="editOn"
       *ngIf="showServiceProviderControl"

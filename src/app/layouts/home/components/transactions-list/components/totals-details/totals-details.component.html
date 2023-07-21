@@ -1,6 +1,6 @@
 <app-card>
-  <div class="flex flex-column gap-3">
-    <div class="flex flex-row justify-content-around">
+  <div class="flex flex-column justify-content-between">
+    <div *ngIf="draw" class="flex flex-row justify-content-between gap-2">
       <div class="flex flex-column align-items-start gap-2">
         <div class="flex flex-row">
           <h5 class="py-0 my-0">Ingresos</h5>
@@ -44,13 +44,19 @@
             </p>
           </div>
           <div class="flex flex-column gap-2">
-            <span class="flex flex-column align-items-end">
+            <span
+              class="flex flex-column align-items-end"
+              style="text-align: right"
+            >
               <p class="font-light text-xs my-0 py-0">Proyectados</p>
               <p class="font-semibold text-sm my-0 py-0">
                 ARS ${{ expenseData.projected.toLocaleString() }}
               </p>
             </span>
-            <span class="flex flex-column align-items-end">
+            <span
+              class="flex flex-column align-items-end"
+              style="text-align: right"
+            >
               <p class="font-light text-xs my-0 py-0">Ejecutados</p>
               <p class="font-semibold text-sm my-0 py-0">
                 ARS ${{ expenseData.executed.toLocaleString() }}

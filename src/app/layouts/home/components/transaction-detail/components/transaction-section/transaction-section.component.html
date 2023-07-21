@@ -1,12 +1,20 @@
 <section id="transaction-details" class="flex flex-column gap-3">
   <app-form-section [label]="deductionLabel">
-    <div class="flex justify-content-between mt-0 pt-0">
+    <div class="flex justify-content-between gap-2 mt-0 pt-0">
       <app-input-text
+        [id]="'input-category'"
         [label]="'Categoría'"
         [editOn]="false"
         [control]="serviceControl"
       ></app-input-text>
       <app-input-text
+        [id]="'input-product'"
+        [label]="'Detalle'"
+        [editOn]="false"
+        [control]="productControl"
+      ></app-input-text>
+      <app-input-text
+        [id]="'input-provider'"
         [label]="'Proveedor'"
         [editOn]="false"
         [control]="serviceProviderControl"

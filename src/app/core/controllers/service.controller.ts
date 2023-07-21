@@ -6,20 +6,25 @@ import { PrivateApiService } from '@services/private-api.service';
   providedIn: 'root',
 })
 export class ServiceService {
-  _apiUrl = environment.apiUrl + environment.apiService;
+  serviceApiUrl = environment.apiUrl + environment.apiService;
+  productApiUrl = environment.apiUrl + environment.apiProduct;
 
   constructor(private privateSvc: PrivateApiService) {}
 
   public getAll() {
-    return this.privateSvc.get(this._apiUrl, null, true);
+    return this.privateSvc.get(this.serviceApiUrl, null, true);
   }
 
   public getByType(type: string) {
-    const url = this._apiUrl + '?type=' + type;
+    const url = this.serviceApiUrl + '?type=' + type;
     return this.privateSvc.get(url, null, true);
   }
 
   public create(data: any) {
-    return this.privateSvc.post(this._apiUrl, data, true);
+    return this.privateSvc.post(this.serviceApiUrl, data, true);
+  }
+
+  getAllProducts() {
+    return this.privateSvc.get(this.productApiUrl, null, true);
   }
 }

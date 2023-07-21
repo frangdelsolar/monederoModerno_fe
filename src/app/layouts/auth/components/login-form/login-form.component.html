@@ -26,12 +26,18 @@
       ></a
     >
 
-    <button pButton pRipple label="Enviar" (click)="onLogin()"></button>
     <button
-      *ngIf="showGoogleLoginButton"
+      id="btn_send"
       pButton
       pRipple
+      label="Enviar"
+      (click)="onLogin()"
+    ></button>
+    <button
+      *ngIf="showGoogleLoginButton"
       id="btn_googleLogin"
+      pButton
+      pRipple
       label="Ingresar con Google"
       class="p-button-outlined"
       (click)="onGoogleLogin()"

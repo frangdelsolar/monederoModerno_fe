@@ -11,19 +11,22 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./transaction-form.component.scss'],
 })
 export class TransactionFormComponent implements OnInit {
-  @Input() editOn: boolean = false;
+  @Input() editOn: boolean = true;
   @Input() label: string = '¿Qué vas a programar?';
 
   labelForTransactionTypeControl: string = 'Tipo de transacción';
   transactionTypeControl: FormControl = new FormControl(null, []);
 
   showServiceControl: boolean = false;
-  labelForServiceControl: string = 'Servicio';
+  labelForServiceControl: string = 'Categoría';
   serviceControl: FormControl = new FormControl(null, []);
 
   showServiceProviderControl: boolean = false;
   labelForServiceProviderControl: string = 'Proveedor';
   serviceProviderControl: FormControl = new FormControl(null, []);
+
+  labelForProductControl: string = 'Detalle';
+  productControl: FormControl = new FormControl(null, []);
 
   constructor(private deductionFormSvc: DeductionFormService) {}
 
@@ -31,12 +34,12 @@ export class TransactionFormComponent implements OnInit {
     this.transactionTypeControl.valueChanges.subscribe((value) => {
       if (value.value == TRANSACTION_TYPES.INCOME) {
         this.showServiceControl = true;
-        this.labelForServiceControl = '¿Qué vas a recibir?';
+        this.labelForProductControl = '¿Qué vas a recibir?';
         this.showServiceProviderControl = true;
         this.labelForServiceProviderControl = '¿Quién te paga?';
       } else if (value.value == TRANSACTION_TYPES.EXPENSE) {
         this.showServiceControl = true;
-        this.labelForServiceControl = '¿Qué vas a pagar?';
+        this.labelForProductControl = '¿Qué vas a pagar?';
         this.showServiceProviderControl = true;
         this.labelForServiceProviderControl = '¿A quién le vas a pagar?';
       } else {
@@ -53,8 +56,9 @@ export class TransactionFormComponent implements OnInit {
   }
 
   save() {
-    let val = this.transactionTypeControl.value;
-    if (!val) {
+    let transaction_type = this.transactionTypeControl.value;
+    let service_product = this.productControl.value;
+    if (!transaction_type) {
       let errorMsg = 'Debes seleccionar un tipo de transacción';
       this.transactionTypeControl.markAsDirty();
       this.transactionTypeControl.markAsTouched();
@@ -65,7 +69,8 @@ export class TransactionFormComponent implements OnInit {
       });
       return;
     }
-    val = val.value;
-    this.deductionFormSvc.transactionOk(val);
+    transaction_type = transaction_type.value;
+
+    this.deductionFormSvc.transactionOk(transaction_type, service_product);
   }
 }

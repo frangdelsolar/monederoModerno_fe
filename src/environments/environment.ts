@@ -13,6 +13,7 @@ export const environment = {
   apiUrl: '',
   apiExchangeRate: '',
   apiImage: '',
+  apiProduct: '',
   apiRegisterUser: '',
   apiService: '',
   apiServiceProvider: '',

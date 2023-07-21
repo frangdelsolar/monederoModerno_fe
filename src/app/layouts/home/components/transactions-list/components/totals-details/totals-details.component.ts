@@ -15,6 +15,7 @@ export class TotalsDetailsComponent implements OnInit {
   labels: string[] = [];
 
   public chart: any;
+  draw: boolean = false;
 
   constructor() {}
 
@@ -83,5 +84,6 @@ export class TotalsDetailsComponent implements OnInit {
         aspectRatio: 1.3,
       },
     });
+    this.draw = true;
   }
 }

@@ -26,6 +26,7 @@ export class DeductionFormService {
   transaction_type: FormControl = new FormControl(null, [Validators.required]);
   service: FormControl = new FormControl(null, [Validators.required]);
   service_provider: FormControl = new FormControl(null, [Validators.required]);
+  service_product: FormControl = new FormControl(null, []);
   frequency: FormControl = new FormControl(null, [Validators.required]);
   frequency_day: FormControl = new FormControl(null, []);
   frequency_month: FormControl = new FormControl(null, []);
@@ -50,6 +51,7 @@ export class DeductionFormService {
       transaction_type: this.transaction_type,
       service: this.service,
       service_provider: this.service_provider,
+      service_product: this.service_product,
       frequency: this.frequency,
       frequency_day: this.frequency_day,
       frequency_month: this.frequency_month,
@@ -116,8 +118,9 @@ export class DeductionFormService {
     this.service_provider.setValue(value);
   }
 
-  transactionOk(value: string) {
-    this.transaction_type.setValue(value);
+  transactionOk(transaction: string, product: string) {
+    this.transaction_type.setValue(transaction);
+    this.service_product.setValue(product);
   }
 
   startDateOk(value: Date) {
