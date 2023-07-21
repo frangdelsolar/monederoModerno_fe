@@ -14,8 +14,7 @@ export class TransactionsListComponent implements OnInit {
   transactions: any[] = [];
   month: string;
   year: string;
-  expenseData: BehaviorSubject<any> = new BehaviorSubject(null);
-  incomeData: BehaviorSubject<any> = new BehaviorSubject(null);
+  chartData: BehaviorSubject<any> = new BehaviorSubject(null);
   loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private transactionSvc: TransactionService) {}
@@ -43,8 +42,7 @@ export class TransactionsListComponent implements OnInit {
       .subscribe(
         (res: any) => {
           this.transactions = res.transactions;
-          this.expenseData.next(res.expenses);
-          this.incomeData.next(res.incomeData);
+          this.chartData.next(res);
           this.loading.next(false);
         },
         (err) => {
