@@ -6,13 +6,8 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from '../models/user.interface';
 import { UserService } from '../controllers/user.controller';
 import firebase from 'firebase/compat/app';
-import {
-  getAuth,
-  getRedirectResult,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  updateProfile,
-} from 'firebase/auth';
+import { Router } from '@angular/router';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -22,7 +17,11 @@ export class AuthService {
   private isAuthenticated: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
 
-  constructor(public afAuth: AngularFireAuth, private userSvc: UserService) {
+  constructor(
+    public afAuth: AngularFireAuth,
+    private userSvc: UserService,
+    private router: Router
+  ) {
     initializeApp(environment.firebase);
     this.verifyAuthentication();
   }
@@ -131,6 +130,7 @@ export class AuthService {
     this.afAuth.signOut().then(() => {
       localStorage.clear();
       this.isAuthenticated.next(false);
+      this.router.navigate(['auth/login']);
     });
   }
 

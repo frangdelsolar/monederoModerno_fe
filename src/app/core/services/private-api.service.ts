@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
@@ -11,7 +12,11 @@ import { ToastService } from './toast.service';
 export class PrivateApiService {
   private _headers: HttpHeaders;
 
-  constructor(private http: HttpClient, private toastSvc: ToastService) {
+  constructor(
+    private http: HttpClient,
+    private toastSvc: ToastService,
+    private router: Router
+  ) {
     let token = localStorage.getItem('access');
 
     if (token) {
@@ -30,7 +35,7 @@ export class PrivateApiService {
     };
     this.toastSvc.add(toastData);
     if (error.status === 403) {
-      window.location.href = 'auth/login';
+      this.router.navigate(['auth/login']);
     }
 
     return throwError(error);
@@ -44,7 +49,6 @@ export class PrivateApiService {
     if (id != null) {
       url += `${id}/`;
     }
-
     return this.http
       .get<T>(url, activateHeader ? { headers: this._headers } : {})
       .pipe(catchError(this.handleError));
