@@ -34,6 +34,7 @@ export class TransactionSectionComponent implements OnInit {
   repetitionsControl: FormControl = new FormControl(null, []);
   goalAmountControl: FormControl = new FormControl(null, []);
   indefiniteControl: FormControl = new FormControl(null, []);
+  tagControl: FormControl = new FormControl(null, []);
 
   commentControl: FormControl = new FormControl(null, []);
 
@@ -112,9 +113,11 @@ export class TransactionSectionComponent implements OnInit {
       this.goalAmountControl.setValue(goal_amount);
 
       this.commentControl.setValue(this.transaction.comment);
-      if (this.commentControl.value != '') {
-        this.showCommentSection = true;
-      }
+      // if (this.commentControl.value != '') {
+      this.showCommentSection = true;
+      // }
+
+      this.tagControl.setValue(this.transaction.tags);
     });
   }
 }

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CurrencyService } from '@app/core/controllers/currency.controller';
 import { TransactionService } from '@app/core/controllers/transaction.controller';
+import FREQUENCIES from '@app/core/enums/frequency.enum';
 import { Transaction } from '@app/core/models/transaction.interface';
 import { Observable } from 'rxjs';
 
@@ -34,6 +35,7 @@ export class PaymentSectionComponent implements OnInit {
 
   pendingPayment: boolean = false;
   loading: boolean = false;
+  canUpdate: boolean = true;
 
   constructor(
     private transactionSvc: TransactionService,
@@ -59,6 +61,9 @@ export class PaymentSectionComponent implements OnInit {
       if (this.transaction.due_date) {
         this.dueDateControl.setValue(new Date(this.transaction.due_date));
         this.getExchangeRate();
+      }
+      if (this.transaction.frequency == FREQUENCIES.ONEOFF) {
+        this.canUpdate = false;
       }
     });
 

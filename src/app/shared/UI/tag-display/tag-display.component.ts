@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 })
 export class TagDisplayComponent implements OnInit {
   @Input() editOn: boolean = true;
-  @Input() label: string = 'Tags';
+  @Input() label: string = 'Etiquetas';
   @Input() control: FormControl = new FormControl('', []);
 
   constructor() {}

@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./chips.component.scss'],
 })
 export class ChipsComponent implements OnInit {
+  @Input() label: string = 'Label';
   @Input() control: FormControl = new FormControl('', []);
 
   constructor() {}

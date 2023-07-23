@@ -2,6 +2,7 @@
   <p-divider></p-divider>
 
   <app-input-switch
+    *ngIf="canUpdate"
     [label]="'Editar monto'"
     [control]="editAmountSectionControl"
   ></app-input-switch>

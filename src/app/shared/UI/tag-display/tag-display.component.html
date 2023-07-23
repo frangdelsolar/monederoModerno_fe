@@ -1,19 +1,19 @@
 <div *ngIf="!editOn">
-  <h3 id="label" class="py-0 my-0 font-normal text-base">{{ label }}</h3>
+  <h3 id="label" class="py-0 my-0 font-normal text-sm">{{ label }}</h3>
   <div
     *ngIf="control.value.length > 0"
-    class="flex flex-row flex-wrap gap-3 mt-1"
+    class="flex flex-row flex-wrap gap-1 mt-1"
   >
     <app-tag *ngFor="let tag of control.value" [value]="tag"></app-tag>
   </div>
   <p
     *ngIf="control.value.length <= 0"
     id="value"
-    class="py-0 my-0 font-bold text-lg"
+    class="py-0 my-0 font-semibold text-base"
   >
-    {{ control.value || "N/A" }}
+    N/A
   </p>
 </div>
-<div *ngIf="editOn" class="mt-4">
-  <app-chips [control]="control"></app-chips>
+<div *ngIf="editOn" class="mt-2">
+  <app-chips [label]="label" [control]="control"></app-chips>
 </div>

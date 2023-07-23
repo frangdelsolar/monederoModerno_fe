@@ -42,6 +42,7 @@ export class DeductionFormService {
   amount: FormControl = new FormControl(null, []);
   rate: FormControl = new FormControl(null, []);
   paid: FormControl = new FormControl(null, []);
+  tags: FormControl = new FormControl(null, []);
 
   constructor(
     private fb: FormBuilder,
@@ -67,6 +68,7 @@ export class DeductionFormService {
       amount: this.amount,
       rate: this.rate,
       paid: this.paid,
+      tags: this.tags,
     });
   }
 
@@ -118,9 +120,10 @@ export class DeductionFormService {
     this.service_provider.setValue(value);
   }
 
-  transactionOk(transaction: string, product: string) {
+  transactionOk(transaction: string, product: string, tags: string[]) {
     this.transaction_type.setValue(transaction);
     this.service_product.setValue(product);
+    this.tags.setValue(tags);
   }
 
   startDateOk(value: Date) {

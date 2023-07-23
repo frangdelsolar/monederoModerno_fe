@@ -27,6 +27,7 @@ export class TransactionFormComponent implements OnInit {
 
   labelForProductControl: string = 'Detalle';
   productControl: FormControl = new FormControl(null, []);
+  tagsControl: FormControl = new FormControl(null, []);
 
   constructor(private deductionFormSvc: DeductionFormService) {}
 
@@ -58,6 +59,7 @@ export class TransactionFormComponent implements OnInit {
   save() {
     let transaction_type = this.transactionTypeControl.value;
     let service_product = this.productControl.value;
+    let tags = this.tagsControl.value;
     if (!transaction_type) {
       let errorMsg = 'Debes seleccionar un tipo de transacción';
       this.transactionTypeControl.markAsDirty();
@@ -71,6 +73,10 @@ export class TransactionFormComponent implements OnInit {
     }
     transaction_type = transaction_type.value;
 
-    this.deductionFormSvc.transactionOk(transaction_type, service_product);
+    this.deductionFormSvc.transactionOk(
+      transaction_type,
+      service_product,
+      tags
+    );
   }
 }
