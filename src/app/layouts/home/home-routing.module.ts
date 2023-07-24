@@ -18,7 +18,6 @@ const routes: Routes = [
         path: '',
         component: TransactionsListComponent,
       },
-      { path: '**', pathMatch: 'full', component: HomeComponent },
     ],
   },
 ];

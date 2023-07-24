@@ -14,9 +14,10 @@ import { environment } from '../environments/environment';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { AuthModule } from './layouts/auth/auth.module';
 import { NgChartsModule } from 'ng2-charts';
+import { MissingComponent } from './layouts/error/missing/missing.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MissingComponent],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,

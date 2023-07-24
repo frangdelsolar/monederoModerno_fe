@@ -9,6 +9,7 @@ import { FormControl } from '@angular/forms';
 export class ChipsComponent implements OnInit {
   @Input() label: string = 'Label';
   @Input() control: FormControl = new FormControl('', []);
+  separatorExp: string = ',';
 
   constructor() {}
 

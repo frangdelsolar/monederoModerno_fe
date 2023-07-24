@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { NoAuthGuard } from './core/guards/no-auth.guard';
+import { MissingComponent } from './layouts/error/missing/missing.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
         (m) => m.HomeRoutingModule
       ),
   },
+  { path: '**', pathMatch: 'full', component: MissingComponent },
 ];
 
 @NgModule({
