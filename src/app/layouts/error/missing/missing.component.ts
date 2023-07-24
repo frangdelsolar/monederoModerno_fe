@@ -10,8 +10,6 @@ export class MissingComponent implements OnInit {
   constructor(private authSvc: AuthService) {}
 
   ngOnInit(): void {
-    window.location.href = '/';
-
     // this.authSvc.isAuthenticatedObservable.subscribe((auth) => {
     //   if (auth) {
     //   } else {

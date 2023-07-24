@@ -38,4 +38,9 @@ export class TransactionService {
       true
     );
   }
+
+  public deletePayment(id: any) {
+    const url = environment.apiUrl + `api/pay/${id}`;
+    return this.privateSvc.delete(url, true);
+  }
 }
