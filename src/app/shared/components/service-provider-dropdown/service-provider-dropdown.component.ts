@@ -85,7 +85,17 @@ export class ServiceProviderDropdownComponent implements OnInit {
       this.serviceProviderControl.value == null &&
       this.newServiceProviderControl.value != null
     ) {
-      this.saveNew();
+      let existing = this.items.filter((item) => {
+        return item.name == this.newServiceProviderControl.value;
+      });
+      if (existing.length > 0) {
+        this.serviceProviderControl.setValue(existing[0]);
+        this.addNewForm = false;
+        this.newServiceProviderControl.reset();
+        this.addNewIcon = 'pi pi-plus';
+      } else {
+        this.saveNew();
+      }
     }
     this.returnServiceValue();
   }

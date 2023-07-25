@@ -4,6 +4,7 @@
   >
     <div class="col-10 -ml-2">
       <app-dropdown
+        [id]="'service-provider-dropdown'"
         [label]="label"
         [control]="serviceProviderControl"
         [items]="items"
@@ -22,6 +23,7 @@
         [icon]="addNewIcon"
         styleClass="p-button-rounded p-button-text"
         (onClick)="onAddNewClick()"
+        [id]="'new-service-provider-toggle-btn'"
       ></p-button>
     </div>
   </span>
@@ -31,6 +33,7 @@
       [editOn]="true"
       [label]="labelForNewServiceProviderControl"
       [control]="newServiceProviderControl"
+      [id]="'input-service-provider-text'"
     ></app-input-text>
   </div>
 </div>

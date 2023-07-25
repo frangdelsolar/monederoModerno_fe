@@ -11,6 +11,7 @@ export class InputTextAreaComponent implements OnInit {
   @Input() label: string = 'Text';
   @Input() type: string = 'text';
   @Input() control: FormControl = new FormControl('', []);
+  @Input() id: any = 'input-text-area';
 
   value: any;
   @Output() valueChange: EventEmitter<any> = new EventEmitter();

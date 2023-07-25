@@ -90,7 +90,17 @@ export class ServiceDropdownComponent implements OnInit {
       this.serviceControl.value == null &&
       this.newServiceControl.value != null
     ) {
-      this.saveNew();
+      let existing = this.items.filter((item) => {
+        return item.name == this.newServiceControl.value;
+      });
+      if (existing.length > 0) {
+        this.serviceControl.setValue(existing[0]);
+        this.addNewForm = false;
+        this.newServiceControl.reset();
+        this.addNewIcon = 'pi pi-plus';
+      } else {
+        this.saveNew();
+      }
     }
     this.returnServiceValue();
   }

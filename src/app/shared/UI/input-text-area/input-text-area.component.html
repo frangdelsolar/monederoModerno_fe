@@ -5,13 +5,13 @@
   <span class="p-float-label mb-2">
     <textarea
       pInputTextarea
-      id="in-text"
+      [id]="id"
       class="w-full"
       [(ngModel)]="value"
       (ngModelChange)="onChange($event)"
       [ngClass]="control.dirty && control.errors ? 'ng-invalid ng-dirty' : ''"
     ></textarea>
-    <label htmlFor="in-text">{{ label }}</label>
+    <label [htmlFor]="id">{{ label }}</label>
   </span>
   <div class="mx-1" *ngFor="let item of control.errors | keyvalue">
     <small *ngIf="item.key == 'serverError'" id="input-help" class="p-error">{{

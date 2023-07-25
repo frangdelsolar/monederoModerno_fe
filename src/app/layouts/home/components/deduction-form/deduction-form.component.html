@@ -8,6 +8,7 @@
 
   <app-form-section [label]="'¿Cuándo empieza?'">
     <app-datepicker
+      [id]="'transaction-datepicker'"
       [editOn]="editModeOn"
       [label]="'Fecha de inicio'"
       [control]="startDateControl"
@@ -33,11 +34,13 @@
 
   <app-input-switch
     *ngIf="showMarkAsPaidSwitch"
+    [id]="'paid-switch'"
     [label]="'Marcar como pagado'"
     [control]="markAsPaidControl"
   ></app-input-switch>
 
   <app-input-text-area
+    [id]="'input-comment'"
     [editOn]="editModeOn"
     [label]="'Notas'"
     [control]="commentControl"
@@ -48,6 +51,7 @@
     pRipple
     class="p-button-primary"
     label="Guardar"
+    id="save-transaction-btn"
     (click)="onSaveClick()"
   ></button>
 </div>

@@ -6,12 +6,14 @@
     class="flex flex-row flex-wrap gap-4 justify-content-left align-items-center"
   >
     <app-dropdown
+      [id]="'currency-dropdown'"
       [editOn]="editOn"
       [label]="'Moneda'"
       [control]="currencyControl"
       [items]="currencyItems"
     ></app-dropdown>
     <app-input-text
+      [id]="'amount-input'"
       [editOn]="editOn"
       [label]="'Valor'"
       [type]="'number'"
@@ -20,6 +22,7 @@
 
     <span *ngIf="showRate">
       <app-input-text
+        [id]="'rate-input'"
         [editOn]="editOn"
         [label]="'Tasa de conversión'"
         [type]="'number'"

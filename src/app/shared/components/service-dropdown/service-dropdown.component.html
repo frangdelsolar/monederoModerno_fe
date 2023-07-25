@@ -22,6 +22,7 @@
         [icon]="addNewIcon"
         styleClass="p-button-rounded p-button-text"
         (onClick)="onAddNewClick()"
+        id="add-service-category-btn"
       ></p-button>
     </div>
   </span>
@@ -29,6 +30,7 @@
   <div *ngIf="addNewForm" class="py-2">
     <app-input-text
       [editOn]="true"
+      [id]="'input-service-category-text'"
       [label]="labelForNewServiceControl"
       [control]="newServiceControl"
     ></app-input-text>

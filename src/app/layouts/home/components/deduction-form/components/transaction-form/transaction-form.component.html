@@ -2,6 +2,7 @@
   <div class="flex flex-column gap-3">
     <app-deduction-type-dropdown
       [editOn]="editOn"
+      [id]="'transaction-type-dropdown'"
       [label]="labelForTransactionTypeControl"
       [control]="transactionTypeControl"
     ></app-deduction-type-dropdown>
@@ -30,6 +31,7 @@
     ></app-service-provider-dropdown>
 
     <app-tag-display
+      [id]="'tags-selector'"
       [editOn]="editOn"
       [label]="'Etiquetas'"
       [control]="tagsControl"

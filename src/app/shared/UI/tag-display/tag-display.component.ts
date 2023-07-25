@@ -10,7 +10,7 @@ export class TagDisplayComponent implements OnInit {
   @Input() editOn: boolean = true;
   @Input() label: string = 'Etiquetas';
   @Input() control: FormControl = new FormControl('', []);
-
+  @Input() id: string = 'input-tags';
   constructor() {}
 
   ngOnInit(): void {}

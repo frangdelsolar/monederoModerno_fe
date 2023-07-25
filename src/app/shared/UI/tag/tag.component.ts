@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TagComponent implements OnInit {
   @Input() value: string;
   @Input() icon: string;
+  @Input() id: string = 'input-tags';
 
   constructor() {}
 

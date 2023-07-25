@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./input-switch.component.scss'],
 })
 export class InputSwitchComponent implements OnInit {
+  @Input() id: string = 'switch';
   @Input() label: string = 'Label';
   @Input() control: FormControl = new FormControl(null, []);
 

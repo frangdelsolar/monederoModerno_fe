@@ -12,6 +12,7 @@ export class DatepickerComponent implements OnInit {
   @Input() control: FormControl = new FormControl<Date | null>(null, []);
   @Input() dateFormat: string = 'dd/mm/yy';
   @Input() view: any = 'date';
+  @Input() id: any = 'date-picker';
   constructor() {}
 
   ngOnInit(): void {}
