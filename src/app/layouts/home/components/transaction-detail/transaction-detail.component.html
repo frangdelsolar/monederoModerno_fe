@@ -1,3 +1,25 @@
+<div class="flex justify-content-around my-2">
+  <!-- <button
+    pButton
+    pRipple
+    type="button"
+    icon="pi pi-calendar-times"
+    (click)="onTransactionDelete()"
+    label="Cerrar"
+    class="p-button-rounded p-button-text p-button-warn"
+  ></button> -->
+  <button
+    pButton
+    pRipple
+    *ngIf="transaction.payments.length <= 0"
+    type="button"
+    icon="pi pi-trash"
+    (click)="onTransactionDelete()"
+    label="Eliminar"
+    class="p-button-rounded p-button-text p-button-danger"
+  ></button>
+</div>
+
 <div *ngIf="!loading" class="flex flex-column gap-0">
   <app-transaction-section
     [transactionObservable]="$transaction"

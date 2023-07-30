@@ -17,7 +17,7 @@ export class PreviousPaymentsComponent implements OnInit {
   transaction: Transaction;
   payments: Payment[] = [];
 
-  total: string;
+  total: any;
 
   showExchangeColumn: FormControl = new FormControl(false, []);
 
@@ -33,9 +33,12 @@ export class PreviousPaymentsComponent implements OnInit {
     this.transactionObservable.subscribe((transaction) => {
       this.transaction = transaction;
       this.payments = transaction.payments;
-      this.total = `${
-        transaction.total_paid?.currency
-      } $${transaction.total_paid?.amount.toLocaleString()}`;
+
+      this.total = transaction.total_paid?.amount.toLocaleString('es-AR', {
+        style: 'currency',
+        currency: transaction.total_paid?.currency,
+        minimumFractionDigits: 2,
+      });
     });
   }
 

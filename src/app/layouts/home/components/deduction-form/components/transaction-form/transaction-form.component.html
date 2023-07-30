@@ -32,6 +32,7 @@
 
     <app-tag-display
       [id]="'tags-selector'"
+      *ngIf="showServiceProviderControl"
       [editOn]="editOn"
       [label]="'Etiquetas'"
       [control]="tagsControl"

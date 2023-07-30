@@ -16,5 +16,8 @@ export class MissingComponent implements OnInit {
     //     window.location.href = 'auth/login';
     //   }
     // });
+    setTimeout(() => {
+      window.location.href = '';
+    }, 1000);
   }
 }

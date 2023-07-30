@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { TransactionService } from '@app/core/controllers/transaction.controller';
 import { Transaction } from '@app/core/models/transaction.interface';
 import { AppDialogService } from '@app/core/services/app-dialog.service';
+import { ToastService } from '@app/core/services/toast.service';
 import { Subscription, BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -28,7 +29,8 @@ export class TransactionDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private dialogSvc: AppDialogService,
-    private transactionSvc: TransactionService
+    private transactionSvc: TransactionService,
+    private toastSvc: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -78,5 +80,16 @@ export class TransactionDetailComponent implements OnInit, OnDestroy {
     if (this.dialogDataSubscription) {
       this.dialogDataSubscription.unsubscribe();
     }
+  }
+
+  onTransactionDelete() {
+    this.transactionSvc.delete(this.transaction.id).subscribe((res) => {
+      this.toastSvc.add({
+        severity: 'success',
+        summary: 'Operación exitosa',
+        detail: 'La transacción ha sido eliminada.',
+      });
+      window.location.reload();
+    });
   }
 }

@@ -11,8 +11,16 @@
     <p class="my-0 py-0 text-sm">{{ transaction.service_provider.name }}</p>
   </div>
   <div class="col-3 flex flex-column align-items-end justify-content-left">
-    <p class="my-0 py-0 font-bold">{{ transaction.currency.currency }}</p>
-    <p class="my-0 py-0 text-sm">${{ transaction.currency.amount }}</p>
+    <p class="my-0 py-0 font-bold">Total</p>
+    <p class="my-0 py-0 text-sm">
+      {{
+        transaction.currency.amount.toLocaleString("es-AR", {
+          style: "currency",
+          currency: transaction.currency.currency,
+          minimumFractionDigits: 2
+        })
+      }}
+    </p>
   </div>
   <div
     *ngIf="transaction.payment"
@@ -20,8 +28,12 @@
   >
     <p class="my-0 py-0 font-bold">Pagado</p>
     <p class="my-0 py-0 text-sm">
-      {{ transaction.payment.currency.currency }} ${{
-        transaction.payment.currency.amount
+      {{
+        transaction.payment.currency.amount.toLocaleString("es-AR", {
+          style: "currency",
+          currency: transaction.payment.currency.currency,
+          minimumFractionDigits: 2
+        })
       }}
     </p>
   </div>

@@ -31,6 +31,12 @@ export class TransactionService {
     return this.privateSvc.post<Transaction>(this._apiUrl, data, true);
   }
 
+  public delete(id: any) {
+    const url = this._apiUrl + `${id}`;
+
+    return this.privateSvc.delete(url, true);
+  }
+
   public payTransaction(data: any) {
     return this.privateSvc.post<any>(
       environment.apiUrl + 'api/pay/',

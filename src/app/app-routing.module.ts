@@ -21,7 +21,7 @@ const routes: Routes = [
         (m) => m.HomeRoutingModule
       ),
   },
-  { path: '**', pathMatch: 'full', component: MissingComponent },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

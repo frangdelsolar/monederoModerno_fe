@@ -18,7 +18,7 @@ export class ServiceDropdownComponent implements OnInit {
   addNewForm: boolean = false;
   addNewIcon: string = 'pi pi-plus';
 
-  labelForNewServiceControl: string = 'Nuevo concepto';
+  labelForNewServiceControl: string = 'Nueva categoría';
   newServiceControl: FormControl = new FormControl(null, []);
 
   items: any[] = [];

@@ -27,13 +27,25 @@
       <td>{{ payment.installment_number }}</td>
       <td>{{ payment.due_date | date : "dd/MM/yy" }}</td>
       <td>{{ payment.transaction_date | date : "dd/MM/yy" }}</td>
-      <td>{{ payment.currency.currency }} ${{ payment.currency.amount }}</td>
+      <td>
+        {{
+          payment.currency.amount.toLocaleString("es-AR", {
+            style: "currency",
+            currency: payment.currency.currency,
+            minimumFractionDigits: 2
+          })
+        }}
+      </td>
       <td *ngIf="showExchangeColumn.value">
         {{ payment.currency.exchange_rate }}
       </td>
       <td *ngIf="showExchangeColumn.value">
-        {{ payment.currency.converted_currency }} ${{
-          payment.currency.converted_amount.toLocaleString()
+        {{
+          payment.currency.converted_amount.toLocaleString("es-AR", {
+            style: "currency",
+            currency: payment.currency.converted_currency,
+            minimumFractionDigits: 2
+          })
         }}
       </td>
       <td>

@@ -28,7 +28,10 @@
     </div>
   </span>
 
-  <div *ngIf="addNewForm" class="pt-2">
+  <div
+    *ngIf="addNewForm"
+    class="border-solid border-200 border-round-lg p-3 pt-4 surface-200 w-auto"
+  >
     <app-input-text
       [editOn]="true"
       [label]="labelForNewServiceProviderControl"
