@@ -1,0 +1,8 @@
+<app-card [title]="'Billeteras'">
+  <div class="flex flex-column justify-content-center">
+    <app-bank-account-item
+      *ngFor="let account of items"
+      [item]="account"
+    ></app-bank-account-item>
+  </div>
+</app-card>

@@ -11,6 +11,9 @@ export const environment = {
   },
 
   apiUrl: '',
+  apiUrlAdjustBankAccount: '',
+  apiUrlBalance: '',
+  apiUrlBankAccount: '',
   apiExchangeRate: '',
   apiImage: '',
   apiProduct: '',
@@ -18,4 +21,5 @@ export const environment = {
   apiService: '',
   apiServiceProvider: '',
   apiTransaction: '',
+  apiValidateUser: '',
 };

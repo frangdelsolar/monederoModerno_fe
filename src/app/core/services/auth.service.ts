@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { initializeApp } from 'firebase/app';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 import { User } from '../models/user.interface';
 import { UserService } from '../controllers/user.controller';
 import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
+import { ToastService } from './toast.service';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -14,71 +16,130 @@ import { Router } from '@angular/router';
 export class AuthService {
   user: any = null;
 
-  private isAuthenticated: BehaviorSubject<boolean> =
-    new BehaviorSubject<boolean>(false);
+  private isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<any>(
+    null
+  );
 
   constructor(
     public afAuth: AngularFireAuth,
     private userSvc: UserService,
-    private router: Router
+    private router: Router,
+    private toastSvc: ToastService
   ) {
+    console.log('Calling cauthSvc Constructor');
     initializeApp(environment.firebase);
-    this.verifyAuthentication();
+    this.checkFirebaseAuthState();
   }
 
   get isAuthenticatedObservable(): Observable<boolean> {
     return this.isAuthenticated.asObservable();
   }
 
-  checkFirebaseAuthStatus() {
+  checkFirebaseAuthState() {
+    console.log('Init Auth');
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        this.storeAuthDetails(user);
+        this.login(user, false, 'checkFirebaseAuthState').subscribe(
+          (loggedIn) => {
+            if (loggedIn) {
+              this.router.navigate(['']);
+            }
+          }
+        );
       } else {
         this.logout();
       }
     });
   }
 
-  verifyAuthentication() {
-    let userDataString = localStorage.getItem('user');
-    if (userDataString) {
-      this.user = JSON.parse(userDataString);
-      this.isAuthenticated.next(true);
-      this.checkFirebaseAuthStatus();
-    } else {
-      this.isAuthenticated.next(false);
-    }
+  checkIfUserExistsInBackend(userData: any): Observable<boolean> {
+    return this.userSvc.validateUser(userData).pipe(
+      map((data: any) => data.user_exists),
+      catchError(() => of(false))
+    );
   }
 
-  async auth(user: User): Promise<any> {
+  login(
+    firebaseUser: any,
+    allowRegistration: boolean,
+    invoker: string
+  ): Observable<boolean> {
+    console.log('Login ', firebaseUser.email, 'from ', invoker);
+    return this.checkIfUserExistsInBackend({ email: firebaseUser.email }).pipe(
+      switchMap((val: any) => {
+        if (val) {
+          this.storeAuthDetails(firebaseUser);
+          this.isAuthenticated.next(true);
+          return of(true); // Emit a signal that login is successful
+        } else {
+          //TODO: Confirmar si desea registrarse
+          if (allowRegistration && confirm('Deseas registrarte')) {
+            this.router.navigate(['auth/register']);
+            return of(false); // Emit a signal that login is not successful
+          } else {
+            return of(false); // Emit a signal that login is not successful
+          }
+        }
+      }),
+      catchError(() => of(false)) // Handle any errors in checkIfUserExistsInBackend and emit false
+    );
+  }
+
+  async loginWithCreds(user: User): Promise<any> {
     const body = {
       email: user.email || '',
       password: user.password,
     };
 
+    let googleAuth;
     try {
-      const googleAuth = await this.afAuth.signInWithEmailAndPassword(
+      googleAuth = await this.afAuth.signInWithEmailAndPassword(
         body.email,
         body.password
       );
-      this.storeAuthDetails(googleAuth.user);
-      return true;
     } catch (err: any) {
-      return err.message;
+      this.toastSvc.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Usuario no encontrado',
+      });
+      this.router.navigate(['auth/register']);
     }
+
+    if (!googleAuth) {
+      return;
+    }
+    this.login(googleAuth.user, true, 'loginWithCreds').subscribe(
+      (loggedIn) => {
+        if (loggedIn) {
+          window.location.reload();
+        }
+      }
+    );
   }
 
-  storeAuthDetails(user: any) {
-    localStorage.setItem('user', JSON.stringify(user));
+  async googleLogin() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    let userCred;
 
-    user.getIdToken().then((tkn: any) => {
-      localStorage.setItem('access', tkn);
-      this.isAuthenticated.next(true);
+    try {
+      userCred = await this.afAuth.signInWithPopup(provider);
+    } catch (err: any) {
+      console.log('Error', err);
+    }
+
+    if (!userCred) {
+      return;
+    }
+
+    this.login(userCred.user, true, 'googleLogin').subscribe((loggedIn) => {
+      if (loggedIn) {
+        window.location.reload();
+      }
     });
   }
 
-  async registerUser(user: any) {
+  async registerUserWithForm(user: any) {
     let response = {
       success: false,
       message: '',
@@ -93,9 +154,7 @@ export class AuthService {
         googleAuth.user.updateProfile({
           displayName: `${user.first_name} ${user.last_name}`,
         });
-        this.storeAuthDetails(googleAuth.user);
       }
-
       return this.registerUserInBackend(user);
     } catch (err: any) {
       response.message = err.message;
@@ -103,27 +162,33 @@ export class AuthService {
     }
   }
 
-  async googleLogin() {
-    try {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      const userCred = await this.afAuth.signInWithPopup(provider);
-      this.storeAuthDetails(userCred.user);
-
-      if (userCred.additionalUserInfo?.isNewUser) {
-        this.registerUserInBackend({
-          first_name: userCred.user?.displayName?.split(' ')[0],
-          last_name: userCred.user?.displayName?.split(' ')[1],
-          email: userCred.user?.email,
+  registerUserInBackend(user: any) {
+    this.userSvc.create(user).subscribe(
+      (res) => {
+        this.toastSvc.add({
+          severity: 'success',
+          summary: 'Usuario registrado',
+          detail: `${res.user.email} registrado de manera exitosa`,
+        });
+        this.router.navigate(['']);
+      },
+      (err) => {
+        this.toastSvc.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error.message,
         });
       }
-      return true;
-    } catch (err: any) {
-      return err;
-    }
+    );
   }
 
-  registerUserInBackend(user: any) {
-    return this.userSvc.create(user);
+  storeAuthDetails(user: any) {
+    this.user = user;
+    let userData = JSON.stringify(user);
+    localStorage.setItem('user', userData);
+    user.getIdToken().then((tkn: any) => {
+      localStorage.setItem('access', tkn);
+    });
   }
 
   logout() {

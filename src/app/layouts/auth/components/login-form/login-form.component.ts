@@ -43,31 +43,11 @@ export class LoginFormComponent implements OnInit {
 
   onLogin() {
     if (this.form.valid) {
-      this.authSvc.auth(this.form.value).then((res: any) => {
-        if (res == true) {
-          window.location.href = '/';
-        } else {
-          this.toastSvc.add({
-            severity: 'error',
-            summary: 'Inicio de sesión fallido',
-            detail: res,
-          });
-        }
-      });
+      this.authSvc.loginWithCreds(this.form.value);
     }
   }
 
   onGoogleLogin() {
-    this.authSvc.googleLogin().then((res: any) => {
-      if (res) {
-        window.location.href = '/';
-      } else {
-        this.toastSvc.add({
-          severity: 'error',
-          summary: 'Inicio de sesión fallido',
-          detail: res,
-        });
-      }
-    });
+    this.authSvc.googleLogin();
   }
 }

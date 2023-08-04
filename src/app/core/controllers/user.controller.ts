@@ -7,11 +7,16 @@ import { PrivateApiService } from '../services/private-api.service';
   providedIn: 'root',
 })
 export class UserService {
-  _apiUrl = environment.apiUrl + environment.apiRegisterUser;
+  registerApiUrl = environment.apiUrl + environment.apiRegisterUser;
+  validateUserApiUrl = environment.apiUrl + environment.apiValidateUser;
 
   constructor(private adminSvc: PrivateApiService) {}
 
   public create(user: any) {
-    return this.adminSvc.post<any>(this._apiUrl, user, true);
+    return this.adminSvc.post<any>(this.registerApiUrl, user, false);
+  }
+
+  public validateUser(user: any) {
+    return this.adminSvc.post<any>(this.validateUserApiUrl, user, false);
   }
 }

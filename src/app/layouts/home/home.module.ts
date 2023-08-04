@@ -9,6 +9,7 @@ import { TransactionDetailModule } from './components/transaction-detail/transac
 import { DeductionFormModule } from './components/deduction-form/deduction-form.module';
 import { TotalsDetailsComponent } from './components/transactions-list/components/totals-details/totals-details.component';
 import { TransactionWrapperComponent } from './components/transaction-wrapper/transaction-wrapper.component';
+import { BankAccountModule } from './pages/bank-account/bank-account.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { TransactionWrapperComponent } from './components/transaction-wrapper/tr
     SharedModule,
     TransactionDetailModule,
     DeductionFormModule,
+    BankAccountModule,
   ],
   exports: [SharedModule],
 })

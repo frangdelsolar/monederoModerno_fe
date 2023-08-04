@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
@@ -35,7 +36,9 @@ export class PrivateApiService {
     };
     this.toastSvc.add(toastData);
     if (error.status === 403) {
-      window.location.reload();
+      if (confirm('Recargar?')) {
+        window.location.reload();
+      }
     }
 
     return throwError(error);

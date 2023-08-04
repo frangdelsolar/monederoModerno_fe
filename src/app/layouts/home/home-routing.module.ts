@@ -18,6 +18,13 @@ const routes: Routes = [
         path: '',
         component: TransactionsListComponent,
       },
+      {
+        path: 'billeteras',
+        loadChildren: () =>
+          import('./pages/bank-account/bank-account-routing.module').then(
+            (m) => m.BankAccountRoutingModule
+          ),
+      },
     ],
   },
 ];

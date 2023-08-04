@@ -27,43 +27,43 @@ export class SidebarComponent implements OnInit {
         },
       ],
     },
-    // {
-    //   label: 'Configuración',
-    //   items: [
-    //     {
-    //       label: 'Billeteras',
-    //       icon: 'pi pi-wallet',
-    //       command: (event: any) => {
-    //         this.router.navigate(['billeteras']);
-    //         this.sidebarSvc.closeSidebar();
-    //       },
-    //     },
-    //     {
-    //       label: 'Categorías',
-    //       icon: 'pi pi-th-large',
-    //       command: (event: any) => {
-    //         this.router.navigate(['categorias']);
-    //         this.sidebarSvc.closeSidebar();
-    //       },
-    //     },
-    //     {
-    //       label: 'Etiquetas',
-    //       icon: 'pi pi-tags',
-    //       command: (event: any) => {
-    //         this.router.navigate(['etiquetas']);
-    //         this.sidebarSvc.closeSidebar();
-    //       },
-    //     },
-    //     {
-    //       label: 'Presupuestos',
-    //       icon: 'pi pi-book',
-    //       command: (event: any) => {
-    //         this.router.navigate(['presupuestos']);
-    //         this.sidebarSvc.closeSidebar();
-    //       },
-    //     },
-    //   ],
-    // },
+    {
+      label: 'Configuración',
+      items: [
+        {
+          label: 'Billeteras',
+          icon: 'pi pi-wallet',
+          command: (event: any) => {
+            this.router.navigate(['billeteras']);
+            this.sidebarSvc.closeSidebar();
+          },
+        },
+        //     {
+        //       label: 'Categorías',
+        //       icon: 'pi pi-th-large',
+        //       command: (event: any) => {
+        //         this.router.navigate(['categorias']);
+        //         this.sidebarSvc.closeSidebar();
+        //       },
+        //     },
+        //     {
+        //       label: 'Etiquetas',
+        //       icon: 'pi pi-tags',
+        //       command: (event: any) => {
+        //         this.router.navigate(['etiquetas']);
+        //         this.sidebarSvc.closeSidebar();
+        //       },
+        //     },
+        //     {
+        //       label: 'Presupuestos',
+        //       icon: 'pi pi-book',
+        //       command: (event: any) => {
+        //         this.router.navigate(['presupuestos']);
+        //         this.sidebarSvc.closeSidebar();
+        //       },
+        //     },
+      ],
+    },
   ];
 
   user: any;

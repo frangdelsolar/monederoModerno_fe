@@ -52,35 +52,36 @@ export class RegisterFormComponent implements OnInit {
 
   async onRegister() {
     if (this.form.valid) {
-      this.authSvc.registerUser(this.form.value).then((res: any) => {
-        res.subscribe(
-          (res: any) => {
-            if (res.success == 'ok') {
-              this.toastSvc.add({
-                severity: 'success',
-                summary: 'Registro exitoso',
-                detail: 'Redirigiendo...',
-              });
-              this.router.navigate(['/auth/login']);
-            } else {
-              this.toastSvc.add({
-                severity: 'error',
-                summary: 'Error',
-                detail: res.message,
-              });
-            }
-          },
-          (err: any) => {
-            err.error.errors.forEach((element: any) => {
-              const fieldName = element.field;
-              this.form.controls[fieldName].setErrors({
-                serverError: element.message,
-              });
-              this.form.controls[fieldName].markAsDirty();
-            });
-          }
-        );
-      });
+      this.authSvc.registerUserWithForm(this.form.value);
+      // .then((res: any) => {
+      //   res.subscribe(
+      //     (res: any) => {
+      //       if (res.success == 'ok') {
+      //         this.toastSvc.add({
+      //           severity: 'success',
+      //           summary: 'Registro exitoso',
+      //           detail: 'Redirigiendo...',
+      //         });
+      //         this.router.navigate(['/auth/login']);
+      //       } else {
+      //         this.toastSvc.add({
+      //           severity: 'error',
+      //           summary: 'Error',
+      //           detail: res.message,
+      //         });
+      //       }
+      //     },
+      //     (err: any) => {
+      //       err.error.errors.forEach((element: any) => {
+      //         const fieldName = element.field;
+      //         this.form.controls[fieldName].setErrors({
+      //           serverError: element.message,
+      //         });
+      //         this.form.controls[fieldName].markAsDirty();
+      //       });
+      //     }
+      //   );
+      // });
     }
   }
 }
