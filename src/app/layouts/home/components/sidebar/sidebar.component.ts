@@ -73,7 +73,9 @@ export class SidebarComponent implements OnInit {
     private router: Router,
     private authSvc: AuthService
   ) {
-    this.user = this.authSvc.user;
+    this.authSvc.userObservable.subscribe((user) => {
+      this.user = user;
+    });
   }
 
   ngOnInit(): void {

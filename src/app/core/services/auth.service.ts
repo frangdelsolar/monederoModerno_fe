@@ -14,11 +14,10 @@ import { switchMap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  user: any = null;
-
   private isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<any>(
     null
   );
+  private user: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -29,10 +28,17 @@ export class AuthService {
     console.log('Calling cauthSvc Constructor');
     initializeApp(environment.firebase);
     this.checkFirebaseAuthState();
+    if (localStorage.getItem('user') != null) {
+      this.isAuthenticated.next(true);
+    }
   }
 
   get isAuthenticatedObservable(): Observable<boolean> {
     return this.isAuthenticated.asObservable();
+  }
+
+  get userObservable(): Observable<boolean> {
+    return this.user.asObservable();
   }
 
   checkFirebaseAuthState() {
@@ -70,18 +76,17 @@ export class AuthService {
         if (val) {
           this.storeAuthDetails(firebaseUser);
           this.isAuthenticated.next(true);
-          return of(true); // Emit a signal that login is successful
+          return of(true);
         } else {
-          //TODO: Confirmar si desea registrarse
           if (allowRegistration && confirm('Deseas registrarte')) {
             this.router.navigate(['auth/register']);
-            return of(false); // Emit a signal that login is not successful
+            return of(false);
           } else {
-            return of(false); // Emit a signal that login is not successful
+            return of(false);
           }
         }
       }),
-      catchError(() => of(false)) // Handle any errors in checkIfUserExistsInBackend and emit false
+      catchError(() => of(false))
     );
   }
 
@@ -183,7 +188,7 @@ export class AuthService {
   }
 
   storeAuthDetails(user: any) {
-    this.user = user;
+    this.user.next(user);
     let userData = JSON.stringify(user);
     localStorage.setItem('user', userData);
     user.getIdToken().then((tkn: any) => {
