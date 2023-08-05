@@ -10,6 +10,7 @@ import { SidebarService } from '@core/services/sidebar.service';
 })
 export class ToolbarComponent implements OnInit {
   userIsAuth: boolean = true;
+  loading: boolean = false;
 
   @Input() showMenuButton: boolean = true;
   @Input() showAuthButtons: boolean = true;
@@ -23,6 +24,9 @@ export class ToolbarComponent implements OnInit {
   ngOnInit(): void {
     this.authSvc.isAuthenticatedObservable.subscribe((isAuth) => {
       this.userIsAuth = isAuth;
+    });
+    this.authSvc.loading.asObservable().subscribe((res) => {
+      this.loading = res;
     });
   }
 

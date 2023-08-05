@@ -6,9 +6,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { BankAccountService } from '@app/core/controllers/bank-account-controller.service';
+import { BankAccount } from '@app/core/models/bank-account.interface';
+import { AppDialogService } from '@app/core/services/app-dialog.service';
 import { ToastService } from '@app/core/services/toast.service';
 import processFormControlErrors from '@app/core/utils/processFormControlErrors';
-import { windowWhen } from 'rxjs';
 
 @Component({
   selector: 'app-bank-account-form',
@@ -18,7 +19,8 @@ import { windowWhen } from 'rxjs';
 export class BankAccountFormComponent implements OnInit {
   processError = processFormControlErrors;
 
-  editOn = true;
+  editModeOn = false;
+  bankAccount: BankAccount;
 
   label = 'Detalle';
   labelForNameControl = 'Nombre';
@@ -36,10 +38,9 @@ export class BankAccountFormComponent implements OnInit {
   constructor(
     private bankSvc: BankAccountService,
     private fb: FormBuilder,
-    private toastSvc: ToastService
-  ) {}
-
-  ngOnInit(): void {
+    private toastSvc: ToastService,
+    private dialogSvc: AppDialogService
+  ) {
     this.form = this.fb.group({
       name: this.nameControl,
       description: this.descriptionControl,
@@ -47,6 +48,54 @@ export class BankAccountFormComponent implements OnInit {
       amount: this.amountControl,
     });
   }
+
+  ngOnInit(): void {
+    this.dialogSvc.DialogDataObservable.subscribe((data) => {
+      if (data.data.item) {
+        let item = data.data.item;
+
+        this.editModeOn = true;
+        this.bankAccount = item;
+
+        if (item) {
+          this.nameControl.setValue(item.name);
+          this.descriptionControl.setValue(item.description);
+          this.currencyControl.setValue(item.currency);
+          this.amountControl.setValue(item.total);
+        }
+      }
+    });
+  }
+
+  onUpdateClick() {
+    if (!this.bankAccount) return;
+    this.bankSvc
+      .update(this.bankAccount.id, {
+        name: this.nameControl.value,
+        description: this.descriptionControl.value,
+      })
+      .subscribe(
+        (res) => {
+          this.toastSvc.add({
+            severity: 'success',
+            summary: 'Cuenta bancaria creada',
+            detail: 'La cuenta bancaria se ha creado correctamente',
+          });
+          window.location.reload();
+        },
+        (err) => {
+          err.error.errors.map((error: any) => {
+            let fieldName = error.field;
+            this.form.controls[fieldName].setErrors({
+              serverError: error.message,
+            });
+            this.form.controls[fieldName].markAsDirty();
+            this.form.controls[fieldName].markAsTouched();
+          });
+        }
+      );
+  }
+
   onSaveClick() {
     let currency = this.currencyControl.value;
     if (currency) {

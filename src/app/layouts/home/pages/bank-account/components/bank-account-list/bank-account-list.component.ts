@@ -14,23 +14,30 @@ export class BankAccountListComponent implements OnInit {
   items: BankAccount[];
   menuItems: MenuItem[] = [
     {
-      label: 'Billeteras',
-      icon: 'pi pi-fw pi-wallet',
-      items: [
-        {
-          label: 'Nueva',
-          icon: 'pi pi-fw pi-plus',
-          command: () => {
-            this.onNewWalletClick();
-          },
-        },
-        {
-          label: 'Ordenar',
-          icon: 'pi pi-fw pi-sort',
-          command: () => {},
-        },
-      ],
+      label: 'Nueva',
+      icon: 'pi pi-fw pi-plus',
+      command: () => {
+        this.onNewWalletClick();
+      },
     },
+    // {
+    //   label: 'Billeteras',
+    //   icon: 'pi pi-fw pi-wallet',
+    //   items: [
+    //     {
+    //       label: 'Nueva',
+    //       icon: 'pi pi-fw pi-plus',
+    //       command: () => {
+    //         this.onNewWalletClick();
+    //       },
+    //     },
+    //     {
+    //       label: 'Ordenar',
+    //       icon: 'pi pi-fw pi-sort',
+    //       command: () => {},
+    //     },
+    //   ],
+    // },
     // {
     //   label: 'Tarjetas de crédito',
     //   icon: 'pi pi-fw pi-credit-card',

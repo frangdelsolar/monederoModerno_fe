@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AppDialogService } from '@app/core/services/app-dialog.service';
 import { DialogData } from '@app/core/models/dialog.interface';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
-  providers: [DialogService, MessageService, ConfirmationService],
+  providers: [DialogService, MessageService],
 })
 export class DialogComponent implements OnInit {
   dialogData: DialogData;

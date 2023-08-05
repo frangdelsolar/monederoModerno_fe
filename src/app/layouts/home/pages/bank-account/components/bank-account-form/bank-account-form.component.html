@@ -2,13 +2,13 @@
   <app-form-section [label]="label">
     <div class="flex flex-column gap-5 pt-3">
       <app-input-text
-        [editOn]="editOn"
+        [editOn]="true"
         [label]="labelForNameControl"
         [control]="nameControl"
         [id]="'name-input'"
       ></app-input-text>
       <app-input-text
-        [editOn]="editOn"
+        [editOn]="true"
         [label]="labelForDescriptionControl"
         [control]="descriptionControl"
         [id]="'description-input'"
@@ -16,8 +16,9 @@
     </div>
   </app-form-section>
   <app-input-currency
+    *ngIf="!editModeOn"
     [label]="labelForCurrencyControl"
-    [editOn]="editOn"
+    [editOn]="true"
     [currencyControl]="currencyControl"
     [amountControl]="amountControl"
     [showRateControl]="false"
@@ -25,9 +26,19 @@
   <button
     pButton
     pRipple
+    *ngIf="!editModeOn"
     class="p-button-primary"
     label="Guardar"
     id="save-transaction-btn"
     (click)="onSaveClick()"
+  ></button>
+  <button
+    pButton
+    pRipple
+    *ngIf="editModeOn"
+    class="p-button-primary"
+    label="Actualizar"
+    id="update-transaction-btn"
+    (click)="onUpdateClick()"
   ></button>
 </form>

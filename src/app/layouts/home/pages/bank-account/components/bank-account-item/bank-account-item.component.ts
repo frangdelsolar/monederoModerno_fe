@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { BankAccountService } from '@app/core/controllers/bank-account-controller.service';
 import { BankAccount } from '@app/core/models/bank-account.interface';
 import { AppDialogService } from '@app/core/services/app-dialog.service';
+import { ToastService } from '@app/core/services/toast.service';
 import { ConfirmationService } from 'primeng/api';
+import { BankAccountFormComponent } from '../bank-account-form/bank-account-form.component';
 
 @Component({
   selector: 'app-bank-account-item',
@@ -11,13 +14,6 @@ import { ConfirmationService } from 'primeng/api';
 export class BankAccountItemComponent implements OnInit {
   @Input() item: BankAccount;
   menuItems: any[] = [
-    // {
-    //   label: 'Ver transacciones',
-    //   icon: 'pi pi-fw pi-list',
-    //   command: () => {
-    //     this.onViewClick();
-    //   }
-    // },
     {
       label: 'Editar',
       icon: 'pi pi-fw pi-pencil',
@@ -26,128 +22,72 @@ export class BankAccountItemComponent implements OnInit {
       },
     },
     {
-      label: 'Reajustar Saldo',
-      icon: 'pi pi-fw pi-wrench',
+      label: 'Eliminar',
+      icon: 'pi pi-fw pi-trash',
       command: () => {
-        this.onAdjustClick();
+        this.onDeleteClick();
       },
     },
-    {
-      label: 'Recalcular',
-      icon: 'pi pi-fw pi-calculator',
-      command: () => {
-        this.onCalculateClick();
-      },
-    },
+    // {
+    //   label: 'Reajustar Saldo',
+    //   icon: 'pi pi-fw pi-wrench',
+    //   command: () => {
+    //     this.onAdjustClick();
+    //   },
+    // },
+    // {
+    //   label: 'Recalcular',
+    //   icon: 'pi pi-fw pi-calculator',
+    //   command: () => {
+    //     this.onCalculateClick();
+    //   },
+    // },
   ];
   constructor(
     private dialogSvc: AppDialogService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private bankSvc: BankAccountService,
+    private toastSvc: ToastService
   ) {}
 
   ngOnInit(): void {}
 
-  showDetail() {
+  onEditClick() {
     this.dialogSvc.show({
-      component: BankAccountItemComponent,
+      component: BankAccountFormComponent,
       data: {
-        // transactionId: this.transaction.id,
-        // month: this.month,
-        // year: this.year,
+        item: this.item,
       },
       params: {
-        header: 'Detalle de transacción',
+        header: 'Editar billetera',
         closable: true,
-        maximizable: true,
-        responsive: true,
-        position: 'center',
-        dismissableMask: true,
       },
     });
   }
 
-  onViewClick() {
-    // const ref = this.dialogService.open(AddBankAccountComponent, {
-    //   header: 'Transacciones',
-    //   resizable: true,
-    //   draggable: true,
-    //   contentStyle: {'overflow': 'visible'},
-    //   data: {
-    //     bankAccount: this.item
-    //   },
-    // });
-    // ref.onClose.subscribe((res: any) => {
-    // });
-  }
-
-  onEditClick() {
-    // const ref = this.dialogService.open(AddBankAccountComponent, {
-    //   header: 'Editar Billetera',
-    //   resizable: true,
-    //   draggable: true,
-    //   contentStyle: {'overflow': 'visible'},
-    //   data: {
-    //     bankAccount: this.item
-    //   },
-    // });
-    // ref.onClose.subscribe((res: any) => {
-    //     this.reloadCurrentRoute(this.router);
-    // });
-  }
-
-  onArchiveClick(value: string, prompt: string) {
-    // let data = {
-    //   status: value
-    // }
-    // this.confirmationService.confirm({
-    //     message: prompt,
-    //     accept: () => {
-    //       if(this.item){
-    //         this.service.update(this.item.id, data).subscribe(
-    //           (res)=>{
-    //             this.messageService.add({severity:'success', summary:'Operación exitosa', detail:'Billetera actualizada'});
-    //             this.reloadCurrentRoute(this.router);
-    //           },
-    //           (err)=>{
-    //             this.messageService.add({severity:'error', summary:'Algo anda mal', detail: err.error.message});
-    //           }
-    //         )
-    //       }
-    //     }
-    // });
-  }
-
-  onAdjustClick() {
-    // const ref = this.dialogSvc.open(AdjustBankAccountComponent, {
-    //   header: 'Reajustar saldo de cuenta',
-    //   resizable: true,
-    //   draggable: true,
-    //   contentStyle: {'overflow': 'visible'},
-    //   data: {
-    //     bankAccount: this.item
-    //   },
-    // });
-    // ref.onClose.subscribe((res: any) => {
-    //   // this.reloadCurrentRoute(this.router);
-    // });
-  }
-
-  onCalculateClick() {
+  onDeleteClick() {
     this.confirmationService.confirm({
-      message: '¿Quieres recalcular el saldo de esta billetera?',
-      // accept: () => {
-      //   if(this.item){
-      //     this.service.recalc(this.item.id).subscribe(
-      //       (res)=>{
-      //         this.messageService.add({severity:'success', summary:'Operación exitosa', detail:'Billetera actualizada'});
-      //         this.reloadCurrentRoute(this.router);
-      //       },
-      //       (err)=>{
-      //         this.messageService.add({severity:'error', summary:'Algo anda mal', detail: err.error.message});
-      //       }
-      //     )
-      //   }
-      // }
+      header: 'Eliminar billetera',
+      message: '¿Está seguro que desea continuar?',
+      accept: () => {
+        this.bankSvc.delete(this.item.id).subscribe(
+          (res) => {
+            this.toastSvc.add({
+              severity: 'success',
+              summary: 'Billetera eliminada',
+              detail: 'La billetera se eliminó correctamente',
+            });
+          },
+          (err) => {
+            this.toastSvc.add({
+              severity: 'error',
+              summary: 'Error',
+              detail:
+                'Ocurrió un error al eliminar la billetera. ' + err.message,
+            });
+          }
+        );
+      },
     });
   }
 }
