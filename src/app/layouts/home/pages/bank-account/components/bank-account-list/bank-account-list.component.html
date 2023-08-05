@@ -1,8 +1,11 @@
 <app-card [title]="'Billeteras'">
-  <div class="flex flex-column justify-content-center">
-    <app-bank-account-item
-      *ngFor="let account of items"
-      [item]="account"
-    ></app-bank-account-item>
+  <div class="flex flex-column gap-3">
+    <app-card-menu [items]="menuItems"></app-card-menu>
+    <div class="flex flex-column justify-content-center">
+      <app-bank-account-item
+        *ngFor="let account of items"
+        [item]="account"
+      ></app-bank-account-item>
+    </div>
   </div>
 </app-card>

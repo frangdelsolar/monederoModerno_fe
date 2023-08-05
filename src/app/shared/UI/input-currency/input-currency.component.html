@@ -15,12 +15,12 @@
     <app-input-text
       [id]="'amount-input'"
       [editOn]="editOn"
-      [label]="'Valor'"
+      [label]="'Total'"
       [type]="'number'"
       [control]="amountControl"
     ></app-input-text>
 
-    <span *ngIf="showRate">
+    <span *ngIf="showRate && showRateControl">
       <app-input-text
         [id]="'rate-input'"
         [editOn]="editOn"
@@ -31,12 +31,11 @@
       <small class="ml-3 font-semibold"
         >{{ conversionCurrency }}$ {{ conversion.toLocaleString() }}</small
       >
+      <i
+        *ngIf="loading.value"
+        class="pi pi-spin pi-sync"
+        style="font-size: 1.5rem"
+      ></i>
     </span>
-
-    <i
-      *ngIf="loading.value"
-      class="pi pi-spin pi-sync"
-      style="font-size: 1.5rem"
-    ></i>
   </div>
 </div>

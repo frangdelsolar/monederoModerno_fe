@@ -1,7 +1,4 @@
-<div
-  class="flex flex-row justify-content-between align-items-center"
-  (click)="showDetail()"
->
+<div class="flex flex-row justify-content-between align-items-center">
   <div class="col-4 flex flex-column align-items-start justify-content-left">
     <p class="my-0 py-0 font-bold">{{ item.bank }}</p>
     <p class="my-0 py-0 text-sm">{{ item.description }}</p>
@@ -9,8 +6,23 @@
   <div class="col-3 flex flex-column align-items-end justify-content-left">
     <p class="my-0 py-0 font-bold">Total</p>
     <p class="my-0 py-0 text-sm">
-      {{ item.total }}
+      {{
+        item.total.amount.toLocaleString("es-AR", {
+          style: "currency",
+          currency: item.total.currency,
+          minimumFractionDigits: 2
+        })
+      }}
     </p>
+  </div>
+  <div>
+    <p-menu #menu [model]="menuItems" [popup]="true"></p-menu>
+
+    <p-button
+      icon="pi pi-ellipsis-v"
+      (click)="menu.toggle($event)"
+      styleClass="p-button-rounded p-button-text"
+    ></p-button>
   </div>
 </div>
 <p-divider></p-divider>

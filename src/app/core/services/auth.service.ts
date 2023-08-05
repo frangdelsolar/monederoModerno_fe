@@ -18,14 +18,13 @@ export class AuthService {
     null
   );
   private user: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-
+  loading: BehaviorSubject<any> = new BehaviorSubject<any>(false);
   constructor(
     public afAuth: AngularFireAuth,
     private userSvc: UserService,
     private router: Router,
     private toastSvc: ToastService
   ) {
-    console.log('Calling cauthSvc Constructor');
     initializeApp(environment.firebase);
     this.checkFirebaseAuthState();
     if (localStorage.getItem('user') != null) {
@@ -42,17 +41,19 @@ export class AuthService {
   }
 
   checkFirebaseAuthState() {
-    console.log('Init Auth');
+    this.loading.next(true);
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.login(user, false, 'checkFirebaseAuthState').subscribe(
           (loggedIn) => {
-            if (loggedIn) {
-              this.router.navigate(['']);
-            }
+            this.loading.next(false);
+            //     if (loggedIn) {
+            //       this.router.navigate(['']);
+            //     }
           }
         );
       } else {
+        this.loading.next(false);
         this.logout();
       }
     });

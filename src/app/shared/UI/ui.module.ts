@@ -56,6 +56,7 @@ import { TagComponent } from './tag/tag.component';
 import { TagDisplayComponent } from './tag-display/tag-display.component';
 import { ToastComponent } from './toast/toast.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { CardMenuComponent } from './card-menu/card-menu.component';
 
 const pngModules = [
   AutoCompleteModule,
@@ -98,6 +99,7 @@ const pngModules = [
 
 const uiComponents = [
   CardComponent,
+  CardMenuComponent,
   ChipsComponent,
   DatepickerComponent,
   DialogComponent,

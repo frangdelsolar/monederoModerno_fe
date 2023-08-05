@@ -11,6 +11,7 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 export class InputCurrencyComponent implements OnInit {
   @Input() editOn: boolean = false;
   @Input() label: string = 'Label';
+  @Input() showRateControl: boolean = true;
   @Input() currencyControl: FormControl = new FormControl(null, []);
   @Input() amountControl: FormControl = new FormControl(null, []);
   @Input() rateControl: FormControl = new FormControl(null, []);
