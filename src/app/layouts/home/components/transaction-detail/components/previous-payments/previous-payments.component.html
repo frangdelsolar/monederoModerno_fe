@@ -15,9 +15,7 @@
     <tr>
       <th>Cuota</th>
       <th>Vencimiento</th>
-      <th>Fecha de pago</th>
-      <th>Total abonado</th>
-      <th *ngIf="showExchangeColumn.value">Cambio</th>
+      <th>Pago</th>
       <th *ngIf="showExchangeColumn.value">Conversión</th>
       <th></th>
     </tr>
@@ -26,27 +24,38 @@
     <tr>
       <td>{{ payment.installment_number }}</td>
       <td>{{ payment.due_date | date : "dd/MM/yy" }}</td>
-      <td>{{ payment.transaction_date | date : "dd/MM/yy" }}</td>
       <td>
-        {{
-          payment.currency.amount.toLocaleString("es-AR", {
-            style: "currency",
-            currency: payment.currency.currency,
-            minimumFractionDigits: 2
-          })
-        }}
+        <span class="flex flex-column gap-0">
+          <span class="text-xs">{{
+            payment.transaction_date | date : "dd/MM/yy"
+          }}</span>
+          <span class="text-xs">{{ payment.account }}</span>
+          <span class="font-semibold">
+            {{
+              payment.currency.amount.toLocaleString("es-AR", {
+                style: "currency",
+                currency: payment.currency.currency,
+                minimumFractionDigits: 2
+              })
+            }}
+          </span>
+        </span>
       </td>
       <td *ngIf="showExchangeColumn.value">
-        {{ payment.currency.exchange_rate }}
-      </td>
-      <td *ngIf="showExchangeColumn.value">
-        {{
-          payment.currency.converted_amount.toLocaleString("es-AR", {
-            style: "currency",
-            currency: payment.currency.converted_currency,
-            minimumFractionDigits: 2
-          })
-        }}
+        <span class="flex flex-column gap-0">
+          <span class="text-xs"
+            >US$1 = ${{ payment.currency.exchange_rate }}</span
+          >
+          <span class="font-semibold">
+            {{
+              payment.currency.converted_amount.toLocaleString("es-AR", {
+                style: "currency",
+                currency: payment.currency.converted_currency,
+                minimumFractionDigits: 2
+              })
+            }}
+          </span>
+        </span>
       </td>
       <td>
         <button

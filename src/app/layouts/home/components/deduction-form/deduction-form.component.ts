@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import FREQUENCIES from '@app/core/enums/frequency.enum';
 import { DeductionFormService } from '@app/core/services/deduction-form.service';
+import processFormControlErrors from '@app/core/utils/processFormControlErrors';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -31,10 +32,17 @@ export class DeductionFormComponent implements OnInit {
   showGoalForm: boolean = false;
 
   showMarkAsPaidSwitch: boolean = false;
-  markAsPaidControl: FormControl = new FormControl('', [Validators.required]);
+  markAsPaidControl: FormControl = new FormControl(false, [
+    Validators.required,
+  ]);
+  bankAccountControl: FormControl = new FormControl(null, [
+    Validators.required,
+  ]);
 
   validateCurrencySignal: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
+
+  processError = processFormControlErrors;
 
   constructor(private deductionFormSvc: DeductionFormService) {}
 
@@ -72,25 +80,35 @@ export class DeductionFormComponent implements OnInit {
 
   validateAndSave() {
     if (this.startDateControl.value == null) {
-      let errorMsg = 'Debes seleccionar una fecha de inicio';
-      this.startDateControl.markAsDirty();
-      this.startDateControl.markAsTouched();
-      this.startDateControl.setErrors({
-        serverError: errorMsg,
-      });
-      this.deductionFormSvc.pushError({
-        step: 'service',
-        error: errorMsg,
-      });
+      this.processError(
+        'service',
+        this.startDateControl,
+        'Debes seleccionar una fecha de inicio',
+        this.deductionFormSvc
+      );
     }
+
+    if (
+      this.markAsPaidControl.value == true &&
+      this.bankAccountControl.value == null
+    ) {
+      this.processError(
+        'service',
+        this.bankAccountControl,
+        'Debes seleccionar un medio de pago',
+        this.deductionFormSvc
+      );
+    }
+
     this.validateCurrencySignal.next(true);
     this.deductionFormSvc.startDateOk(this.startDateControl.value);
     this.deductionFormSvc.commentOk(this.commentControl.value);
     this.deductionFormSvc.amountOk(
-      this.currencyControl.value.value,
+      this.currencyControl.value?.value,
       this.amountControl.value,
       this.rateControl.value,
-      this.markAsPaidControl.value
+      this.markAsPaidControl.value,
+      this.bankAccountControl.value?.id
     );
   }
 

@@ -42,6 +42,7 @@ export class DeductionFormService {
   amount: FormControl = new FormControl(null, []);
   rate: FormControl = new FormControl(null, []);
   paid: FormControl = new FormControl(null, []);
+  account: FormControl = new FormControl(null, []);
   tags: FormControl = new FormControl(null, []);
 
   constructor(
@@ -68,6 +69,7 @@ export class DeductionFormService {
       amount: this.amount,
       rate: this.rate,
       paid: this.paid,
+      account: this.account,
       tags: this.tags,
     });
   }
@@ -160,10 +162,17 @@ export class DeductionFormService {
     this.comment.setValue(value);
   }
 
-  amountOk(currency: string, amount: number, rate: number, paid: boolean) {
+  amountOk(
+    currency: string,
+    amount: number,
+    rate: number,
+    paid: boolean,
+    account: string
+  ) {
     this.currency.setValue(currency);
     this.amount.setValue(amount);
     this.rate.setValue(rate);
     this.paid.setValue(paid);
+    this.account.setValue(account);
   }
 }

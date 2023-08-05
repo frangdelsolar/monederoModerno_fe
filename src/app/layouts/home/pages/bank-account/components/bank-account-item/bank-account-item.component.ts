@@ -77,13 +77,15 @@ export class BankAccountItemComponent implements OnInit {
               summary: 'Billetera eliminada',
               detail: 'La billetera se eliminó correctamente',
             });
+            window.location.reload();
           },
           (err) => {
             this.toastSvc.add({
               severity: 'error',
               summary: 'Error',
               detail:
-                'Ocurrió un error al eliminar la billetera. ' + err.message,
+                'Ocurrió un error al eliminar la billetera. ' +
+                err.error.message,
             });
           }
         );

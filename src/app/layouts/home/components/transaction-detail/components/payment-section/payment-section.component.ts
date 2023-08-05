@@ -13,6 +13,7 @@ interface PayFormData {
   rate: number;
   due_date: Date;
   update_amount: boolean;
+  account: number;
 }
 
 @Component({
@@ -97,6 +98,7 @@ export class PaymentSectionComponent implements OnInit {
       rate: this.newRateControl.value,
       due_date: this.transaction.due_date,
       update_amount: false,
+      account: 0,
     };
 
     if (this.editAmountSectionControl.value) {

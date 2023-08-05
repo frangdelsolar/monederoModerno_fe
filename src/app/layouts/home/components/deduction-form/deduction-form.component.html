@@ -39,6 +39,11 @@
     [control]="markAsPaidControl"
   ></app-input-switch>
 
+  <app-bank-account-dropdown
+    *ngIf="markAsPaidControl.value"
+    [control]="bankAccountControl"
+  ></app-bank-account-dropdown>
+
   <app-input-text-area
     [id]="'input-comment'"
     [editOn]="editModeOn"
