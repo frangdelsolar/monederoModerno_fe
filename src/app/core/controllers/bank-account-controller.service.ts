@@ -35,9 +35,9 @@ export class BankAccountService {
     return this.adminSvc.delete<any>(url, true);
   }
 
-  // public recalc(id: number) {
-  //   return this.adminSvc.get<any>(this._adjustUrl, id, true);
-  // }
+  public recalculateTotals(id: number) {
+    return this.adminSvc.get<any>(this._adjustUrl, id, true);
+  }
 
   public updateAccountTotal(id: number, body: any) {
     let url = this._adjustUrl + id + '/';

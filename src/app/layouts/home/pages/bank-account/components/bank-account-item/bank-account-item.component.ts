@@ -36,13 +36,13 @@ export class BankAccountItemComponent implements OnInit {
       },
     },
 
-    // {
-    //   label: 'Recalcular',
-    //   icon: 'pi pi-fw pi-calculator',
-    //   command: () => {
-    //     this.onCalculateClick();
-    //   },
-    // },
+    {
+      label: 'Recalcular',
+      icon: 'pi pi-fw pi-sync',
+      command: () => {
+        this.onCalculateClick();
+      },
+    },
   ];
   constructor(
     private dialogSvc: AppDialogService,
@@ -76,6 +76,34 @@ export class BankAccountItemComponent implements OnInit {
       params: {
         header: 'Ajustar saldo',
         closable: true,
+      },
+    });
+  }
+
+  onCalculateClick() {
+    this.confirmationService.confirm({
+      header: 'Recalcular total',
+      message: '¿Está seguro que desea continuar?',
+      accept: () => {
+        this.bankSvc.recalculateTotals(this.item.id).subscribe(
+          (res) => {
+            this.toastSvc.add({
+              severity: 'success',
+              summary: 'Total actualizado',
+              detail: 'La billetera se actualizó correctamente',
+            });
+            window.location.reload();
+          },
+          (err) => {
+            this.toastSvc.add({
+              severity: 'error',
+              summary: 'Error',
+              detail:
+                'Ocurrió un error al actualizar la billetera. ' +
+                err.error.message,
+            });
+          }
+        );
       },
     });
   }
