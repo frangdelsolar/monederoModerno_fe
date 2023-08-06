@@ -1,4 +1,9 @@
 <app-input-switch
+  [label]="'Editar'"
+  [control]="showActionColumn"
+></app-input-switch>
+
+<app-input-switch
   [label]="'Mostrar cambio'"
   [control]="showExchangeColumn"
 ></app-input-switch>
@@ -17,7 +22,7 @@
       <th>Vencimiento</th>
       <th>Pago</th>
       <th *ngIf="showExchangeColumn.value">Conversión</th>
-      <th></th>
+      <th *ngIf="showActionColumn.value"></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-payment>
@@ -57,7 +62,7 @@
           </span>
         </span>
       </td>
-      <td>
+      <td *ngIf="showActionColumn.value">
         <button
           pButton
           pRipple

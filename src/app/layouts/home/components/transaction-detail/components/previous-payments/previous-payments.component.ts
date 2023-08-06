@@ -20,6 +20,7 @@ export class PreviousPaymentsComponent implements OnInit {
   total: any;
 
   showExchangeColumn: FormControl = new FormControl(false, []);
+  showActionColumn: FormControl = new FormControl(false, []);
 
   percentage: number = 0;
 
