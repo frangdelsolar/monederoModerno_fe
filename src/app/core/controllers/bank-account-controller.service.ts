@@ -35,16 +35,16 @@ export class BankAccountService {
     return this.adminSvc.delete<any>(url, true);
   }
 
-  public recalc(id: number) {
-    return this.adminSvc.get<any>(this._adjustUrl, id, true);
-  }
+  // public recalc(id: number) {
+  //   return this.adminSvc.get<any>(this._adjustUrl, id, true);
+  // }
 
-  public postAdjustData(id: number, body: any) {
+  public updateAccountTotal(id: number, body: any) {
     let url = this._adjustUrl + id + '/';
     return this.adminSvc.post<any>(url, body, true);
   }
 
-  public reorderAccounts(body: any) {
-    return this.adminSvc.post<any>(this._reorderUrl, body, true);
-  }
+  // public reorderAccounts(body: any) {
+  //   return this.adminSvc.post<any>(this._reorderUrl, body, true);
+  // }
 }

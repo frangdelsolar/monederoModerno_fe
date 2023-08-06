@@ -35,11 +35,11 @@ export class PrivateApiService {
       detail: error.message,
     };
     this.toastSvc.add(toastData);
-    if (error.status === 403) {
-      if (confirm('Recargar?')) {
-        window.location.reload();
-      }
-    }
+    // if (error.status === 403) {
+    //   if (confirm('Recargar?')) {
+    //     window.location.reload();
+    //   }
+    // }
 
     return throwError(error);
   };

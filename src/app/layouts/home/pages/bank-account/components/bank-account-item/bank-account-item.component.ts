@@ -22,19 +22,20 @@ export class BankAccountItemComponent implements OnInit {
       },
     },
     {
+      label: 'Ajustar Saldo',
+      icon: 'pi pi-fw pi-angle-double-up',
+      command: () => {
+        this.onAdjustClick();
+      },
+    },
+    {
       label: 'Eliminar',
       icon: 'pi pi-fw pi-trash',
       command: () => {
         this.onDeleteClick();
       },
     },
-    // {
-    //   label: 'Reajustar Saldo',
-    //   icon: 'pi pi-fw pi-wrench',
-    //   command: () => {
-    //     this.onAdjustClick();
-    //   },
-    // },
+
     // {
     //   label: 'Recalcular',
     //   icon: 'pi pi-fw pi-calculator',
@@ -60,6 +61,20 @@ export class BankAccountItemComponent implements OnInit {
       },
       params: {
         header: 'Editar billetera',
+        closable: true,
+      },
+    });
+  }
+
+  onAdjustClick() {
+    this.dialogSvc.show({
+      component: BankAccountFormComponent,
+      data: {
+        item: this.item,
+        adjust: true,
+      },
+      params: {
+        header: 'Ajustar saldo',
         closable: true,
       },
     });

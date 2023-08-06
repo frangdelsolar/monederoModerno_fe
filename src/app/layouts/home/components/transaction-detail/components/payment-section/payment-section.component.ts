@@ -103,8 +103,6 @@ export class PaymentSectionComponent implements OnInit {
       account: this.bankAccountControl.value?.id,
     };
 
-    console.log(data);
-
     if (this.editAmountSectionControl.value) {
       data.amount = parseFloat(this.newAmountControl.value);
       data.currency = this.newCurrencyControl.value.value;

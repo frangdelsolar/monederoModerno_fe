@@ -20,6 +20,7 @@ export class BankAccountFormComponent implements OnInit {
   processError = processFormControlErrors;
 
   editModeOn = false;
+  adjustModeOn = false;
   bankAccount: BankAccount;
 
   label = 'Detalle';
@@ -35,6 +36,9 @@ export class BankAccountFormComponent implements OnInit {
   currencyControl: FormControl = new FormControl(null, [Validators.required]);
   amountControl: FormControl = new FormControl(null, [Validators.required]);
 
+  saveBtnLabel = 'Guardar';
+  saveBtnAction = () => {};
+
   constructor(
     private bankSvc: BankAccountService,
     private fb: FormBuilder,
@@ -47,6 +51,7 @@ export class BankAccountFormComponent implements OnInit {
       currency: this.currencyControl,
       amount: this.amountControl,
     });
+    this.saveBtnAction = this.onSaveClick;
   }
 
   ngOnInit(): void {
@@ -56,15 +61,51 @@ export class BankAccountFormComponent implements OnInit {
 
         this.editModeOn = true;
         this.bankAccount = item;
+        this.saveBtnAction = this.onUpdateClick;
+        this.saveBtnLabel = 'Actualizar';
 
         if (item) {
           this.nameControl.setValue(item.name);
           this.descriptionControl.setValue(item.description);
-          this.currencyControl.setValue(item.currency);
-          this.amountControl.setValue(item.total);
+          this.currencyControl.setValue(item.total.currency);
+          this.amountControl.setValue(item.total.amount);
         }
       }
+      if (data.data.adjust) {
+        this.adjustModeOn = true;
+        this.labelForCurrencyControl = 'Nuevo saldo';
+        this.saveBtnAction = this.onAdjustClick;
+        this.saveBtnLabel = 'Ajustar';
+      }
     });
+  }
+
+  onAdjustClick() {
+    if (!this.bankAccount) return;
+    this.bankSvc
+      .updateAccountTotal(this.bankAccount.id, {
+        amount: this.amountControl.value,
+      })
+      .subscribe(
+        (res) => {
+          this.toastSvc.add({
+            severity: 'success',
+            summary: 'Cuenta bancaria actualizada',
+            detail: 'La cuenta bancaria se ha actualizado correctamente',
+          });
+          window.location.reload();
+        },
+        (err) => {
+          err.error.errors.map((error: any) => {
+            let fieldName = error.field;
+            this.form.controls[fieldName].setErrors({
+              serverError: error.message,
+            });
+            this.form.controls[fieldName].markAsDirty();
+            this.form.controls[fieldName].markAsTouched();
+          });
+        }
+      );
   }
 
   onUpdateClick() {
@@ -78,8 +119,8 @@ export class BankAccountFormComponent implements OnInit {
         (res) => {
           this.toastSvc.add({
             severity: 'success',
-            summary: 'Cuenta bancaria creada',
-            detail: 'La cuenta bancaria se ha creado correctamente',
+            summary: 'Cuenta bancaria actualizada',
+            detail: 'La cuenta bancaria se ha actualizado correctamente',
           });
           window.location.reload();
         },

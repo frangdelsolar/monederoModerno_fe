@@ -1,5 +1,5 @@
 <form class="flex flex-column gap-3" [formGroup]="form" id="bankForm">
-  <app-form-section [label]="label">
+  <app-form-section *ngIf="!adjustModeOn" [label]="label">
     <div class="flex flex-column gap-5 pt-3">
       <app-input-text
         [editOn]="true"
@@ -16,29 +16,32 @@
     </div>
   </app-form-section>
   <app-input-currency
-    *ngIf="!editModeOn"
+    *ngIf="!editModeOn && !adjustModeOn"
     [label]="labelForCurrencyControl"
     [editOn]="true"
     [currencyControl]="currencyControl"
     [amountControl]="amountControl"
     [showRateControl]="false"
   ></app-input-currency>
+  <span
+    *ngIf="adjustModeOn"
+    class="flex gap-3 align-items-center justify-content-between"
+  >
+    <strong>{{ currencyControl.value }}</strong>
+    <app-input-text
+      [editOn]="true"
+      [label]="'Total'"
+      [control]="amountControl"
+      [id]="'amount-input'"
+      [type]="'number'"
+    ></app-input-text>
+  </span>
   <button
     pButton
     pRipple
-    *ngIf="!editModeOn"
     class="p-button-primary"
-    label="Guardar"
+    [label]="saveBtnLabel"
     id="save-transaction-btn"
-    (click)="onSaveClick()"
-  ></button>
-  <button
-    pButton
-    pRipple
-    *ngIf="editModeOn"
-    class="p-button-primary"
-    label="Actualizar"
-    id="update-transaction-btn"
-    (click)="onUpdateClick()"
+    (click)="saveBtnAction()"
   ></button>
 </form>
