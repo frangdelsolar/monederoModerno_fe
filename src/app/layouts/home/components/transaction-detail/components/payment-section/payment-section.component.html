@@ -7,12 +7,6 @@
     [control]="editAmountSectionControl"
   ></app-input-switch>
 
-  <app-input-switch
-    *ngIf="editAmountSectionControl.value"
-    [label]="'Actualizar proximos vencimientos'"
-    [control]="updateAmountControl"
-  ></app-input-switch>
-
   <app-input-currency
     *ngIf="editAmountSectionControl.value"
     [editOn]="true"
@@ -22,6 +16,17 @@
     [rateControl]="newRateControl"
     [rateDateControl]="dueDateControl"
   ></app-input-currency>
+
+  <app-bank-account-dropdown
+    *ngIf="editAmountSectionControl.value"
+    [control]="bankAccountControl"
+  ></app-bank-account-dropdown>
+
+  <app-input-switch
+    *ngIf="editAmountSectionControl.value"
+    [label]="'Actualizar proximos vencimientos'"
+    [control]="updateAmountControl"
+  ></app-input-switch>
 
   <button
     pButton

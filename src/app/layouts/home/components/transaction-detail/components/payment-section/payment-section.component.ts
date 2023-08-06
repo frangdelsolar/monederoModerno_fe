@@ -33,6 +33,7 @@ export class PaymentSectionComponent implements OnInit {
   newRateControl: FormControl = new FormControl(null, []);
   updateAmountControl: FormControl = new FormControl(false, []);
   dueDateControl: FormControl = new FormControl(new Date(), []);
+  bankAccountControl: FormControl = new FormControl(null, []);
 
   pendingPayment: boolean = false;
   loading: boolean = false;
@@ -66,6 +67,7 @@ export class PaymentSectionComponent implements OnInit {
       if (this.transaction.frequency == FREQUENCIES.ONEOFF) {
         this.canUpdate = false;
       }
+      this.bankAccountControl.setValue(this.transaction.default_account);
     });
 
     this.editAmountSectionControl.valueChanges.subscribe((value) => {
@@ -98,8 +100,10 @@ export class PaymentSectionComponent implements OnInit {
       rate: this.newRateControl.value,
       due_date: this.transaction.due_date,
       update_amount: false,
-      account: 0,
+      account: this.bankAccountControl.value?.id,
     };
+
+    console.log(data);
 
     if (this.editAmountSectionControl.value) {
       data.amount = parseFloat(this.newAmountControl.value);

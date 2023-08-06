@@ -25,4 +25,5 @@ export interface Transaction {
   total_paid?: Currency;
   status?: string;
   tags?: any;
+  default_account?: any;
 }
