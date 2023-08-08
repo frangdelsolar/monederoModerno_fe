@@ -25,6 +25,13 @@ const routes: Routes = [
             (m) => m.BankAccountRoutingModule
           ),
       },
+      // {
+      //   path: 'objetivos',
+      //   loadChildren: () =>
+      //     import('./pages/budget-goal/budget-goal-routing.module').then(
+      //       (m) => m.BudgetGoalRoutingModule
+      //     ),
+      // },
     ],
   },
 ];

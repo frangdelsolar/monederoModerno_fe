@@ -17,6 +17,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
+import { InplaceModule } from 'primeng/inplace';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputSwitchModule } from 'primeng/inputswitch';
@@ -75,6 +76,7 @@ const pngModules = [
   FileUploadModule,
   FormsModule,
   ImageModule,
+  InplaceModule,
   InputSwitchModule,
   InputTextareaModule,
   InputTextModule,

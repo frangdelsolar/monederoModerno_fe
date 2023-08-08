@@ -1,0 +1,56 @@
+<form class="flex flex-column gap-3" [formGroup]="form" id="bankForm">
+  <app-form-section [label]="label">
+    <div class="flex flex-column gap-5 pt-3">
+      <app-input-text
+        [editOn]="true"
+        [label]="labelForNameControl"
+        [control]="nameControl"
+        [id]="'name-input'"
+      ></app-input-text>
+      <app-input-text
+        [editOn]="true"
+        [label]="labelForDescriptionControl"
+        [control]="descriptionControl"
+        [id]="'description-input'"
+      ></app-input-text>
+    </div>
+  </app-form-section>
+
+  <app-deduction-type-dropdown
+    [editOn]="true"
+    [id]="'transaction-type-dropdown'"
+    [label]="labelForTransactionTypeControl"
+    [control]="transactionTypeControl"
+  ></app-deduction-type-dropdown>
+
+  <app-service-dropdown
+    [editOn]="true"
+    [label]="labelForServiceControl"
+    [serviceType]="transactionTypeControl"
+    [serviceControl]="serviceControl"
+  ></app-service-dropdown>
+
+  <app-input-currency
+    [label]="labelForCurrencyControl"
+    [editOn]="true"
+    [currencyControl]="currencyControl"
+    [amountControl]="amountControl"
+    [showRateControl]="false"
+  ></app-input-currency>
+
+  <app-input-text
+    [editOn]="true"
+    [label]="'Porcentaje'"
+    [control]="amountControl"
+    [id]="'amount-input'"
+    [type]="'number'"
+  ></app-input-text>
+  <button
+    pButton
+    pRipple
+    class="p-button-primary"
+    [label]="saveBtnLabel"
+    id="save-transaction-btn"
+    (click)="saveBtnAction()"
+  ></button>
+</form>

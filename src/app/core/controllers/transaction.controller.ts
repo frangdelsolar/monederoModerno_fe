@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { PrivateApiService } from '@services/private-api.service';
 import { Transaction } from '../models/transaction.interface';
+import { Payment } from '../models/payment.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -48,5 +49,10 @@ export class TransactionService {
   public deletePayment(id: any) {
     const url = environment.apiUrl + `api/pay/${id}`;
     return this.privateSvc.delete(url, true);
+  }
+
+  public getPayments(params: any) {
+    const url = environment.apiUrl + `api/pay/`;
+    return this.privateSvc.get<Payment[]>(url, null, true, params);
   }
 }

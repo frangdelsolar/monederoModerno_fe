@@ -5,6 +5,7 @@ import { AppDialogService } from '@app/core/services/app-dialog.service';
 import { ToastService } from '@app/core/services/toast.service';
 import { ConfirmationService } from 'primeng/api';
 import { BankAccountFormComponent } from '../bank-account-form/bank-account-form.component';
+import { PaymentsTableComponent } from '../payments-table/payments-table.component';
 
 @Component({
   selector: 'app-bank-account-item',
@@ -13,7 +14,15 @@ import { BankAccountFormComponent } from '../bank-account-form/bank-account-form
 })
 export class BankAccountItemComponent implements OnInit {
   @Input() item: BankAccount;
+  @Input() showMenu = true;
   menuItems: any[] = [
+    {
+      label: 'Ver transacciones',
+      icon: 'pi pi-fw pi-eye',
+      command: () => {
+        this.onViewClick();
+      },
+    },
     {
       label: 'Editar',
       icon: 'pi pi-fw pi-pencil',
@@ -29,18 +38,17 @@ export class BankAccountItemComponent implements OnInit {
       },
     },
     {
-      label: 'Eliminar',
-      icon: 'pi pi-fw pi-trash',
-      command: () => {
-        this.onDeleteClick();
-      },
-    },
-
-    {
       label: 'Recalcular',
       icon: 'pi pi-fw pi-sync',
       command: () => {
         this.onCalculateClick();
+      },
+    },
+    {
+      label: 'Eliminar',
+      icon: 'pi pi-fw pi-trash',
+      command: () => {
+        this.onDeleteClick();
       },
     },
   ];
@@ -52,6 +60,20 @@ export class BankAccountItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  onViewClick() {
+    this.dialogSvc.show({
+      component: PaymentsTableComponent,
+      data: {
+        item: this.item,
+      },
+      params: {
+        header: 'Ver Pagos',
+        closable: true,
+        maximizable: true,
+      },
+    });
+  }
 
   onEditClick() {
     this.dialogSvc.show({

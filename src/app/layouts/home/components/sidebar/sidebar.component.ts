@@ -54,14 +54,14 @@ export class SidebarComponent implements OnInit {
         //         this.sidebarSvc.closeSidebar();
         //       },
         //     },
-        //     {
-        //       label: 'Presupuestos',
-        //       icon: 'pi pi-book',
-        //       command: (event: any) => {
-        //         this.router.navigate(['presupuestos']);
-        //         this.sidebarSvc.closeSidebar();
-        //       },
-        //     },
+        // {
+        //   label: 'Objetivos',
+        //   icon: 'pi pi-percentage',
+        //   command: (event: any) => {
+        //     this.router.navigate(['objetivos']);
+        //     this.sidebarSvc.closeSidebar();
+        //   },
+        // },
       ],
     },
   ];

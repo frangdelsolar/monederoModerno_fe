@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AuthService } from './auth.service';
 import { ToastService } from './toast.service';
 
 @Injectable({
@@ -35,11 +34,11 @@ export class PrivateApiService {
       detail: error.message,
     };
     this.toastSvc.add(toastData);
-    // if (error.status === 403) {
-    //   if (confirm('Recargar?')) {
-    //     window.location.reload();
-    //   }
-    // }
+    if (error.status === 403) {
+      //   if (confirm('Recargar?')) {
+      //     window.location.reload();
+      //   }
+    }
 
     return throwError(error);
   };
@@ -47,10 +46,19 @@ export class PrivateApiService {
   public get<T>(
     url: string,
     id: number | null,
-    activateHeader: boolean = false
+    activateHeader: boolean = false,
+    params: any = null
   ): Observable<T> {
     if (id != null) {
       url += `${id}/`;
+    }
+    if (params) {
+      url += '?';
+      for (const key in params) {
+        if (params.hasOwnProperty(key)) {
+          url += `${key}=${params[key]}&`;
+        }
+      }
     }
     return this.http
       .get<T>(url, activateHeader ? { headers: this._headers } : {})

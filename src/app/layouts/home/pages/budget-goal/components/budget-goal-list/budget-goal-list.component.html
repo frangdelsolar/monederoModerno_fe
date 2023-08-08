@@ -1,0 +1,11 @@
+<app-card [title]="'Objetivos'">
+  <div class="flex flex-column gap-3">
+    <app-card-menu [items]="menuItems"></app-card-menu>
+    <div class="flex flex-column justify-content-center">
+      <app-budget-goal-item
+        *ngFor="let item of items"
+        [item]="item"
+      ></app-budget-goal-item>
+    </div>
+  </div>
+</app-card>

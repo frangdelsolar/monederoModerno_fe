@@ -12,13 +12,26 @@ export class BankAccountDropdownComponent implements OnInit {
   @Input() label: string = 'Medio de Pago';
   @Input() control: FormControl = new FormControl(null, []);
 
+  accounts: any[] = [];
   items: any[] = [];
 
   constructor(private bankSvc: BankAccountService) {}
 
   ngOnInit(): void {
     this.bankSvc.getAll().subscribe((res: any) => {
-      this.items = res.accounts;
+      this.accounts = res.accounts;
+
+      this.items = this.accounts.map((item) => {
+        return {
+          id: item.id,
+          name:
+            item.name +
+            ' - ' +
+            item.total.currency +
+            ' $' +
+            item.total.amount.toFixed(2),
+        };
+      });
     });
   }
 }
