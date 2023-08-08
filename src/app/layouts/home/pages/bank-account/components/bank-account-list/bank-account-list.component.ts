@@ -68,6 +68,7 @@ export class BankAccountListComponent implements OnInit {
       params: {
         header: 'Nueva billetera',
         closable: true,
+        maximizable: true,
       },
     });
   }

@@ -9,7 +9,7 @@ import { TRANSACTION_TYPE_ITEMS } from '@app/core/enums/transaction_type.enum';
 })
 export class DeductionTypeDropdownComponent implements OnInit {
   @Input() editOn: boolean = false;
-  @Input() label: string = 'Label';
+  @Input() label: string = 'Tipo de Transacción';
   @Input() control: FormControl = new FormControl<Date | null>(null, []);
 
   items = TRANSACTION_TYPE_ITEMS;

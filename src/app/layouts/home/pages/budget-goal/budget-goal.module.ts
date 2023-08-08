@@ -5,10 +5,17 @@ import { BudgetGoalListComponent } from './components/budget-goal-list/budget-go
 import { SharedModule } from '@app/shared/shared.module';
 import { BudgetGoalItemComponent } from './components/budget-goal-item/budget-goal-item.component';
 import { BudgetGoalFormComponent } from './components/budget-goal-form/budget-goal-form.component';
+import { BudgetGoalWidgetComponent } from './components/budget-goal-widget/budget-goal-widget.component';
 
 @NgModule({
-  declarations: [BudgetGoalComponent, BudgetGoalListComponent, BudgetGoalItemComponent, BudgetGoalFormComponent],
+  declarations: [
+    BudgetGoalComponent,
+    BudgetGoalListComponent,
+    BudgetGoalItemComponent,
+    BudgetGoalFormComponent,
+    BudgetGoalWidgetComponent,
+  ],
   imports: [CommonModule, SharedModule],
-  exports: [SharedModule],
+  exports: [SharedModule, BudgetGoalWidgetComponent],
 })
 export class BudgetGoalModule {}

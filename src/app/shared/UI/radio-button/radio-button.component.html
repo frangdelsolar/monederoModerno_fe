@@ -1,0 +1,13 @@
+<div *ngFor="let item of items" class="field-checkbox">
+  <p-radioButton
+    [inputId]="item.value"
+    [value]="item"
+    [formControl]="itemControl"
+  ></p-radioButton>
+  <label [for]="item.value" class="ml-2">{{ item.name }}</label>
+</div>
+<div class="mx-1" *ngFor="let item of itemControl.errors | keyvalue">
+  <small *ngIf="item.key == 'serverError'" id="input-help" class="p-error">{{
+    item.value
+  }}</small>
+</div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BudgetGoalService } from '@app/core/controllers/budget-goal-controller.service';
+import { AppDialogService } from '@app/core/services/app-dialog.service';
 import { MenuItem } from 'primeng/api';
+import { BudgetGoalFormComponent } from '../budget-goal-form/budget-goal-form.component';
 
 @Component({
   selector: 'app-budget-goal-list',
@@ -18,7 +20,10 @@ export class BudgetGoalListComponent implements OnInit {
       },
     },
   ];
-  constructor(private goalSvc: BudgetGoalService) {}
+  constructor(
+    private goalSvc: BudgetGoalService,
+    private dialogSvc: AppDialogService
+  ) {}
 
   ngOnInit(): void {
     this.goalSvc.getAll().subscribe((res) => {
@@ -26,5 +31,15 @@ export class BudgetGoalListComponent implements OnInit {
     });
   }
 
-  onNewGoalClick() {}
+  onNewGoalClick() {
+    this.dialogSvc.show({
+      component: BudgetGoalFormComponent,
+      data: {},
+      params: {
+        header: 'Nuevo presupuesto',
+        closable: true,
+        maximizable: true,
+      },
+    });
+  }
 }

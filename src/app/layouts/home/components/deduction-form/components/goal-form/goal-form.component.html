@@ -2,19 +2,11 @@
 <div
   class="border-solid border-200 border-round-lg px-3 pt-5 pb-3 surface-ground w-auto"
 >
-  <div *ngFor="let item of goalType" class="field-checkbox">
-    <p-radioButton
-      [inputId]="item.value"
-      [value]="item"
-      [formControl]="goalTypeControl"
-    ></p-radioButton>
-    <label [for]="item.value" class="ml-2">{{ item.name }}</label>
-  </div>
-  <div class="mx-1" *ngFor="let item of goalTypeControl.errors | keyvalue">
-    <small *ngIf="item.key == 'serverError'" id="input-help" class="p-error">{{
-      item.value
-    }}</small>
-  </div>
+  <app-radio-button
+    [items]="goalType"
+    [itemControl]="goalTypeControl"
+  ></app-radio-button>
+
   <div
     *ngIf="showAmountControl || showRepetitionsControl || showDateControl"
     class="pt-3"

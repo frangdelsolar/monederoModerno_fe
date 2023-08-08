@@ -1,1 +1,51 @@
-<p>{{ item.name }}</p>
+<div
+  class="flex flex-row justify-content-between align-items-center"
+  [ngClass]="{
+    'hover-green': item.transaction_type === 'INCOME',
+    'hover-red': item.transaction_type === 'EXPENSE'
+  }"
+>
+  <div class="col-4 flex flex-column align-items-start justify-content-left">
+    <p class="my-0 py-0 text-sm">Categoría</p>
+    <p class="my-0 py-0 font-bold">{{ item.service_category.name }}</p>
+  </div>
+  <div class="col-4 flex flex-column align-items-start justify-content-left">
+    <p class="my-0 py-0 text-sm">
+      {{ item.effective_from | date : "dd/MM/yy" }}
+    </p>
+    <p class="my-0 py-0 text-sm">{{ item.effective_to | date : "dd/MM/yy" }}</p>
+  </div>
+  <div
+    *ngIf="item.currency"
+    class="col-3 flex flex-column align-items-end justify-content-left"
+  >
+    <p class="my-0 py-0 text-sm">Total</p>
+    <p class="my-0 py-0 font-bold">
+      {{
+        item.currency.amount.toLocaleString("es-AR", {
+          style: "currency",
+          currency: item.currency.currency,
+          minimumFractionDigits: 2
+        })
+      }}
+    </p>
+  </div>
+  <div
+    *ngIf="item.percentage"
+    class="col-3 flex flex-column align-items-end justify-content-left"
+  >
+    <p class="my-0 py-0 text-sm">Porcentaje</p>
+    <p class="my-0 py-0 font-bold">{{ item.percentage }}%</p>
+  </div>
+  <div *ngIf="showMenu">
+    <p-menu #menu [model]="menuItems" [popup]="true"></p-menu>
+
+    <p-button
+      icon="pi pi-ellipsis-v"
+      (click)="menu.toggle($event)"
+      styleClass="p-button-rounded p-button-text"
+    ></p-button>
+  </div>
+</div>
+
+<p-divider></p-divider>

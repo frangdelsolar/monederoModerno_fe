@@ -58,6 +58,7 @@ import { TagDisplayComponent } from './tag-display/tag-display.component';
 import { ToastComponent } from './toast/toast.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { CardMenuComponent } from './card-menu/card-menu.component';
+import { RadioButtonComponent } from './radio-button/radio-button.component';
 
 const pngModules = [
   AutoCompleteModule,
@@ -116,6 +117,7 @@ const uiComponents = [
   InputSwitchComponent,
   InputTextCustomComponent,
   MonthPickerComponent,
+  RadioButtonComponent,
   TabMenuComponent,
   TagComponent,
   TagDisplayComponent,

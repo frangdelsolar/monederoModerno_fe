@@ -17,27 +17,25 @@ export class BudgetGoalFormComponent implements OnInit {
   processError = processFormControlErrors;
 
   editModeOn = true;
-  bankAccount: any;
-
-  label = 'Detalle';
-  labelForNameControl = 'Nombre';
-  labelForDescriptionControl = 'Descripción';
-  labelForCurrencyControl = 'Objetivo';
-
-  labelForTransactionTypeControl: string = 'Tipo de transacción';
-  transactionTypeControl: FormControl = new FormControl(null, []);
-
-  showServiceControl: boolean = false;
-  labelForServiceControl: string = 'Categoría';
-  serviceControl: FormControl = new FormControl(null, []);
+  goalType = [
+    { value: 'PERCENTAGE', name: 'Porcentaje' },
+    { value: 'AMOUNT', name: 'Monto' },
+  ];
 
   form: FormGroup;
-  nameControl: FormControl = new FormControl(null, [Validators.required]);
-  descriptionControl: FormControl = new FormControl(null, [
+  effectiveFromControl: FormControl = new FormControl(null, [
     Validators.required,
   ]);
+  effectiveToControl: FormControl = new FormControl(null, []);
+  deductionTypeControl: FormControl = new FormControl(null, [
+    Validators.required,
+  ]);
+  serviceControl: FormControl = new FormControl(null, [Validators.required]);
+  goalTypeControl: FormControl = new FormControl(null, [Validators.required]);
+  percentageControl: FormControl = new FormControl(null, []);
+  amountControl: FormControl = new FormControl(null, []);
   currencyControl: FormControl = new FormControl(null, [Validators.required]);
-  amountControl: FormControl = new FormControl(null, [Validators.required]);
+  rateControl: FormControl = new FormControl(null, []);
 
   saveBtnLabel = 'Guardar';
   saveBtnAction = () => {};
@@ -47,10 +45,15 @@ export class BudgetGoalFormComponent implements OnInit {
     private budgetGoalService: BudgetGoalService
   ) {
     this.form = this.fb.group({
-      name: this.nameControl,
-      description: this.descriptionControl,
-      currency: this.currencyControl,
+      effective_from: this.effectiveFromControl,
+      effective_to: this.effectiveToControl,
+      goal_type: this.goalTypeControl,
+      transaction_type: this.deductionTypeControl,
+      service_category: this.serviceControl,
+      percentage: this.percentageControl,
       amount: this.amountControl,
+      currency: this.currencyControl,
+      rate: this.rateControl,
     });
   }
 
@@ -58,5 +61,24 @@ export class BudgetGoalFormComponent implements OnInit {
     this.saveBtnAction = this.onSave;
   }
 
-  onSave() {}
+  onSave() {
+    let data = this.form.value;
+    data.goal_type = data.goal_type?.value;
+    data.transaction_type = data.transaction_type?.value;
+    data.currency = data.currency?.value;
+    data.service_category = data.service_category?.id;
+    this.budgetGoalService.create(data).subscribe(
+      (res) => {
+        window.location.reload();
+      },
+      (err) => {
+        err.error.errors.forEach((error: any) => {
+          let control = this.form.get(error.field);
+          control?.setErrors({ serverError: error.message });
+          control?.markAsDirty();
+          control?.markAsTouched();
+        });
+      }
+    );
+  }
 }

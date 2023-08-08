@@ -11,7 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ServiceDropdownComponent implements OnInit {
   @Input() editOn: boolean = false;
-  @Input() label: string = 'Label';
+  @Input() label: string = 'Categoría';
   @Input() serviceControl: FormControl = new FormControl(null, []);
   @Input() serviceType: FormControl = new FormControl(null, []);
 
