@@ -1,0 +1,33 @@
+<div class="flex flex-column gap-0 mt-0 pt-0">
+  <h4 class="mb-0 pb-0">{{ item.service_category.name }}</h4>
+  <p class="mt-0 pt-0 mb-3" *ngIf="item.goal_type == 'AMOUNT'">
+    Gastar
+    <strong>{{
+      item.currency.amount.toLocaleString("es-AR", {
+        style: "currency",
+        currency: item.currency.currency,
+        minimumFractionDigits: 2
+      })
+    }}</strong>
+
+    de tus ingresos mensuales en
+    <strong>{{ item.service_category.name }}</strong
+    >.
+  </p>
+  <p class="mt-0 pt-0 mb-3" *ngIf="item.goal_type == 'PERCENTAGE'">
+    Gastar
+    <strong>{{ item.percentage }}%</strong>
+    de tus ingresos mensuales en
+    <strong>{{ item.service_category.name }}</strong
+    >.
+  </p>
+  <p-progressBar
+    [value]="item.stats.percentage"
+    [style]="{ height: '6px' }"
+    [showValue]="false"
+  ></p-progressBar>
+  <div class="mt-1 text-sm">
+    Completado en un <strong>{{ item.stats.percentage.toFixed(2) }}%</strong>
+  </div>
+</div>
+<p-divider></p-divider>

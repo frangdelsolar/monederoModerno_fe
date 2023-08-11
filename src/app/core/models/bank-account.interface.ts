@@ -8,4 +8,5 @@ export interface BankAccount {
   bank: string;
   total: Currency;
   order: number;
+  default_currency: string;
 }

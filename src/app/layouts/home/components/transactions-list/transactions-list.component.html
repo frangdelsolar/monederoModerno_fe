@@ -1,17 +1,5 @@
 <div class="flex flex-column gap-3">
-  <app-card>
-    <div class="flex flex-row justify-content-center align-items-center gap-3">
-      <app-month-picker
-        [label]="'Selecciona un mes'"
-        [control]="dateControl"
-      ></app-month-picker>
-      <i
-        *ngIf="loading.value"
-        class="pi pi-spin pi-sync"
-        style="font-size: 2rem"
-      ></i>
-    </div>
-  </app-card>
+  <app-month-selector></app-month-selector>
 
   <app-bank-account-widget></app-bank-account-widget>
   <app-budget-goal-widget></app-budget-goal-widget>

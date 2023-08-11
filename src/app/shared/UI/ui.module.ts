@@ -27,6 +27,7 @@ import { MenuModule } from 'primeng/menu';
 import { MessagesModule } from 'primeng/messages';
 import { PanelModule } from 'primeng/panel';
 import { PasswordModule } from 'primeng/password';
+import { ProgressBarModule } from 'primeng/progressbar';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { RippleModule } from 'primeng/ripple';
 import { SidebarModule } from 'primeng/sidebar';
@@ -87,6 +88,7 @@ const pngModules = [
   MessagesModule,
   PanelModule,
   PasswordModule,
+  ProgressBarModule,
   RadioButtonModule,
   ReactiveFormsModule,
   RippleModule,

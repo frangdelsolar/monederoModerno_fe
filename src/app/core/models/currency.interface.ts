@@ -5,4 +5,7 @@ export interface Currency {
   rate: number;
   converted_amount: number;
   converted_currency: string;
+  ars: number;
+  usd: number;
+  ars_usd: number;
 }

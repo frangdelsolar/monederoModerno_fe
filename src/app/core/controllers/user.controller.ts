@@ -17,6 +17,6 @@ export class UserService {
   }
 
   public validateUser(user: any) {
-    return this.adminSvc.post<any>(this.validateUserApiUrl, user, false);
+    return this.adminSvc.post<any>(this.validateUserApiUrl, user, true);
   }
 }

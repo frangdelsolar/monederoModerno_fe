@@ -15,6 +15,7 @@ export const environment = {
   apiUrlBalance: '',
   apiUrlBankAccount: '',
   apiBudgetGoal: '',
+  apiBudgetGoalStats: '',
   apiExchangeRate: '',
   apiImage: '',
   apiProduct: '',

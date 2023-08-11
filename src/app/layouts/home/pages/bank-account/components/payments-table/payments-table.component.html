@@ -50,18 +50,31 @@
       </td>
       <td>
         <span class="flex flex-column gap-0">
-          <span class="text-xs"
-            >US$1 = ${{ payment.currency.exchange_rate }}</span
+          <span class="text-xs">US$1 = ${{ payment.currency.ars_usd }}</span>
+          <span
+            *ngIf="payment.currency.currency == 'USD'"
+            class="font-semibold"
           >
-          <span class="font-semibold">
             {{
-              payment.currency.converted_amount.toLocaleString("es-AR", {
+              payment.currency.ars.toLocaleString("es-AR", {
                 style: "currency",
-                currency: payment.currency.converted_currency,
+                currency: "ARS",
                 minimumFractionDigits: 2
               })
-            }}
-          </span>
+            }}</span
+          >
+          <span
+            *ngIf="payment.currency.currency == 'ARS'"
+            class="font-semibold"
+          >
+            {{
+              payment.currency.usd.toLocaleString("es-AR", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 2
+              })
+            }}</span
+          >
         </span>
       </td>
     </tr>

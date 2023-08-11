@@ -19,13 +19,7 @@
         >
           <p class="my-0 py-0 font-bold">Total</p>
           <p class="my-0 py-0 text-sm">
-            {{
-              item.total.amount.toLocaleString("es-AR", {
-                style: "currency",
-                currency: item.total.currency,
-                minimumFractionDigits: 2
-              })
-            }}
+            {{ item.total.currency }} ${{ item.total.amount }}
           </p>
         </div>
       </div>

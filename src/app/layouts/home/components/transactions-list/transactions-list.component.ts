@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TransactionService } from '@app/core/controllers/transaction.controller';
 import { Currency } from '@app/core/models/currency.interface';
+import { MonthSelectorService } from '@app/core/services/month-selector.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -10,14 +11,16 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./transactions-list.component.scss'],
 })
 export class TransactionsListComponent implements OnInit {
-  dateControl: FormControl = new FormControl<Date>(new Date(), []);
   transactions: any[] = [];
   month: string;
   year: string;
   chartData: BehaviorSubject<any> = new BehaviorSubject(null);
   loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private transactionSvc: TransactionService) {}
+  constructor(
+    private transactionSvc: TransactionService,
+    private monthSelectorSvc: MonthSelectorService
+  ) {}
 
   ngOnInit(): void {
     const date = new Date();
@@ -25,7 +28,7 @@ export class TransactionsListComponent implements OnInit {
     const year = date.getFullYear();
     this.loadData(month, year);
 
-    this.dateControl.valueChanges.subscribe((value) => {
+    this.monthSelectorSvc.dateControl.valueChanges.subscribe((value) => {
       const date = new Date(value);
       const month = date.getMonth() + 1;
       const year = date.getFullYear();

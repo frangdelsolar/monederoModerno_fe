@@ -11,6 +11,7 @@ import { TotalsDetailsComponent } from './components/transactions-list/component
 import { TransactionWrapperComponent } from './components/transaction-wrapper/transaction-wrapper.component';
 import { BankAccountModule } from './pages/bank-account/bank-account.module';
 import { BudgetGoalModule } from './pages/budget-goal/budget-goal.module';
+import { MonthSelectorComponent } from './components/month-selector/month-selector.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { BudgetGoalModule } from './pages/budget-goal/budget-goal.module';
     TransactionItemComponent,
     TotalsDetailsComponent,
     TransactionWrapperComponent,
+    MonthSelectorComponent,
   ],
   imports: [
     CommonModule,

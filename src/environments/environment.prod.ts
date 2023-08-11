@@ -15,6 +15,7 @@ export const environment = {
   apiUrlBalance: 'api/balance/',
   apiUrlBankAccount: 'api/bank-account/',
   apiBudgetGoal: 'api/budget-goal/',
+  apiBudgetGoalStats: 'api/goal-stats/',
   apiExchangeRate: 'api/currency/exchange/',
   apiImage: 'api/images/',
   apiProduct: 'api/service-products/',

@@ -7,6 +7,7 @@ import { PrivateApiService } from '../services/private-api.service';
 })
 export class BudgetGoalService {
   _apiUrl = environment.apiUrl + environment.apiBudgetGoal;
+  _statsUrl = environment.apiUrl + environment.apiBudgetGoalStats;
 
   constructor(private adminSvc: PrivateApiService) {}
 
@@ -30,5 +31,14 @@ export class BudgetGoalService {
   public delete(id: number) {
     let url = this._apiUrl + id + '/';
     return this.adminSvc.delete<any>(url, true);
+  }
+
+  public getStatsById(id: number) {
+    let url = this._statsUrl + id + '/';
+    return this.adminSvc.get<any>(url, null, true);
+  }
+
+  public getStats(params: any) {
+    return this.adminSvc.get<any>(this._statsUrl, null, true, params);
   }
 }
