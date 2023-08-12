@@ -25,6 +25,7 @@ import { KnobModule } from 'primeng/knob';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuModule } from 'primeng/menu';
 import { MessagesModule } from 'primeng/messages';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { PanelModule } from 'primeng/panel';
 import { PasswordModule } from 'primeng/password';
 import { ProgressBarModule } from 'primeng/progressbar';
@@ -86,6 +87,7 @@ const pngModules = [
   MenubarModule,
   MenuModule,
   MessagesModule,
+  OverlayPanelModule,
   PanelModule,
   PasswordModule,
   ProgressBarModule,

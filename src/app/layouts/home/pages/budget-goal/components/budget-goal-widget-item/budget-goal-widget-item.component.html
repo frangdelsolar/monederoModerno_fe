@@ -26,8 +26,124 @@
     [style]="{ height: '6px' }"
     [showValue]="false"
   ></p-progressBar>
-  <div class="mt-1 text-sm">
-    Completado en un <strong>{{ item.stats.percentage.toFixed(2) }}%</strong>
+  <div class="flex flex-row justify-content-between align-items-center">
+    <div class="flex flex-column">
+      <div class="mt-1 text-sm">
+        Completado en un
+        <strong>{{ item.stats.percentage.toFixed(2) }}%</strong>.
+      </div>
+      <div class="mt-1 text-sm">
+        Has ejecutado
+        <strong>{{
+          item.stats.completed.amount.toLocaleString("es-AR", {
+            style: "currency",
+            currency: item.stats.completed.currency,
+            minimumFractionDigits: 2
+          })
+        }}</strong>
+        de los
+        <strong>{{
+          item.stats.target.amount.toLocaleString("es-AR", {
+            style: "currency",
+            currency: item.stats.target.currency,
+            minimumFractionDigits: 2
+          })
+        }}</strong>
+        que tenias presupuestados.
+      </div>
+    </div>
+    <div class="flex flex-column align-items-end">
+      <p-overlayPanel #op>
+        <p-table
+          [value]="item.stats.payments"
+          [paginator]="false"
+          [rows]="5"
+          [rowsPerPageOptions]="[5, 10, 25, 50]"
+          [styleClass]="'p-datatable-sm p-datatable-striped'"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Transacción</th>
+              <th>Pago</th>
+              <th>Conversión</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-payment>
+            <tr>
+              <td>
+                <span class="flex flex-column gap-0">
+                  <span class="text-xs">{{
+                    payment.transaction.service_provider
+                  }}</span>
+                  <span class="font-semibold">
+                    {{ payment.transaction.service }}
+                  </span>
+                </span>
+              </td>
+              <td>
+                <span class="flex flex-column gap-0">
+                  <span class="text-xs">{{
+                    payment.transaction_date | date : "dd/MM/yy"
+                  }}</span>
+                  <span
+                    class="font-semibold"
+                    [ngClass]="
+                      payment.transaction.transaction_type == 'EXPENSE'
+                        ? 'text-red-400'
+                        : 'text-green-400'
+                    "
+                  >
+                    {{
+                      payment.currency.amount.toLocaleString("es-AR", {
+                        style: "currency",
+                        currency: payment.currency.currency,
+                        minimumFractionDigits: 2
+                      })
+                    }}
+                  </span>
+                </span>
+              </td>
+              <td>
+                <span class="flex flex-column gap-0">
+                  <span class="text-xs"
+                    >US$1 = ${{ payment.currency.ars_usd }}</span
+                  >
+                  <span
+                    *ngIf="payment.currency.currency == 'USD'"
+                    class="font-semibold"
+                  >
+                    {{
+                      payment.currency.ars.toLocaleString("es-AR", {
+                        style: "currency",
+                        currency: "ARS",
+                        minimumFractionDigits: 2
+                      })
+                    }}</span
+                  >
+                  <span
+                    *ngIf="payment.currency.currency == 'ARS'"
+                    class="font-semibold"
+                  >
+                    {{
+                      payment.currency.usd.toLocaleString("es-AR", {
+                        style: "currency",
+                        currency: "USD",
+                        minimumFractionDigits: 2
+                      })
+                    }}</span
+                  >
+                </span>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-overlayPanel>
+      <p-button
+        icon="pi pi-eye"
+        styleClass="p-button-rounded p-button-info p-button-text"
+        (click)="op.toggle($event)"
+      ></p-button>
+    </div>
   </div>
 </div>
 <p-divider></p-divider>

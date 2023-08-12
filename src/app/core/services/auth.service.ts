@@ -47,9 +47,9 @@ export class AuthService {
         this.login(user, false, 'checkFirebaseAuthState').subscribe(
           (loggedIn) => {
             this.loading.next(false);
-            //     if (loggedIn) {
-            //       this.router.navigate(['']);
-            //     }
+            if (loggedIn) {
+              this.router.navigate(['']);
+            }
           }
         );
       } else {
