@@ -35,7 +35,7 @@ export class PrivateApiService {
     };
     this.toastSvc.add(toastData);
     if (error.status === 403) {
-      this.router.navigate(['auth/login']);
+      this.router.navigateByUrl('auth/logout');
     }
 
     return throwError(error);
