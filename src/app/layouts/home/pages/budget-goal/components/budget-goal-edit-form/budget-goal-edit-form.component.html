@@ -1,0 +1,58 @@
+<div class="flex flex-column gap-3">
+  <p-messages severity="info">
+    <ng-template pTemplate>
+      <i class="pi pi-info-circle"></i>
+      <div class="ml-4">
+        Los objetivos sólo pueden modificar su fecha de finalización.
+      </div>
+    </ng-template>
+  </p-messages>
+
+  <p class="mt-0 pt-0 mb-3 text-xl" *ngIf="item.goal_type == 'AMOUNT'">
+    Ejecutar
+    <strong>{{
+      item.currency.amount.toLocaleString("es-AR", {
+        style: "currency",
+        currency: item.currency.currency,
+        minimumFractionDigits: 2
+      })
+    }}</strong>
+
+    en
+    <strong>{{ item.service_category.name }}</strong
+    >.
+  </p>
+  <p class="mt-0 pt-0 mb-3 text-xl" *ngIf="item.goal_type == 'PERCENTAGE'">
+    Ejecutar
+    <strong>{{ item.percentage }}%</strong>
+    en
+    <strong>{{ item.service_category.name }}</strong
+    >.
+  </p>
+
+  <app-form-section [label]="'Periodo de validez'">
+    <div class="flex flex-column gap-4">
+      <app-datepicker
+        [id]="'transaction-datepicker'"
+        [editOn]="false"
+        [label]="'Fecha de inicio'"
+        [control]="effectiveFromControl"
+      ></app-datepicker>
+      <app-datepicker
+        [id]="'transaction-datepicker'"
+        [editOn]="true"
+        [label]="'Fecha de finalización'"
+        [control]="effectiveToControl"
+      ></app-datepicker>
+    </div>
+  </app-form-section>
+
+  <button
+    pButton
+    pRipple
+    class="p-button-primary"
+    [label]="'Actualizar'"
+    id="save-transaction-btn"
+    (click)="onSave()"
+  ></button>
+</div>

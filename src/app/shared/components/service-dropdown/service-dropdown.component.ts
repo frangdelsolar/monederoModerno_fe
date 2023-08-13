@@ -21,6 +21,8 @@ export class ServiceDropdownComponent implements OnInit {
   labelForNewServiceControl: string = 'Nueva categoría';
   newServiceControl: FormControl = new FormControl(null, []);
 
+  @Input() addNewSetting = true;
+
   items: any[] = [];
 
   loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);

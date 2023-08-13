@@ -19,7 +19,7 @@ export class LoginFormComponent implements OnInit {
   form!: FormGroup;
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
-  showGoogleLoginButton: boolean = false;
+  showGoogleLoginButton: boolean = true;
   constructor(
     private fb: FormBuilder,
     private authSvc: AuthService,
@@ -34,11 +34,11 @@ export class LoginFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.deviceSvc.getDeviceInfo().then((res) => {
-      if (res.platform == 'web') {
-        this.showGoogleLoginButton = true;
-      }
-    });
+    // this.deviceSvc.getDeviceInfo().then((res) => {
+    //   if (res.platform == 'web') {
+    //     this.showGoogleLoginButton = true;
+    //   }
+    // });
   }
 
   onLogin() {

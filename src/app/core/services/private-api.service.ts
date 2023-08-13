@@ -35,9 +35,7 @@ export class PrivateApiService {
     };
     this.toastSvc.add(toastData);
     if (error.status === 403) {
-      //   if (confirm('Recargar?')) {
-      //     window.location.reload();
-      //   }
+      this.router.navigate(['auth/login']);
     }
 
     return throwError(error);

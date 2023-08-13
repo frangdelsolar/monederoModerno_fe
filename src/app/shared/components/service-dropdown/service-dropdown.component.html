@@ -18,7 +18,7 @@
       ></i>
 
       <p-button
-        *ngIf="!loading.value"
+        *ngIf="!loading.value && addNewSetting"
         [icon]="addNewIcon"
         styleClass="p-button-rounded p-button-text"
         (onClick)="onAddNewClick()"

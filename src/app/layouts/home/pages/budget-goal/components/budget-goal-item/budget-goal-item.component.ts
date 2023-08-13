@@ -3,7 +3,7 @@ import { BudgetGoalService } from '@app/core/controllers/budget-goal-controller.
 import { AppDialogService } from '@app/core/services/app-dialog.service';
 import { ToastService } from '@app/core/services/toast.service';
 import { ConfirmationService } from 'primeng/api';
-import { BudgetGoalFormComponent } from '../budget-goal-form/budget-goal-form.component';
+import { BudgetGoalEditFormComponent } from '../budget-goal-edit-form/budget-goal-edit-form.component';
 
 @Component({
   selector: 'app-budget-goal-item',
@@ -41,12 +41,12 @@ export class BudgetGoalItemComponent implements OnInit {
 
   onEditClick() {
     this.dialogSvc.show({
-      component: BudgetGoalFormComponent,
+      component: BudgetGoalEditFormComponent,
       data: {
         item: this.item,
       },
       params: {
-        header: 'Editar billetera',
+        header: 'Editar Objetivo',
         closable: true,
       },
     });
@@ -54,15 +54,15 @@ export class BudgetGoalItemComponent implements OnInit {
 
   onDeleteClick() {
     this.confirmationService.confirm({
-      header: 'Eliminar Presupuesto',
+      header: 'Eliminar Objetivo',
       message: '¿Está seguro que desea continuar?',
       accept: () => {
         this.goalSvc.delete(this.item.id).subscribe(
           (res) => {
             this.toastSvc.add({
               severity: 'success',
-              summary: 'Presupuesto eliminado',
-              detail: 'El presupuesto se eliminó correctamente',
+              summary: 'Objetivo eliminado',
+              detail: 'El objetivo se eliminó correctamente',
             });
             window.location.reload();
           },

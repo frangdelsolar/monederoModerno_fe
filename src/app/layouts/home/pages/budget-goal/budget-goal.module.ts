@@ -7,6 +7,7 @@ import { BudgetGoalItemComponent } from './components/budget-goal-item/budget-go
 import { BudgetGoalFormComponent } from './components/budget-goal-form/budget-goal-form.component';
 import { BudgetGoalWidgetComponent } from './components/budget-goal-widget/budget-goal-widget.component';
 import { BudgetGoalWidgetItemComponent } from './components/budget-goal-widget-item/budget-goal-widget-item.component';
+import { BudgetGoalEditFormComponent } from './components/budget-goal-edit-form/budget-goal-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { BudgetGoalWidgetItemComponent } from './components/budget-goal-widget-i
     BudgetGoalFormComponent,
     BudgetGoalWidgetComponent,
     BudgetGoalWidgetItemComponent,
+    BudgetGoalEditFormComponent,
   ],
   imports: [CommonModule, SharedModule],
   exports: [SharedModule, BudgetGoalWidgetComponent],

@@ -1,7 +1,6 @@
 <div class="flex flex-column gap-0 mt-0 pt-0">
-  <h4 class="mb-0 pb-0">{{ item.service_category.name }}</h4>
   <p class="mt-0 pt-0 mb-3" *ngIf="item.goal_type == 'AMOUNT'">
-    Gastar
+    Ejecutar
     <strong>{{
       item.currency.amount.toLocaleString("es-AR", {
         style: "currency",
@@ -10,14 +9,14 @@
       })
     }}</strong>
 
-    de tus ingresos mensuales en
+    en
     <strong>{{ item.service_category.name }}</strong
     >.
   </p>
   <p class="mt-0 pt-0 mb-3" *ngIf="item.goal_type == 'PERCENTAGE'">
-    Gastar
+    Ejecutar
     <strong>{{ item.percentage }}%</strong>
-    de tus ingresos mensuales en
+    en
     <strong>{{ item.service_category.name }}</strong
     >.
   </p>
@@ -52,7 +51,10 @@
         que tenias presupuestados.
       </div>
     </div>
-    <div class="flex flex-column align-items-end">
+    <div
+      *ngIf="item.stats.payments.length > 0"
+      class="flex flex-column align-items-end"
+    >
       <p-overlayPanel #op>
         <p-table
           [value]="item.stats.payments"
