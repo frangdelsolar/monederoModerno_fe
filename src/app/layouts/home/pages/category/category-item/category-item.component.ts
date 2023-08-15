@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ServiceService } from '@app/core/controllers/service.controller';
 import { AppDialogService } from '@app/core/services/app-dialog.service';
 import { ToastService } from '@app/core/services/toast.service';
+import { CategoryFormComponent } from '@app/shared/components/category-form/category-form.component';
 import { ConfirmationService } from 'primeng/api';
-import { CategoryFormComponent } from '../category-form/category-form.component';
 
 @Component({
   selector: 'app-category-item',

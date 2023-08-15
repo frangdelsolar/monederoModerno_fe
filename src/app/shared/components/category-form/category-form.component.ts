@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ServiceService } from '@app/core/controllers/service.controller';
+import { TRANSACTION_TYPES_DISPLAY } from '@app/core/enums/transaction_type.enum';
 import { AppDialogService } from '@app/core/services/app-dialog.service';
 
 @Component({
@@ -14,7 +15,7 @@ import { AppDialogService } from '@app/core/services/app-dialog.service';
   styleUrls: ['./category-form.component.scss'],
 })
 export class CategoryFormComponent implements OnInit {
-  @Input() transactionType = 'EXPENSE';
+  @Input() transactionType: string = 'EXPENSE';
 
   form: FormGroup;
   colorControl: FormControl = new FormControl('#ffffff', [Validators.required]);
@@ -45,7 +46,8 @@ export class CategoryFormComponent implements OnInit {
     this.buttonLabel = 'Guardar';
 
     this.dialogSvc.DialogDataObservable.subscribe((data) => {
-      if (data.data.edit) {
+      let edit = data.data.edit;
+      if (edit) {
         this.item = data.data.category;
         this.colorControl.setValue(this.item.color);
         this.iconControl.setValue(this.item.icon);
@@ -54,6 +56,7 @@ export class CategoryFormComponent implements OnInit {
         this.buttonLabel = 'Actualizar';
       } else {
         this.transactionType = data.data.transactionType;
+
         this.form.get('service_type')?.setValue(this.transactionType);
       }
     });
@@ -79,7 +82,6 @@ export class CategoryFormComponent implements OnInit {
   }
 
   onSave() {
-    console.log('save');
     this.categorySvc.create(this.form.value).subscribe(
       (res) => {
         window.location.reload();
@@ -96,7 +98,6 @@ export class CategoryFormComponent implements OnInit {
   }
 
   onUpdate() {
-    console.log('update');
     this.categorySvc.update(this.item.id, this.form.value).subscribe(
       (res) => {
         window.location.reload();

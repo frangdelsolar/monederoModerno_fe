@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '@app/core/controllers/service.controller';
 import { AppDialogService } from '@app/core/services/app-dialog.service';
+import { CategoryFormComponent } from '@app/shared/components/category-form/category-form.component';
 import { MenuItem } from 'primeng/api';
-import { CategoryFormComponent } from '../category-form/category-form.component';
 
 @Component({
   selector: 'app-category-list',
