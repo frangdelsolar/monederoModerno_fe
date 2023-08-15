@@ -32,6 +32,13 @@ const routes: Routes = [
             (m) => m.BudgetGoalRoutingModule
           ),
       },
+      {
+        path: 'categorias',
+        loadChildren: () =>
+          import('./pages/category/category-routing.module').then(
+            (m) => m.CategoryRoutingModule
+          ),
+      },
     ],
   },
 ];

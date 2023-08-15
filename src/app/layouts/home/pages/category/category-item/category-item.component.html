@@ -1,0 +1,21 @@
+<div class="flex flex-row justify-content-between align-items-center my-0 py-0">
+  <div class="flex gap-3 align-items-center">
+    <i
+      class="pi {{ item.icon }}"
+      style="font-size: 1.5rem; color: {{ item.color }}"
+    ></i>
+    <p class="my-0 py-0 font-bold">{{ item.name }}</p>
+  </div>
+
+  <div *ngIf="showMenu">
+    <p-menu #menu [model]="menuItems" [popup]="true"></p-menu>
+
+    <p-button
+      icon="pi pi-ellipsis-v"
+      (click)="menu.toggle($event)"
+      styleClass="p-button-rounded p-button-text"
+    ></p-button>
+  </div>
+</div>
+
+<p-divider></p-divider>

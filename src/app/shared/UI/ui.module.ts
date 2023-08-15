@@ -10,6 +10,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
 import { ChipsModule } from 'primeng/chips';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ColorPickerModule } from 'primeng/colorpicker';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
@@ -61,6 +62,8 @@ import { ToastComponent } from './toast/toast.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { CardMenuComponent } from './card-menu/card-menu.component';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { ColorPickerComponent } from './color-picker/color-picker.component';
+import { IconPickerComponent } from './icon-picker/icon-picker.component';
 
 const pngModules = [
   AutoCompleteModule,
@@ -71,6 +74,7 @@ const pngModules = [
   CardModule,
   ChipsModule,
   CKEditorModule,
+  ColorPickerModule,
   DialogModule,
   ConfirmDialogModule,
   DividerModule,
@@ -108,10 +112,12 @@ const uiComponents = [
   CardComponent,
   CardMenuComponent,
   ChipsComponent,
+  ColorPickerComponent,
   DatepickerComponent,
   DialogComponent,
   DropdownComponent,
   FormSectionComponent,
+  IconPickerComponent,
   InputCurrencyComponent,
   InputImageComponent,
   InputEditorComponent,

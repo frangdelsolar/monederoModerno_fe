@@ -38,14 +38,14 @@ export class SidebarComponent implements OnInit {
             this.sidebarSvc.closeSidebar();
           },
         },
-        //     {
-        //       label: 'Categorías',
-        //       icon: 'pi pi-th-large',
-        //       command: (event: any) => {
-        //         this.router.navigate(['categorias']);
-        //         this.sidebarSvc.closeSidebar();
-        //       },
-        //     },
+        {
+          label: 'Categorías',
+          icon: 'pi pi-th-large',
+          command: (event: any) => {
+            this.router.navigate(['categorias']);
+            this.sidebarSvc.closeSidebar();
+          },
+        },
         //     {
         //       label: 'Etiquetas',
         //       icon: 'pi pi-tags',

@@ -1,0 +1,19 @@
+<app-card [title]="'Categorías'">
+  <div class="flex flex-column gap-3">
+    <app-card-menu [items]="menuItems"></app-card-menu>
+    <p-tabView [(activeIndex)]="activeIndex">
+      <p-tabPanel header="Gastos">
+        <app-category-item
+          *ngFor="let item of expenseCategories"
+          [item]="item"
+        ></app-category-item>
+      </p-tabPanel>
+      <p-tabPanel header="Ingresos">
+        <app-category-item
+          *ngFor="let item of incomeCategories"
+          [item]="item"
+        ></app-category-item>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</app-card>

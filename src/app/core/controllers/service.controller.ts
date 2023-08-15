@@ -27,4 +27,14 @@ export class ServiceService {
   getAllProducts() {
     return this.privateSvc.get(this.productApiUrl, null, true);
   }
+
+  public delete(id: number) {
+    const url = this.serviceApiUrl + id;
+    return this.privateSvc.delete(url, true);
+  }
+
+  public update(id: any, data: any) {
+    const url = this.serviceApiUrl + id + '/';
+    return this.privateSvc.put(url, data, true);
+  }
 }
