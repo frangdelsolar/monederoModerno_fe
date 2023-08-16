@@ -1,17 +1,27 @@
 <div
-  class="flex flex-row justify-content-between align-items-center"
+  class="flex flex-row align-items-center"
   [ngClass]="{
     'hover-green': transaction.transaction_type === 'INCOME',
     'hover-red': transaction.transaction_type === 'EXPENSE'
   }"
   (click)="showDetail()"
 >
-  <div class="col-4 flex flex-column align-items-start justify-content-left">
-    <p class="my-0 py-0 font-bold">{{ transaction.service.name }}</p>
-    <p class="my-0 py-0 text-sm">{{ transaction.service_provider.name }}</p>
+  <div class="col-1 flex gap-3 align-items-center">
+    <i
+      class="pi {{ transaction.service.icon }}"
+      style="font-size: 1.5rem; color: {{ transaction.service.color }}"
+    ></i>
+  </div>
+  <div class="col-5 flex flex-column align-items-start justify-content-left">
+    <p class="my-0 py-0 font-bold">{{ transaction.service_provider.name }}</p>
+    <p class="my-0 py-0 text-sm">{{ transaction.product }}</p>
   </div>
   <div class="col-3 flex flex-column align-items-end justify-content-left">
-    <p class="my-0 py-0 font-bold">Total</p>
+    <p class="my-0 py-0 text-sm font-semibold">Vencimiento</p>
+
+    <p class="my-0 py-0 text-sm">
+      {{ transaction.due_date | date : "dd/MM/yy" }}
+    </p>
     <p class="my-0 py-0 text-sm">
       {{
         transaction.currency.amount.toLocaleString("es-AR", {
@@ -24,10 +34,13 @@
   </div>
   <div
     *ngIf="transaction.payment"
-    class="col-5 flex flex-column align-items-end justify-content-left"
+    class="col-3 flex flex-column align-items-end justify-content-left"
   >
-    <p class="my-0 py-0 font-bold">Pagado</p>
+    <p class="my-0 py-0 text-sm font-semibold">Pago</p>
     <p class="my-0 py-0 text-sm">
+      {{ transaction.payment.transaction_date | date : "dd/MM/yy" }}
+    </p>
+    <p class="my-0 py-0 font-bold">
       {{
         transaction.payment.currency.amount.toLocaleString("es-AR", {
           style: "currency",
@@ -39,7 +52,7 @@
   </div>
   <div
     *ngIf="!transaction.payment"
-    class="col-4 flex flex-column align-items-end justify-content-left"
+    class="col-3 flex flex-column align-items-end justify-content-left"
   >
     <p class="my-0 py-0 text-sm font-base">Estado</p>
     <p class="my-0 py-0 font-bold">Pendiente</p>

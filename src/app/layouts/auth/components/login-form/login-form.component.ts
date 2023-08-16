@@ -19,7 +19,7 @@ export class LoginFormComponent implements OnInit {
   form!: FormGroup;
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
-  showGoogleLoginButton: boolean = true;
+  showGoogleLoginButton: boolean = false;
   constructor(
     private fb: FormBuilder,
     private authSvc: AuthService,
