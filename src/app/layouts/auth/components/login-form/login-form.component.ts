@@ -43,11 +43,15 @@ export class LoginFormComponent implements OnInit {
 
   onLogin() {
     if (this.form.valid) {
-      this.authSvc.loginWithCreds(this.form.value);
+      this.authSvc.loginWithCreds(this.form.value).then(() => {
+        this.router.navigate(['/']);
+      });
     }
   }
 
   onGoogleLogin() {
-    this.authSvc.googleLogin();
+    this.authSvc.googleLogin().then(() => {
+      this.router.navigate(['/']);
+    });
   }
 }
