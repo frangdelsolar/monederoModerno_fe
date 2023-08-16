@@ -3,6 +3,21 @@
     <ng-template pTemplate="display">
       <span>Abrir</span>
     </ng-template>
-    <ng-template pTemplate="content"> Nothing in here yet </ng-template>
+    <ng-template pTemplate="content">
+      <div class="flex flex-column gap-3">
+        <p-panel header="Gastos" [toggleable]="true" [collapsed]="true">
+          <app-chart
+            [chartId]="'expense-chart'"
+            [chartCtx]="exChartCtx"
+          ></app-chart>
+        </p-panel>
+        <p-panel header="Ingresos" [toggleable]="true" [collapsed]="true">
+          <app-chart
+            [chartId]="'income-chart'"
+            [chartCtx]="inChartCtx"
+          ></app-chart>
+        </p-panel>
+      </div>
+    </ng-template>
   </p-inplace>
 </app-card>

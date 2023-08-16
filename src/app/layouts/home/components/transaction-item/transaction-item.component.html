@@ -12,17 +12,17 @@
       style="font-size: 1.5rem; color: {{ transaction.service.color }}"
     ></i>
   </div>
-  <div class="col-5 flex flex-column align-items-start justify-content-left">
+  <div class="col-4 flex flex-column align-items-start justify-content-left">
     <p class="my-0 py-0 font-bold">{{ transaction.service_provider.name }}</p>
     <p class="my-0 py-0 text-sm">{{ transaction.product }}</p>
   </div>
   <div class="col-3 flex flex-column align-items-end justify-content-left">
-    <p class="my-0 py-0 text-sm font-semibold">Vencimiento</p>
+    <p class="my-0 py-0 text-xs font-semibold">Vencimiento</p>
 
-    <p class="my-0 py-0 text-sm">
+    <p class="my-0 py-0 text-xs">
       {{ transaction.due_date | date : "dd/MM/yy" }}
     </p>
-    <p class="my-0 py-0 text-sm">
+    <p class="my-0 py-0 text-xs">
       {{
         transaction.currency.amount.toLocaleString("es-AR", {
           style: "currency",
@@ -34,7 +34,7 @@
   </div>
   <div
     *ngIf="transaction.payment"
-    class="col-3 flex flex-column align-items-end justify-content-left"
+    class="col-4 flex flex-column align-items-end justify-content-left"
   >
     <p class="my-0 py-0 text-sm font-semibold">Pago</p>
     <p class="my-0 py-0 text-sm">
@@ -52,7 +52,7 @@
   </div>
   <div
     *ngIf="!transaction.payment"
-    class="col-3 flex flex-column align-items-end justify-content-left"
+    class="col-4 flex flex-column align-items-end justify-content-left"
   >
     <p class="my-0 py-0 text-sm font-base">Estado</p>
     <p class="my-0 py-0 font-bold">Pendiente</p>

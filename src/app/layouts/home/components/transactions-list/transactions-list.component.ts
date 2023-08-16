@@ -15,6 +15,7 @@ export class TransactionsListComponent implements OnInit {
   month: string;
   year: string;
   chartData: BehaviorSubject<any> = new BehaviorSubject(null);
+  categoriesData: BehaviorSubject<any> = new BehaviorSubject(null);
   loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-totals-details',
@@ -14,8 +15,8 @@ export class TotalsDetailsComponent implements OnInit {
   projected: any = [];
   labels: string[] = [];
 
-  public chart: any;
-  draw: boolean = false;
+  chartCtx: BehaviorSubject<any> = new BehaviorSubject({});
+  dataReady: boolean = false;
 
   constructor() {}
 
@@ -27,16 +28,13 @@ export class TotalsDetailsComponent implements OnInit {
         this.expenseData = res.expenses;
         this.executed = res.executed_progression;
         this.projected = res.projected_progression;
-        this.createChart();
+        this.setChartCtx();
       }
     });
   }
 
-  createChart() {
-    if (this.chart) {
-      this.chart.destroy();
-    }
-    this.chart = new Chart('MyChart', {
+  setChartCtx() {
+    this.chartCtx.next({
       data: {
         labels: this.labels,
         datasets: [
@@ -84,6 +82,6 @@ export class TotalsDetailsComponent implements OnInit {
         aspectRatio: 1.3,
       },
     });
-    this.draw = true;
+    this.dataReady = true;
   }
 }

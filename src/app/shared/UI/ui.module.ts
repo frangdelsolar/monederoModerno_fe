@@ -16,6 +16,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { FieldsetModule } from 'primeng/fieldset';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { InplaceModule } from 'primeng/inplace';
@@ -64,6 +65,7 @@ import { CardMenuComponent } from './card-menu/card-menu.component';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
 import { IconPickerComponent } from './icon-picker/icon-picker.component';
+import { ChartComponent } from './chart/chart.component';
 
 const pngModules = [
   AutoCompleteModule,
@@ -80,6 +82,7 @@ const pngModules = [
   DividerModule,
   DropdownModule,
   DynamicDialogModule,
+  FieldsetModule,
   FileUploadModule,
   FormsModule,
   ImageModule,
@@ -111,6 +114,7 @@ const pngModules = [
 const uiComponents = [
   CardComponent,
   CardMenuComponent,
+  ChartComponent,
   ChipsComponent,
   ColorPickerComponent,
   DatepickerComponent,

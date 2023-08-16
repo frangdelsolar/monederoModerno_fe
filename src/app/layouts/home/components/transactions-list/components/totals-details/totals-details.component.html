@@ -1,6 +1,6 @@
 <app-card>
   <div class="flex flex-column justify-content-between">
-    <div *ngIf="draw" class="flex flex-row justify-content-between gap-2">
+    <div *ngIf="dataReady" class="flex flex-row justify-content-between gap-2">
       <div class="flex flex-column align-items-start gap-2">
         <div class="flex flex-row">
           <h5 class="py-0 my-0">Ingresos</h5>
@@ -67,6 +67,6 @@
       </div>
     </div>
 
-    <canvas id="MyChart">{{ chart }}</canvas>
+    <app-chart [chartId]="'totals-chart'" [chartCtx]="chartCtx"></app-chart>
   </div>
 </app-card>

@@ -4,7 +4,7 @@
   <app-bank-account-widget></app-bank-account-widget>
   <app-budget-goal-widget></app-budget-goal-widget>
   <app-totals-details [chartData]="chartData"></app-totals-details>
-  <app-category-widget></app-category-widget>
+  <app-category-widget [data]="chartData"></app-category-widget>
 
   <app-card [title]="'Movimientos'">
     <div class="flex flex-column justify-content-center">
