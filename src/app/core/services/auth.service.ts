@@ -25,7 +25,6 @@ export class AuthService {
     private router: Router,
     private toastSvc: ToastService
   ) {
-    console.log('Initializing Auth & Firebase');
     initializeApp(environment.firebase);
     this.checkFirebaseAuthState();
     if (localStorage.getItem('user') != null) {
@@ -42,19 +41,15 @@ export class AuthService {
   }
 
   checkFirebaseAuthState() {
-    console.log('Verifying Firebase Auth State');
     this.loading.next(true);
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        console.log('Firebase Auth State', user);
-
         this.login(user, false, 'checkFirebaseAuthState').subscribe(
           (loggedIn) => {
             this.loading.next(false);
           }
         );
       } else {
-        console.log('Firebase Auth State - No User', user);
         this.loading.next(false);
         this.logout();
       }
@@ -73,10 +68,8 @@ export class AuthService {
     allowRegistration: boolean,
     invoker: string
   ): Observable<boolean> {
-    console.log('Login ', firebaseUser.email, 'from ', invoker);
     return this.checkIfUserExistsInBackend({ email: firebaseUser.email }).pipe(
       switchMap((val: any) => {
-        console.log(val);
         if (val) {
           this.storeAuthDetails(firebaseUser);
           this.isAuthenticated.next(true);
@@ -118,13 +111,7 @@ export class AuthService {
     if (!googleAuth) {
       return;
     }
-    this.login(googleAuth.user, true, 'loginWithCreds').subscribe(
-      (loggedIn) => {
-        if (loggedIn) {
-          window.location.reload();
-        }
-      }
-    );
+    return this.login(googleAuth.user, true, 'loginWithCreds');
   }
 
   async googleLogin() {
@@ -135,17 +122,14 @@ export class AuthService {
       userCred = await this.afAuth.signInWithPopup(provider);
     } catch (err: any) {
       console.log('Error', err);
+      return;
     }
 
     if (!userCred) {
       return;
     }
 
-    this.login(userCred.user, true, 'googleLogin').subscribe((loggedIn) => {
-      if (loggedIn) {
-        window.location.reload();
-      }
-    });
+    return this.login(userCred.user, true, 'googleLogin');
   }
 
   async registerUserWithForm(user: any) {
@@ -197,16 +181,13 @@ export class AuthService {
     localStorage.setItem('user', userData);
     user.getIdToken().then((tkn: any) => {
       localStorage.setItem('access', tkn);
-      // window.location.reload();
     });
   }
 
   logout() {
-    console.log('Logout');
     this.afAuth.signOut().then(() => {
       localStorage.clear();
       this.isAuthenticated.next(false);
-      console.log('Redirecting to login from logout func');
       this.router.navigate(['auth/login']);
     });
   }
