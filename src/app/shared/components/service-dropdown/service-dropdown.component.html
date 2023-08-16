@@ -27,15 +27,11 @@
     </div>
   </span>
 
-  <div
-    *ngIf="addNewForm"
-    class="border-solid border-200 border-round-lg p-3 pt-4 surface-200 w-auto"
-  >
-    <app-input-text
-      [editOn]="true"
-      [id]="'input-service-category-text'"
-      [label]="labelForNewServiceControl"
-      [control]="newServiceControl"
-    ></app-input-text>
+  <div *ngIf="addNewForm">
+    <app-category-form
+      [invoker]="'transaction_form'"
+      [transactionType]="serviceType.value.value"
+      (onSaveSignal)="onCategorySave($event)"
+    ></app-category-form>
   </div>
 </div>

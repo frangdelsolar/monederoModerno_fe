@@ -47,6 +47,7 @@ export class CategoryListComponent implements OnInit {
       component: CategoryFormComponent,
       data: {
         transactionType: this.getTransactionTypeFromTabIndex(),
+        invoker: 'category_form',
       },
       params: {
         header: 'Nueva categoría',

@@ -100,8 +100,6 @@ export class ServiceDropdownComponent implements OnInit {
         this.addNewForm = false;
         this.newServiceControl.reset();
         this.addNewIcon = 'pi pi-plus';
-      } else {
-        this.saveNew();
       }
     }
     this.returnServiceValue();
@@ -111,34 +109,12 @@ export class ServiceDropdownComponent implements OnInit {
     this.deductionFormSvc.serviceOk(this.serviceControl.value.id);
   }
 
-  saveNew() {
-    this.serviceSvc
-      .create({
-        name: this.newServiceControl.value,
-        service_type: this.serviceType.value.value,
-      })
-      .subscribe(
-        (service) => {
-          this.items.push(service);
-          this.serviceControl.setValue(service);
-          this.addNewForm = false;
-          this.newServiceControl.reset();
-          this.addNewIcon = 'pi pi-plus';
-          this.returnServiceValue();
-        },
-        (error) => {
-          if ('errors' in error.error) {
-            error.error.errors.forEach((element: any) => {
-              this.newServiceControl.setErrors({
-                serverError: element.message,
-              });
-            });
-          }
-          this.deductionFormSvc.pushError({
-            step: 'service',
-            error: error.error,
-          });
-        }
-      );
+  onCategorySave(service: any) {
+    this.items.push(service);
+    this.serviceControl.setValue(service);
+    this.addNewForm = false;
+    this.newServiceControl.reset();
+    this.addNewIcon = 'pi pi-plus';
+    this.returnServiceValue();
   }
 }

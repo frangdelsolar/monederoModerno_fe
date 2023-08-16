@@ -45,6 +45,7 @@ export class CategoryItemComponent implements OnInit {
       data: {
         category: this.item,
         edit: true,
+        invoker: 'category_form',
       },
       params: {
         header: 'Editar categoría',

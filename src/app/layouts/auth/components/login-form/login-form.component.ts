@@ -34,11 +34,11 @@ export class LoginFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.deviceSvc.getDeviceInfo().then((res) => {
-    //   if (res.platform == 'web') {
-    //     this.showGoogleLoginButton = true;
-    //   }
-    // });
+    this.deviceSvc.getDeviceInfo().then((res) => {
+      if (res.platform == 'web') {
+        this.showGoogleLoginButton = true;
+      }
+    });
   }
 
   onLogin() {
