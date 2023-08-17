@@ -1,34 +1,38 @@
 <app-card [title]="'Estado de cuentas'">
-  <p-inplace>
-    <ng-template pTemplate="display">
-      <span>Ver disponibles</span>
-    </ng-template>
-    <ng-template pTemplate="content">
-      <div
-        *ngFor="let item of items"
-        class="flex flex-row justify-content-between align-items-center"
-      >
+  <div class="flex flex-column gap-3">
+    <app-chart [chartId]="'balance-chart'" [chartCtx]="chartCtx"></app-chart>
+
+    <p-inplace>
+      <ng-template pTemplate="display">
+        <span>Ver disponibles</span>
+      </ng-template>
+      <ng-template pTemplate="content">
         <div
-          class="col-4 flex flex-column align-items-start justify-content-left"
+          *ngFor="let item of items"
+          class="flex flex-row justify-content-between align-items-center"
         >
-          <p class="my-0 py-0 font-bold">{{ item.name }}</p>
-          <p class="my-0 py-0 text-sm">{{ item.description }}</p>
+          <div
+            class="col-4 flex flex-column align-items-start justify-content-left"
+          >
+            <p class="my-0 py-0 font-bold">{{ item.name }}</p>
+            <p class="my-0 py-0 text-sm">{{ item.description }}</p>
+          </div>
+          <div
+            class="col-3 flex flex-column align-items-end justify-content-left"
+          >
+            <p class="my-0 py-0 font-bold">Total</p>
+            <p class="my-0 py-0 text-sm">
+              {{
+                item.total.amount.toLocaleString("es-AR", {
+                  style: "currency",
+                  currency: item.total.currency,
+                  minimumFractionDigits: 2
+                })
+              }}
+            </p>
+          </div>
         </div>
-        <div
-          class="col-3 flex flex-column align-items-end justify-content-left"
-        >
-          <p class="my-0 py-0 font-bold">Total</p>
-          <p class="my-0 py-0 text-sm">
-            {{
-              item.total.amount.toLocaleString("es-AR", {
-                style: "currency",
-                currency: item.total.currency,
-                minimumFractionDigits: 2
-              })
-            }}
-          </p>
-        </div>
-      </div>
-    </ng-template>
-  </p-inplace>
+      </ng-template>
+    </p-inplace>
+  </div>
 </app-card>
