@@ -64,6 +64,19 @@ export class SidebarComponent implements OnInit {
         },
       ],
     },
+    {
+      label: 'Reportes',
+      items: [
+        {
+          label: 'Recurrencias',
+          icon: 'pi pi-table',
+          command: (event: any) => {
+            this.router.navigate(['transacciones']);
+            this.sidebarSvc.closeSidebar();
+          },
+        },
+      ],
+    },
   ];
 
   user: any;

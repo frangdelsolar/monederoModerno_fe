@@ -13,6 +13,7 @@ export class ServiceProviderDropdownComponent implements OnInit {
   @Input() editOn: boolean = false;
   @Input() label: string = 'Label';
   @Input() serviceProviderControl: FormControl = new FormControl(null, []);
+  @Input() addNewSetting: boolean = true;
 
   addNewForm: boolean = false;
   addNewIcon: string = 'pi pi-plus';

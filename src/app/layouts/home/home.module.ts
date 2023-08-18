@@ -13,6 +13,8 @@ import { BankAccountModule } from './pages/bank-account/bank-account.module';
 import { BudgetGoalModule } from './pages/budget-goal/budget-goal.module';
 import { MonthSelectorComponent } from './components/month-selector/month-selector.component';
 import { CategoryModule } from './pages/category/category.module';
+import { TransactionsComponent } from './pages/transactions/transactions.component';
+import { TransactionsTableComponent } from './pages/transactions/components/transactions-table/transactions-table.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { CategoryModule } from './pages/category/category.module';
     TotalsDetailsComponent,
     TransactionWrapperComponent,
     MonthSelectorComponent,
+    TransactionsComponent,
+    TransactionsTableComponent,
   ],
   imports: [
     CommonModule,

@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { TransactionsListComponent } from './components/transactions-list/transactions-list.component';
 import { TransactionWrapperComponent } from './components/transaction-wrapper/transaction-wrapper.component';
+import { TransactionsComponent } from './pages/transactions/transactions.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: '',
         component: TransactionsListComponent,
+      },
+      {
+        path: 'transacciones',
+        component: TransactionsComponent,
       },
       {
         path: 'billeteras',
