@@ -41,6 +41,19 @@ export class BankAccountWidgetComponent implements OnInit {
         data: data,
         options: {
           pointRadius: 0,
+          plugins: {
+            zoom: {
+              zoom: {
+                wheel: {
+                  enabled: true,
+                },
+                pinch: {
+                  enabled: true,
+                },
+                mode: 'x',
+              },
+            },
+          },
         },
       };
       this.chartCtx.next(chartData);

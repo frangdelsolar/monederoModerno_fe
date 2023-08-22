@@ -1,6 +1,9 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { Observable } from 'rxjs';
+import zoomPlugin from 'chartjs-plugin-zoom';
+
+Chart.register(zoomPlugin);
 
 @Component({
   selector: 'app-chart',
