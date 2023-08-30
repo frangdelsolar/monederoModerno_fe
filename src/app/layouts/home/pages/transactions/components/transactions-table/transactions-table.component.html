@@ -12,7 +12,6 @@
       <th>ID</th>
       <th>Proveedor</th>
       <th>Objetivo</th>
-      <th>Frequencia</th>
       <th>Periodo efectivo</th>
       <th>Cuota</th>
     </tr>
@@ -43,20 +42,6 @@
         <span>{{ transaction.goal_type }}</span>
       </td>
       <td>
-        <span>
-          <span>{{ transaction.frequency }}</span>
-          <span *ngIf="transaction.goal_currency">
-            {{
-              transaction.goal_currency.amount.toLocaleString("es-AR", {
-                style: "currency",
-                currency: transaction.goal_currency.currency,
-                minimumFractionDigits: 2
-              })
-            }}</span
-          >
-        </span>
-      </td>
-      <td>
         <span class="flex flex-column">
           <span>{{ transaction.start_date | date : "dd/MM/yy" }}</span>
           <span>{{ transaction.end_date | date : "dd/MM/yy" }}</span>
@@ -85,7 +70,7 @@
   <ng-template pTemplate="rowexpansion" let-transaction>
     <tr>
       <td colspan="7">
-        <div class="p-3">
+        <div class="p-2">
           <p-table
             [value]="transaction.children"
             dataKey="id"
