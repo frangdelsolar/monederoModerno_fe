@@ -8,10 +8,12 @@ import { BlockUIModule } from 'primeng/blockui';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
+import { CheckboxModule } from 'primeng/checkbox';
 import { ChipsModule } from 'primeng/chips';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
@@ -75,8 +77,10 @@ const pngModules = [
   CalendarModule,
   CardModule,
   ChipsModule,
+  CheckboxModule,
   CKEditorModule,
   ColorPickerModule,
+  ConfirmPopupModule,
   DialogModule,
   ConfirmDialogModule,
   DividerModule,

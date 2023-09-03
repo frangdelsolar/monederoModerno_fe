@@ -15,6 +15,7 @@ import { MonthSelectorComponent } from './components/month-selector/month-select
 import { CategoryModule } from './pages/category/category.module';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { TransactionsTableComponent } from './pages/transactions/components/transactions-table/transactions-table.component';
+import { TaskModule } from './pages/task/task.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { TransactionsTableComponent } from './pages/transactions/components/tran
     BankAccountModule,
     BudgetGoalModule,
     CategoryModule,
+    TaskModule,
   ],
   exports: [SharedModule],
 })

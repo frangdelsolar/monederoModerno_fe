@@ -22,6 +22,8 @@ export const environment = {
   apiRegisterUser: '',
   apiService: '',
   apiServiceProvider: '',
+  apiUrlTask: '',
+  apiUrlTaskStatus: '',
   apiTransaction: '',
   apiValidateUser: '',
 };

@@ -1,0 +1,9 @@
+<app-card [title]="'Tareas del mes'">
+  <div class="flex flex-column justify-content-center">
+    <app-task-item
+      *ngFor="let task of items"
+      [item]="task"
+      [showMenu]="false"
+    ></app-task-item>
+  </div>
+</app-card>

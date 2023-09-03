@@ -1,0 +1,29 @@
+<div class="flex flex-row justify-content-between align-items-center">
+  <div class="col-4 flex flex-column align-items-start justify-content-left">
+    <p class="my-0 py-0 font-bold">{{ item.title }}</p>
+    <p class="my-0 py-0 text-sm">{{ item.description }}</p>
+  </div>
+
+  <div
+    *ngIf="showStatus"
+    class="col-7 flex flex-column align-items-end justify-content-left"
+  >
+    <app-input-switch
+      [label]="''"
+      [control]="completedControl"
+      [readonly]="true"
+      (click)="onCompletedClick()"
+    ></app-input-switch>
+  </div>
+
+  <div *ngIf="showMenu">
+    <p-menu #menu [model]="menuItems" [popup]="true"></p-menu>
+
+    <p-button
+      icon="pi pi-ellipsis-v"
+      (click)="menu.toggle($event)"
+      styleClass="p-button-rounded p-button-text"
+    ></p-button>
+  </div>
+</div>
+<p-divider></p-divider>

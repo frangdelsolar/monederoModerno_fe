@@ -22,6 +22,8 @@ export const environment = {
   apiRegisterUser: 'api/user/register/',
   apiServiceProvider: 'api/service-providers/',
   apiService: 'api/services/',
+  apiUrlTask: 'api/tasks/',
+  apiUrlTaskStatus: 'api/tasks_status/',
   apiTransaction: 'api/transactions/',
   apiValidateUser: 'api/user/validate/',
 };

@@ -10,6 +10,7 @@ export class InputSwitchComponent implements OnInit {
   @Input() id: string = 'switch';
   @Input() label: string = 'Label';
   @Input() control: FormControl = new FormControl(null, []);
+  @Input() readonly: boolean = false;
 
   constructor() {}
 

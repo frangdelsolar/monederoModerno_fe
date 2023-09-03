@@ -44,6 +44,13 @@ const routes: Routes = [
             (m) => m.CategoryRoutingModule
           ),
       },
+      {
+        path: 'tareas',
+        loadChildren: () =>
+          import('./pages/task/task-routing.module').then(
+            (m) => m.TaskRoutingModule
+          ),
+      },
     ],
   },
 ];

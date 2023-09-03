@@ -17,13 +17,13 @@
   <app-form-section [label]="'Periodo de validez'">
     <div class="flex flex-column gap-3">
       <app-datepicker
-        [id]="'transaction-datepicker'"
+        [id]="'transaction-from-datepicker'"
         [editOn]="editModeOn"
         [label]="'Fecha de inicio'"
         [control]="effectiveFromControl"
       ></app-datepicker>
       <app-datepicker
-        [id]="'transaction-datepicker'"
+        [id]="'transaction-to-datepicker'"
         [editOn]="editModeOn"
         [label]="'Fecha de finalización'"
         [control]="effectiveToControl"

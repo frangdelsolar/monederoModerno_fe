@@ -1,11 +1,15 @@
 <div class="flex flex-column gap-3">
+  <!-- <div class="flex flex-column col-3 gap-3"> -->
   <app-month-selector></app-month-selector>
-
-  <app-bank-account-widget></app-bank-account-widget>
   <app-budget-goal-widget></app-budget-goal-widget>
+  <app-task-widget></app-task-widget>
+  <!-- </div> -->
+  <!-- <div class="flex flex-column col-5 gap-3"> -->
+  <app-bank-account-widget></app-bank-account-widget>
   <app-totals-details [chartData]="chartData"></app-totals-details>
   <app-category-widget [data]="chartData"></app-category-widget>
-
+  <!-- </div> -->
+  <!-- <div class="flex flex-column col-4 gap-3"> -->
   <app-card [title]="'Movimientos'">
     <div class="flex flex-column justify-content-center">
       <app-transaction-item
@@ -16,4 +20,5 @@
       ></app-transaction-item>
     </div>
   </app-card>
+  <!-- </div> -->
 </div>

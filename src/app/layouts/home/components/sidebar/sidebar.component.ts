@@ -54,11 +54,20 @@ export class SidebarComponent implements OnInit {
         //         this.sidebarSvc.closeSidebar();
         //       },
         //     },
+
         {
-          label: 'Presupuestos',
-          icon: 'pi pi-percentage',
+          label: 'Objetivos',
+          icon: 'pi pi-compass',
           command: (event: any) => {
             this.router.navigate(['presupuestos']);
+            this.sidebarSvc.closeSidebar();
+          },
+        },
+        {
+          label: 'Tareas',
+          icon: 'pi pi-check-square',
+          command: (event: any) => {
+            this.router.navigate(['tareas']);
             this.sidebarSvc.closeSidebar();
           },
         },
@@ -69,7 +78,7 @@ export class SidebarComponent implements OnInit {
       items: [
         {
           label: 'Recurrencias',
-          icon: 'pi pi-table',
+          icon: 'pi pi-replay',
           command: (event: any) => {
             this.router.navigate(['transacciones']);
             this.sidebarSvc.closeSidebar();

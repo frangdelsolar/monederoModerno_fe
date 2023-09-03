@@ -1,4 +1,8 @@
-<div class="flex justify-content-between align-items-center">
-  <p class="font-medium">{{ label }}</p>
-  <p-inputSwitch [id]="id" [formControl]="control"></p-inputSwitch>
+<div class="flex flex-row justify-content-between align-items-center gap-2">
+  <p class="text-sm">{{ label }}</p>
+  <p-inputSwitch
+    [id]="id"
+    [formControl]="control"
+    [readonly]="readonly"
+  ></p-inputSwitch>
 </div>

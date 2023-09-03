@@ -1,0 +1,42 @@
+<form class="flex flex-column gap-3" [formGroup]="form" id="taskForm">
+  <app-form-section [label]="label">
+    <div class="flex flex-column gap-5 pt-3">
+      <app-input-text
+        [editOn]="true"
+        [label]="labelForNameControl"
+        [control]="titleControl"
+        [id]="'name-input'"
+      ></app-input-text>
+      <app-input-text
+        [editOn]="true"
+        [label]="labelForDescriptionControl"
+        [control]="descriptionControl"
+        [id]="'description-input'"
+      ></app-input-text>
+    </div>
+  </app-form-section>
+  <app-form-section [label]="'Periodo efectivo'">
+    <div class="flex flex-column gap-5 pt-3">
+      <app-datepicker
+        [id]="'task-from-datepicker'"
+        [editOn]="true"
+        [label]="'Fecha de inicio'"
+        [control]="effectiveFromControl"
+      ></app-datepicker>
+      <app-datepicker
+        [id]="'task-to-datepicker'"
+        [editOn]="true"
+        [label]="'Fecha de finalización'"
+        [control]="effectiveToControl"
+      ></app-datepicker>
+    </div>
+  </app-form-section>
+  <button
+    pButton
+    pRipple
+    class="p-button-primary"
+    [label]="saveBtnLabel"
+    id="save-transaction-btn"
+    (click)="saveBtnAction()"
+  ></button>
+</form>
