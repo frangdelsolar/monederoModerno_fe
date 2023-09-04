@@ -1,0 +1,29 @@
+<div class="flex flex-column gap-2">
+  <h3 class="py-0 my-0">{{ bankAccount.name }}</h3>
+
+  <app-input-switch
+    [label]="'Modo edición'"
+    [control]="editModeOnControl"
+  ></app-input-switch>
+
+  <app-input-editor
+    *ngIf="editModeOnControl.value"
+    [control]="instructionsControl"
+    [label]="'Instrucciones'"
+  ></app-input-editor>
+
+  <div
+    *ngIf="!editModeOnControl.value"
+    innerHtml="{{ instructionsControl.value }}"
+  ></div>
+
+  <button
+    pButton
+    pRipple
+    *ngIf="editModeOnControl.value"
+    class="p-button-primary"
+    [label]="'Guardar'"
+    id="save-transaction-btn"
+    (click)="saveBtnAction()"
+  ></button>
+</div>

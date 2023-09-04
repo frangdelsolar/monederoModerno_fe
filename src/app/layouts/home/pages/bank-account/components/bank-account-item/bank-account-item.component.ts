@@ -5,6 +5,7 @@ import { AppDialogService } from '@app/core/services/app-dialog.service';
 import { ToastService } from '@app/core/services/toast.service';
 import { ConfirmationService } from 'primeng/api';
 import { BankAccountFormComponent } from '../bank-account-form/bank-account-form.component';
+import { BankAccountInstructionsComponent } from '../bank-account-instructions/bank-account-instructions.component';
 import { PaymentsTableComponent } from '../payments-table/payments-table.component';
 
 @Component({
@@ -21,6 +22,13 @@ export class BankAccountItemComponent implements OnInit {
       icon: 'pi pi-fw pi-eye',
       command: () => {
         this.onViewClick();
+      },
+    },
+    {
+      label: 'Ver instrucciones',
+      icon: 'pi pi-fw pi-directions',
+      command: () => {
+        this.onViewInstructionsClick();
       },
     },
     {
@@ -69,6 +77,20 @@ export class BankAccountItemComponent implements OnInit {
       },
       params: {
         header: 'Ver Pagos',
+        closable: true,
+        maximizable: true,
+      },
+    });
+  }
+
+  onViewInstructionsClick() {
+    this.dialogSvc.show({
+      component: BankAccountInstructionsComponent,
+      data: {
+        item: this.item,
+      },
+      params: {
+        header: 'Ver Instrucciones',
         closable: true,
         maximizable: true,
       },

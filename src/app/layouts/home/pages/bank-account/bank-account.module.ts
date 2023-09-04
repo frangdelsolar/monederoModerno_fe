@@ -7,6 +7,7 @@ import { BankAccountItemComponent } from './components/bank-account-item/bank-ac
 import { BankAccountFormComponent } from './components/bank-account-form/bank-account-form.component';
 import { PaymentsTableComponent } from './components/payments-table/payments-table.component';
 import { BankAccountWidgetComponent } from './components/bank-account-widget/bank-account-widget.component';
+import { BankAccountInstructionsComponent } from './components/bank-account-instructions/bank-account-instructions.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { BankAccountWidgetComponent } from './components/bank-account-widget/ban
     BankAccountFormComponent,
     PaymentsTableComponent,
     BankAccountWidgetComponent,
+    BankAccountInstructionsComponent,
   ],
   imports: [CommonModule, SharedModule],
   exports: [SharedModule, BankAccountWidgetComponent],
