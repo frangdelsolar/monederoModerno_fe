@@ -8,12 +8,12 @@
     *ngIf="showStatus"
     class="col-7 flex flex-column align-items-end justify-content-left"
   >
-    <app-input-switch
-      [label]="''"
-      [control]="completedControl"
+    <p-checkbox
       [readonly]="true"
+      [binary]="true"
+      [formControl]="completedControl"
       (click)="onCompletedClick()"
-    ></app-input-switch>
+    ></p-checkbox>
   </div>
 
   <div *ngIf="showMenu">
