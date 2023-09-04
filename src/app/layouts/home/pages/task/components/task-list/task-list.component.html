@@ -3,11 +3,12 @@
     <div class="flex flex-column gap-3">
       <app-card-menu [items]="menuItems"></app-card-menu>
       <div class="flex flex-column justify-content-center">
-        <app-task-item
+        <!-- <app-task-item
           *ngFor="let task of items"
           [item]="task"
           [showStatus]="false"
-        ></app-task-item>
+        ></app-task-item> -->
+        <app-task-table [tasks]="items"></app-task-table>
       </div>
     </div>
   </app-card>

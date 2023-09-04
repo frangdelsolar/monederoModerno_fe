@@ -68,6 +68,8 @@ export class TaskFormComponent implements OnInit {
             item.effective_periods[0].effective_from
           );
           this.effectiveFromControl.setValue(effectiveFrom);
+          let effectiveTo = new Date(item.effective_periods[0].effective_to);
+          this.effectiveToControl.setValue(effectiveTo);
         }
       }
     });
