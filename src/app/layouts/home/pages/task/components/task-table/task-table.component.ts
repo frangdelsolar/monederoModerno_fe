@@ -10,6 +10,14 @@ import { Task } from '@app/core/models/task.interface';
 export class TaskTableComponent implements OnInit {
   @Input() tasks: Task[] = [];
 
+  taskMenuItems: any[] = [
+    {
+      label: 'Añadir periodo efectivo',
+      icon: 'pi pi-fw pi-calendar-plus',
+      command: () => {},
+    },
+  ];
+
   constructor() {}
 
   ngOnInit(): void {}
