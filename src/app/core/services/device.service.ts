@@ -5,7 +5,12 @@ import { Device } from '@capacitor/device';
   providedIn: 'root',
 })
 export class DeviceService {
-  constructor() {}
+  device: any;
+  constructor() {
+    this.getDeviceInfo().then((res) => {
+      this.device = res;
+    });
+  }
 
   async getDeviceInfo() {
     return await Device.getInfo();
@@ -13,5 +18,12 @@ export class DeviceService {
 
   async getBatteryInfo() {
     return await Device.getBatteryInfo();
+  }
+
+  isMobile() {
+    return (
+      this.device.operatingSystem == 'android' ||
+      this.device.operatingSystem == 'ios'
+    );
   }
 }

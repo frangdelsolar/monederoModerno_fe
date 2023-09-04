@@ -33,10 +33,11 @@ export class PrivateApiService {
       summary: 'Error',
       detail: error.message,
     };
-    // this.toastSvc.add(toastData);
-    console.log(toastData);
     if (error.status === 403) {
+      console.log(toastData);
       this.router.navigateByUrl('auth/logout');
+    } else {
+      this.toastSvc.add(toastData);
     }
 
     return throwError(error);

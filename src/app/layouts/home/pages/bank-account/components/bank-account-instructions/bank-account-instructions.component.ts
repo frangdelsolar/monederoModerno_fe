@@ -38,7 +38,6 @@ export class BankAccountInstructionsComponent implements OnInit {
       .getInstructions(this.bankAccount.id)
       .subscribe((res: any) => {
         this.instructionsControl.setValue(res.instructions);
-        console.log(this.instructionsControl.value);
       });
   }
 

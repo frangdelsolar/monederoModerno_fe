@@ -1,6 +1,7 @@
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { DialogData } from '@models/dialog.interface';
+import { DeviceService } from './device.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class AppDialogService {
   private ShowObservable: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
 
-  constructor() {}
+  constructor(private deviceSvc: DeviceService) {}
 
   private DialogShow() {
     this.ShowObservable.next(true);
@@ -31,6 +32,10 @@ export class AppDialogService {
   }
 
   public show(data: DialogData) {
+    let isMobile = this.deviceSvc.isMobile();
+    if (isMobile) {
+      data.params.width = '100%';
+    }
     this.DataObservable.next(data);
     this.DialogShow();
   }
