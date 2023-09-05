@@ -11,6 +11,7 @@ export class BankAccountService {
   _adjustUrl = environment.apiUrl + environment.apiUrlAdjustBankAccount;
   _reorderUrl = environment.apiUrl + 'api/reorder-accounts/';
   _instructionsUrl = environment.apiUrl + 'api/account-instructions/';
+  _transferUrl = environment.apiUrl + 'api/account-transfer/';
 
   constructor(private adminSvc: PrivateApiService) {}
 
@@ -51,6 +52,11 @@ export class BankAccountService {
 
   public postInstructions(id: number, body: any) {
     let url = this._instructionsUrl + id + '/';
+    return this.adminSvc.put<any>(url, body, true);
+  }
+
+  public transfer(id: number, body: any) {
+    let url = this._transferUrl + id + '/';
     return this.adminSvc.put<any>(url, body, true);
   }
 

@@ -58,6 +58,14 @@ export class TaskFormComponent implements OnInit {
 
         this.editModeOn = true;
         this.task = item;
+
+        let action = data.data.action;
+        if (action === 'addPeriod') {
+          console.log('action' + action);
+        } else if (action === 'closePeriod') {
+          console.log('action' + action);
+        }
+
         this.saveBtnAction = this.onUpdateClick;
         this.saveBtnLabel = 'Actualizar';
 

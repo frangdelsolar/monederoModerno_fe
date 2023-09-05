@@ -34,7 +34,7 @@
             </span>
           </span>
         </td>
-        <td>
+        <td *ngIf="task.effective_periods[0].effective_to">
           <p-button
             icon="pi pi-ellipsis-v"
             (click)="menu.toggle($event)"
@@ -42,7 +42,7 @@
           ></p-button>
           <p-menu
             #menu
-            [model]="taskMenuItems"
+            [model]="getTaskMenuItems(task)"
             [popup]="true"
             [appendTo]="row"
           ></p-menu>
@@ -57,10 +57,10 @@
               <ng-template pTemplate="header">
                 <tr>
                   <th style="width: 5rem"></th>
-
                   <th>Id</th>
                   <th>Inicio</th>
                   <th>Fin</th>
+                  <th></th>
                 </tr>
               </ng-template>
               <ng-template
@@ -87,6 +87,19 @@
                   </td>
                   <td>
                     {{ effectivePeriod.effective_to | date : "dd/MM/yy" }}
+                  </td>
+                  <td *ngIf="!effectivePeriod.effective_to">
+                    <p-button
+                      icon="pi pi-ellipsis-v"
+                      (click)="menu.toggle($event)"
+                      styleClass="p-button-rounded p-button-text"
+                    ></p-button>
+                    <p-menu
+                      #menu
+                      [model]="getEffectivePeriodMenuItems(task)"
+                      [popup]="true"
+                      [appendTo]="row"
+                    ></p-menu>
                   </td>
                 </tr>
               </ng-template>

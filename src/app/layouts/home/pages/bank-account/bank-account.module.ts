@@ -8,6 +8,7 @@ import { BankAccountFormComponent } from './components/bank-account-form/bank-ac
 import { PaymentsTableComponent } from './components/payments-table/payments-table.component';
 import { BankAccountWidgetComponent } from './components/bank-account-widget/bank-account-widget.component';
 import { BankAccountInstructionsComponent } from './components/bank-account-instructions/bank-account-instructions.component';
+import { TransferFormComponent } from './components/transfer-form/transfer-form.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { BankAccountInstructionsComponent } from './components/bank-account-inst
     PaymentsTableComponent,
     BankAccountWidgetComponent,
     BankAccountInstructionsComponent,
+    TransferFormComponent,
   ],
   imports: [CommonModule, SharedModule],
   exports: [SharedModule, BankAccountWidgetComponent],

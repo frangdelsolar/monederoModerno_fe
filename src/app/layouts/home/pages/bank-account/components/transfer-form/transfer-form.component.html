@@ -1,0 +1,45 @@
+<form class="flex flex-column gap-3" [formGroup]="form" id="bankForm">
+  <app-form-section [label]="'Origen de la transferencia'">
+    <div class="flex flex-column">
+      <h3 class="py-0 my-0">{{ bankAccount.name }}</h3>
+      <p class="py-0 my-0 text-sm">
+        Disponible:
+        <span class="font-semibold">
+          {{
+            bankAccount.total.amount.toLocaleString("es-AR", {
+              style: "currency",
+              currency: bankAccount.total.currency,
+              minimumFractionDigits: 2
+            })
+          }}
+        </span>
+      </p>
+    </div>
+  </app-form-section>
+
+  <app-form-section [label]="'Destino de la transferencia'">
+    <div class="flex flex-column gap-5 pt-3">
+      <app-bank-account-dropdown
+        [label]="'Seleccione la cuenta de destino'"
+        [exclude]="[bankAccount]"
+        [control]="destinationControl"
+      ></app-bank-account-dropdown>
+    </div>
+  </app-form-section>
+  <app-input-currency
+    [label]="'Total a transferir'"
+    [editOn]="true"
+    [currencyControl]="currencyControl"
+    [amountControl]="amountControl"
+    [showRateControl]="false"
+  ></app-input-currency>
+
+  <button
+    pButton
+    pRipple
+    class="p-button-primary"
+    [label]="saveBtnLabel"
+    id="save-transaction-btn"
+    (click)="saveBtnAction()"
+  ></button>
+</form>

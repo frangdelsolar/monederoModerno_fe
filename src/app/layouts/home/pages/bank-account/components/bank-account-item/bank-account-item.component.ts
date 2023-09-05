@@ -7,6 +7,7 @@ import { ConfirmationService } from 'primeng/api';
 import { BankAccountFormComponent } from '../bank-account-form/bank-account-form.component';
 import { BankAccountInstructionsComponent } from '../bank-account-instructions/bank-account-instructions.component';
 import { PaymentsTableComponent } from '../payments-table/payments-table.component';
+import { TransferFormComponent } from '../transfer-form/transfer-form.component';
 
 @Component({
   selector: 'app-bank-account-item',
@@ -25,12 +26,13 @@ export class BankAccountItemComponent implements OnInit {
       },
     },
     {
-      label: 'Ver instrucciones',
+      label: 'Instrucciones',
       icon: 'pi pi-fw pi-directions',
       command: () => {
         this.onViewInstructionsClick();
       },
     },
+
     {
       label: 'Editar',
       icon: 'pi pi-fw pi-pencil',
@@ -47,9 +49,16 @@ export class BankAccountItemComponent implements OnInit {
     },
     {
       label: 'Recalcular',
-      icon: 'pi pi-fw pi-sync',
+      icon: 'pi pi-fw pi-history',
       command: () => {
         this.onCalculateClick();
+      },
+    },
+    {
+      label: 'Transferir',
+      icon: 'pi pi-fw pi-sync',
+      command: () => {
+        this.onTransferClick();
       },
     },
     {
@@ -148,6 +157,20 @@ export class BankAccountItemComponent implements OnInit {
             });
           }
         );
+      },
+    });
+  }
+
+  onTransferClick() {
+    this.dialogSvc.show({
+      component: TransferFormComponent,
+      data: {
+        item: this.item,
+        adjust: true,
+      },
+      params: {
+        header: 'Transferir entre cuentas',
+        closable: true,
       },
     });
   }
